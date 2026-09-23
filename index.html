@@ -1,0 +1,1491 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Organic Chemistry, Revised. CHE 613T</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/smiles-drawer@1.2.0/dist/smiles-drawer.min.js"></script>
+<style>
+:root{
+  box-sizing:border-box;
+  padding-top:env(safe-area-inset-top,0px);
+  padding-bottom:env(safe-area-inset-bottom,0px);
+  --bg:#ffffff; --bg2:#f5f5f7; --card:#ffffff; --ink:#1d1d1f; --ink2:#6e6e73; --line:rgba(0,0,0,.08);
+  --glass:rgba(255,255,255,.72); --blue:#0071e3;
+  --u1:#7b61ff; --u2:#0bb5a6; --u3:#34c759; --u4:#ff9f0a; --u5:#ff375f;
+  --u1s:#f1eeff; --u2s:#e3f8f5; --u3s:#e8f8ec; --u4s:#fff4e2; --u5s:#ffe9ee;
+  --shadow:0 1px 2px rgba(0,0,0,.04),0 8px 30px rgba(0,0,0,.06);
+  --r-xl:32px; --r-l:22px; --r-m:14px; --r-s:10px;
+  --font:-apple-system,BlinkMacSystemFont,"SF Pro Display","SF Pro Text","Inter","Helvetica Neue",Arial,sans-serif;
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --bg:#000000; --bg2:#101012; --card:#1c1c1e; --ink:#f5f5f7; --ink2:#a1a1a6; --line:rgba(255,255,255,.1);
+    --glass:rgba(22,22,24,.72); --blue:#2997ff;
+    --u1s:#221c3d; --u2s:#0f2a28; --u3s:#12281a; --u4s:#2e230f; --u5s:#2f1219;
+    --shadow:0 1px 2px rgba(0,0,0,.3),0 8px 30px rgba(0,0,0,.4);
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#000000; --bg2:#101012; --card:#1c1c1e; --ink:#f5f5f7; --ink2:#a1a1a6; --line:rgba(255,255,255,.1);
+  --glass:rgba(22,22,24,.72); --blue:#2997ff;
+  --u1s:#221c3d; --u2s:#0f2a28; --u3s:#12281a; --u4s:#2e230f; --u5s:#2f1219;
+  --shadow:0 1px 2px rgba(0,0,0,.3),0 8px 30px rgba(0,0,0,.4);
+}
+*,*::before,*::after{box-sizing:inherit}
+html{scroll-padding-top:calc(env(safe-area-inset-top,0px) + 64px);scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--font);font-size:17px;line-height:1.5;letter-spacing:-.01em;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+img,canvas,svg{max-width:100%}
+button{font:inherit;color:inherit;cursor:pointer}
+:focus-visible{outline:3px solid var(--blue);outline-offset:2px;border-radius:8px}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
+sub,sup{font-size:.7em;line-height:0}
+.wrap{max-width:1080px;margin:0 auto;padding:0 20px}
+/* nav */
+.nav{position:sticky;top:env(safe-area-inset-top,0px);z-index:50;background:var(--glass);backdrop-filter:saturate(180%) blur(20px);-webkit-backdrop-filter:saturate(180%) blur(20px);border-bottom:1px solid var(--line)}
+.nav .wrap{display:flex;align-items:center;gap:14px;height:52px}
+.brand{font-weight:700;font-size:17px;white-space:nowrap;display:flex;align-items:center;gap:8px}
+.brand i{width:22px;height:22px;border-radius:7px;background:conic-gradient(from 200deg,var(--u1),var(--u2),var(--u3),var(--u4),var(--u5),var(--u1));display:inline-block}
+.navlinks{display:flex;gap:4px;overflow-x:auto;scrollbar-width:none;flex:1}
+.navlinks::-webkit-scrollbar{display:none}
+.navlinks a{color:var(--ink2);text-decoration:none;font-size:13px;padding:6px 11px;border-radius:999px;white-space:nowrap}
+.navlinks a:hover,.navlinks a.on{color:var(--ink);background:var(--bg2)}
+.ring{position:relative;width:34px;height:34px;flex:none}
+.ring svg{transform:rotate(-90deg)}
+.ring span{position:absolute;inset:0;display:grid;place-items:center;font-size:10px;font-weight:700}
+.themebtn{border:0;background:var(--bg2);border-radius:999px;width:34px;height:34px;flex:none;font-size:15px}
+/* hero */
+.hero{padding:72px 0 40px;text-align:center;position:relative;overflow:hidden}
+.hero h1{font-size:clamp(44px,9vw,96px);line-height:1.02;letter-spacing:-.045em;font-weight:800;margin:0 auto 18px;max-width:14ch;
+  background:linear-gradient(100deg,var(--u1) 0%,var(--u5) 35%,var(--u4) 60%,var(--u2) 100%);-webkit-background-clip:text;background-clip:text;color:transparent;background-size:200% 100%;animation:sheen 9s ease-in-out infinite alternate}
+@keyframes sheen{to{background-position:100% 0}}
+.hero p.lede{font-size:clamp(19px,2.6vw,24px);color:var(--ink2);max-width:36ch;margin:0 auto 28px;font-weight:500;line-height:1.35}
+.cta{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
+.btn{border:0;border-radius:999px;padding:12px 22px;font-size:16px;font-weight:600;text-decoration:none;display:inline-flex;align-items:center;gap:8px}
+.btn.primary{background:var(--blue);color:#fff}
+.btn.ghost{background:var(--bg2);color:var(--ink)}
+.molstage{margin:44px auto 0;max-width:560px;background:var(--bg2);border-radius:var(--r-xl);padding:22px 18px 18px;position:relative}
+.molstage canvas{display:block;margin:0 auto}
+.molstage .cap{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-top:8px;text-align:left}
+.molstage .cap b{font-size:17px}
+.molstage .cap small{color:var(--ink2);display:block;font-size:14px}
+.dots{display:flex;gap:6px}
+.dots button{width:8px;height:8px;border-radius:50%;border:0;background:var(--line);padding:0}
+.dots button.on{background:var(--ink)}
+/* sections */
+section.unit{padding:72px 0 24px}
+.unit-head{display:grid;gap:10px;margin-bottom:32px}
+.unit-tag{display:inline-flex;align-items:center;gap:8px;font-size:15px;font-weight:600;color:var(--c)}
+.unit-tag::before{content:"";width:10px;height:10px;border-radius:3px;background:var(--c)}
+.unit-head h2{font-size:clamp(34px,6vw,60px);line-height:1.04;letter-spacing:-.035em;margin:0;font-weight:800}
+.unit-head p{font-size:19px;color:var(--ink2);max-width:60ch;margin:0}
+h3.sub{font-size:clamp(24px,3.4vw,32px);letter-spacing:-.025em;margin:48px 0 8px;line-height:1.15}
+p.subl{color:var(--ink2);margin:0 0 20px;max-width:62ch}
+.revised{display:inline-flex;align-items:center;gap:8px;border:1px solid var(--line);background:var(--card);border-radius:999px;padding:7px 14px 7px 10px;font-size:14px;font-weight:600;width:max-content}
+.revised .box{width:18px;height:18px;border-radius:50%;border:2px solid var(--ink2);display:grid;place-items:center;font-size:11px;color:#fff}
+.revised.on{border-color:var(--c);color:var(--c)}
+.revised.on .box{background:var(--c);border-color:var(--c)}
+/* syllabus map */
+.map{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:14px}
+.tile{border-radius:var(--r-l);padding:22px;background:var(--s);color:var(--ink);text-decoration:none;display:flex;flex-direction:column;gap:6px;min-height:170px;position:relative;overflow:hidden;border:1px solid var(--line)}
+.tile .n{font-size:44px;font-weight:800;letter-spacing:-.04em;color:var(--c);line-height:1}
+.tile b{font-size:19px;letter-spacing:-.02em}
+.tile small{color:var(--ink2);font-size:14px;line-height:1.35}
+.tile .bar{margin-top:auto;height:4px;border-radius:4px;background:var(--line);overflow:hidden}
+.tile .bar i{display:block;height:100%;width:0;background:var(--c);transition:width .5s}
+/* chips & search */
+.tools{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin-bottom:18px}
+.search{flex:1 1 220px;display:flex;align-items:center;gap:8px;background:var(--bg2);border-radius:12px;padding:0 12px;height:42px}
+.search input{border:0;background:transparent;outline:0;font:inherit;color:var(--ink);width:100%;font-size:16px}
+.chips{display:flex;gap:8px;overflow-x:auto;scrollbar-width:none;padding-bottom:2px}
+.chips::-webkit-scrollbar{display:none}
+.chip{border:1px solid var(--line);background:var(--card);border-radius:999px;padding:8px 14px;font-size:14px;font-weight:600;white-space:nowrap}
+.chip.on{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+/* reagent grid */
+.rgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:14px}
+.rcard{text-align:left;border:1px solid var(--line);background:var(--card);border-radius:var(--r-l);padding:18px;display:flex;flex-direction:column;gap:8px;box-shadow:var(--shadow);transition:transform .2s}
+.rcard:active{transform:scale(.98)}
+.rcard .sym{font-size:26px;font-weight:800;letter-spacing:-.03em;color:var(--c)}
+.rcard b{font-size:17px;line-height:1.25}
+.rcard p{margin:0;color:var(--ink2);font-size:14px;line-height:1.4}
+.rcard .tags{display:flex;gap:6px;flex-wrap:wrap;margin-top:auto;padding-top:6px}
+.tag{font-size:12px;font-weight:600;padding:3px 9px;border-radius:999px;background:var(--bg2);color:var(--ink2)}
+.rcard .done{font-size:12px;color:var(--u3);font-weight:700}
+/* sheet */
+.scrim{position:fixed;inset:0;background:rgba(0,0,0,.4);z-index:90;opacity:0;pointer-events:none;transition:opacity .25s}
+.scrim.open{opacity:1;pointer-events:auto}
+.sheet{position:fixed;left:0;right:0;bottom:0;z-index:91;max-height:92%;background:var(--bg);border-radius:28px 28px 0 0;transform:translateY(105%);transition:transform .35s cubic-bezier(.2,.8,.2,1);display:flex;flex-direction:column;max-width:860px;margin:0 auto;box-shadow:0 -10px 40px rgba(0,0,0,.2)}
+.sheet.open{transform:none}
+.sheet .grab{width:40px;height:5px;border-radius:5px;background:var(--line);margin:10px auto 0;flex:none}
+.sheet .shead{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;padding:12px 22px 10px;flex:none}
+.sheet .shead h4{margin:0;font-size:28px;letter-spacing:-.03em;line-height:1.1}
+.sheet .shead small{color:var(--ink2);font-size:15px}
+.xbtn{border:0;background:var(--bg2);width:34px;height:34px;border-radius:50%;flex:none;font-size:16px}
+.sbody{overflow-y:auto;padding:4px 22px calc(28px + env(safe-area-inset-bottom,0px));-webkit-overflow-scrolling:touch}
+.sbody h5{font-size:19px;margin:24px 0 10px;letter-spacing:-.02em}
+ul.pts{margin:0;padding:0;list-style:none;display:grid;gap:10px}
+ul.pts li{position:relative;padding-left:22px;line-height:1.45}
+ul.pts li::before{content:"";position:absolute;left:4px;top:.6em;width:8px;height:8px;border-radius:50%;background:var(--c,var(--blue))}
+.callout{border-radius:var(--r-m);padding:14px 16px;margin:14px 0;font-size:15px;line-height:1.45;display:grid;gap:4px}
+.callout b{font-size:14px}
+.callout.tip{background:var(--u3s)}
+.callout.tip b{color:var(--u3)}
+.callout.trap{background:var(--u5s)}
+.callout.trap b{color:var(--u5)}
+.callout.fix{background:var(--u4s)}
+.callout.fix b{color:var(--u4)}
+/* reaction card */
+.rxn{background:var(--bg2);border-radius:var(--r-l);padding:14px;margin:12px 0}
+.rxn .row{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:6px}
+.rxn .mol{background:var(--card);border-radius:var(--r-m);padding:6px;min-height:90px;display:grid;place-items:center;position:relative}
+.rxn canvas.m{width:100%!important;height:auto!important;display:block}
+.rxn .arrow{display:flex;flex-direction:column;align-items:center;gap:2px;max-width:110px;text-align:center}
+.rxn .arrow span{font-size:12px;font-weight:600;color:var(--c,var(--blue));line-height:1.2}
+.rxn .arrow svg{width:56px;height:14px}
+.rxn .lab{font-size:14px;color:var(--ink2);margin-top:10px;line-height:1.4}
+.rxn .lab b{color:var(--ink)}
+.mname{font-size:11px;color:var(--ink2);text-align:center;margin-top:2px;line-height:1.2}
+.fallback{font-family:ui-monospace,Menlo,monospace;font-size:11px;word-break:break-all;color:var(--ink2);padding:6px}
+/* stepper */
+.stepper{border:1px solid var(--line);border-radius:var(--r-l);padding:18px;background:var(--card);margin:12px 0}
+.stepper .top{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;gap:10px}
+.stepper .top b{font-size:15px}
+.stepper .count{font-size:13px;color:var(--ink2);font-variant-numeric:tabular-nums}
+.stepper .track{height:4px;border-radius:4px;background:var(--line);overflow:hidden;margin-bottom:14px}
+.stepper .track i{display:block;height:100%;background:var(--c,var(--blue));transition:width .3s}
+.stepper .txt{min-height:78px;font-size:16px;line-height:1.5}
+.stepper .txt .k{display:block;font-weight:700;margin-bottom:4px}
+.stepper .ctrl{display:flex;gap:8px;margin-top:12px}
+.stepper .ctrl button{border:0;background:var(--bg2);border-radius:999px;padding:9px 16px;font-size:14px;font-weight:600}
+.stepper .ctrl button.nx{background:var(--c,var(--blue));color:#fff}
+.stepper .ctrl button:disabled{opacity:.35}
+/* feature panels */
+.panel{background:var(--bg2);border-radius:var(--r-xl);padding:26px;margin:18px 0}
+.panel.dark{background:#000;color:#f5f5f7}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:22px;align-items:center}
+@media (max-width:760px){.two{grid-template-columns:1fr}}
+/* catalytic cycle */
+.cyc svg{width:100%;height:auto;display:block}
+.cyc .node{cursor:pointer}
+.cyc .node circle{transition:r .2s,fill .2s}
+.cyc .node.on circle{fill:var(--u1)}
+.cyc .node.on text{fill:#fff}
+.seg{display:flex;background:var(--card);border-radius:12px;padding:3px;gap:2px;overflow-x:auto;scrollbar-width:none;margin-bottom:14px}
+.seg::-webkit-scrollbar{display:none}
+.seg button{border:0;background:transparent;border-radius:9px;padding:8px 12px;font-size:14px;font-weight:600;white-space:nowrap;color:var(--ink2);flex:1}
+.seg button.on{background:var(--ink);color:var(--bg)}
+.cycinfo h4{font-size:24px;margin:0 0 6px;letter-spacing:-.02em}
+.cycinfo p{margin:0 0 10px;color:var(--ink2)}
+.cycinfo .stepbox{background:var(--card);border-radius:var(--r-m);padding:14px 16px;min-height:120px}
+.cycinfo .stepbox b{display:block;margin-bottom:4px;color:var(--u1)}
+/* table */
+.tbl{width:100%;border-collapse:separate;border-spacing:0;font-size:15px}
+.tblw{overflow-x:auto;border-radius:var(--r-m);border:1px solid var(--line);background:var(--card)}
+.tbl th,.tbl td{text-align:left;padding:11px 14px;border-bottom:1px solid var(--line);vertical-align:top}
+.tbl th{font-size:13px;color:var(--ink2);font-weight:600;background:var(--bg2)}
+.tbl tr:last-child td{border-bottom:0}
+.tbl td b{color:var(--c,var(--ink))}
+/* reactivity order */
+.order{display:grid;gap:8px}
+.order .it{display:grid;grid-template-columns:130px 1fr 36px;align-items:center;gap:10px;font-size:15px}
+.order .it .b{height:26px;border-radius:8px;background:var(--line);overflow:hidden}
+.order .it .b i{display:block;height:100%;width:0;border-radius:8px;transition:width .8s cubic-bezier(.2,.8,.2,1)}
+.order .it small{color:var(--ink2);font-weight:700;text-align:right}
+/* ring gallery */
+.rings{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:12px}
+.ringc{perspective:900px;border:0;background:transparent;padding:0;height:220px;text-align:left}
+.ringc .in{position:relative;width:100%;height:100%;transition:transform .55s cubic-bezier(.2,.8,.2,1);transform-style:preserve-3d}
+.ringc.flip .in{transform:rotateY(180deg)}
+.ringc .f,.ringc .bk{position:absolute;inset:0;backface-visibility:hidden;-webkit-backface-visibility:hidden;border-radius:var(--r-l);border:1px solid var(--line);background:var(--card);padding:12px;display:flex;flex-direction:column}
+.ringc .f canvas{width:100%!important;height:auto!important;flex:1;object-fit:contain}
+.ringc .f b{font-size:16px;text-align:center}
+.ringc .bk{transform:rotateY(180deg);background:var(--u2s);font-size:13.5px;line-height:1.4;gap:6px;overflow:auto}
+.ringc .bk b{font-size:15px;color:var(--u2)}
+/* reactivity map */
+.rmap svg{width:100%;max-width:320px;display:block;margin:0 auto}
+.legend{display:flex;gap:14px;flex-wrap:wrap;justify-content:center;font-size:13px;color:var(--ink2);margin-top:8px}
+.legend i{display:inline-block;width:10px;height:10px;border-radius:50%;margin-right:5px;vertical-align:middle}
+/* name reaction list */
+.nrx{display:grid;gap:14px}
+.nr{border:1px solid var(--line);background:var(--card);border-radius:var(--r-l);overflow:hidden}
+.nr > button{width:100%;border:0;background:transparent;text-align:left;padding:18px 20px;display:flex;justify-content:space-between;align-items:center;gap:12px}
+.nr > button b{font-size:18px;letter-spacing:-.015em;display:block}
+.nr > button small{color:var(--ink2);font-size:14px;display:block;margin-top:2px}
+.nr > button .pl{width:28px;height:28px;border-radius:50%;background:var(--bg2);display:grid;place-items:center;flex:none;transition:transform .3s;font-size:18px}
+.nr.open > button .pl{transform:rotate(45deg)}
+.nr .nb{display:none;padding:0 20px 20px}
+.nr.open .nb{display:block}
+/* green */
+.principles{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:10px}
+.pr{border:0;border-radius:var(--r-m);padding:16px;text-align:left;background:var(--card);border:1px solid var(--line);min-height:128px;display:flex;flex-direction:column;gap:6px;transition:background .2s}
+.pr .no{font-size:28px;font-weight:800;color:var(--u3);line-height:1}
+.pr b{font-size:15px;line-height:1.25}
+.pr p{display:none;margin:0;font-size:13.5px;color:var(--ink2);line-height:1.4}
+.pr.on{background:var(--u3s)}
+.pr.on p{display:block}
+.calc{display:grid;gap:12px}
+.calc label{font-size:14px;font-weight:600;color:var(--ink2);display:grid;gap:6px}
+.calc input,.calc select{font:inherit;font-size:16px;border:1px solid var(--line);background:var(--card);color:var(--ink);border-radius:12px;padding:10px 12px;width:100%}
+.gauge{position:relative;width:220px;max-width:100%;margin:0 auto}
+.gauge .v{position:absolute;inset:0;display:grid;place-items:center;text-align:center}
+.gauge .v b{font-size:44px;letter-spacing:-.04em;display:block;line-height:1}
+.gauge .v small{color:var(--ink2);font-size:13px}
+.bars{display:grid;gap:10px;margin-top:10px}
+.bars .br{display:grid;grid-template-columns:150px 1fr 54px;gap:10px;align-items:center;font-size:14px}
+.bars .br .t{height:14px;border-radius:7px;background:var(--line);overflow:hidden}
+.bars .br .t i{display:block;height:100%;border-radius:7px}
+/* timeline */
+.tl{position:relative;padding-left:26px;display:grid;gap:18px}
+.tl::before{content:"";position:absolute;left:8px;top:6px;bottom:6px;width:2px;background:var(--line)}
+.tl .ev{position:relative}
+.tl .ev::before{content:"";position:absolute;left:-23px;top:6px;width:12px;height:12px;border-radius:50%;background:var(--c);box-shadow:0 0 0 4px var(--bg)}
+.tl .ev b{display:block;font-size:17px}
+.tl .ev span{color:var(--ink2);font-size:15px}
+/* flow */
+.flow{display:flex;gap:8px;overflow-x:auto;padding:4px 2px 12px;scrollbar-width:thin;align-items:stretch}
+.flow .fs{flex:none;min-width:150px;max-width:190px;background:var(--card);border:1px solid var(--line);border-radius:var(--r-m);padding:12px;font-size:14px;line-height:1.35;cursor:pointer;transition:border-color .2s}
+.flow .fs b{display:block;font-size:15px;color:var(--c)}
+.flow .fs.on{border-color:var(--c);box-shadow:0 0 0 2px var(--c) inset}
+.flow .ar{flex:none;align-self:center;color:var(--ink2);font-size:18px}
+.flowinfo{background:var(--card);border-radius:var(--r-m);padding:14px 16px;min-height:70px;font-size:15px}
+/* FAS wheel */
+.wheel{display:grid;grid-template-columns:260px 1fr;gap:24px;align-items:center}
+@media (max-width:700px){.wheel{grid-template-columns:1fr}}
+.wheel svg{width:100%;max-width:260px;margin:0 auto;display:block}
+.wheel .seg4{cursor:pointer}
+/* quiz */
+.quiz{background:var(--card);border:1px solid var(--line);border-radius:var(--r-xl);padding:24px;box-shadow:var(--shadow)}
+.qhead{display:flex;justify-content:space-between;align-items:center;margin-bottom:14px;gap:10px;flex-wrap:wrap}
+.qhead .sc{font-weight:700;font-variant-numeric:tabular-nums}
+.qq{font-size:20px;font-weight:600;letter-spacing:-.015em;line-height:1.35;margin:6px 0 16px}
+.opts{display:grid;gap:10px}
+.opt{border:1px solid var(--line);background:var(--bg2);border-radius:14px;padding:13px 16px;text-align:left;font-size:16px;line-height:1.35}
+.opt.ok{background:var(--u3s);border-color:var(--u3)}
+.opt.no{background:var(--u5s);border-color:var(--u5)}
+.expl{margin-top:14px;font-size:15px;color:var(--ink2);line-height:1.5;display:none}
+.expl.show{display:block}
+.qnav{display:flex;justify-content:space-between;margin-top:16px;gap:10px}
+/* flashcards */
+.fcwrap{display:grid;place-items:center;gap:16px}
+.fc{width:100%;max-width:520px;height:280px;perspective:1200px;border:0;background:transparent;padding:0}
+.fc .in{position:relative;width:100%;height:100%;transition:transform .6s cubic-bezier(.2,.8,.2,1);transform-style:preserve-3d}
+.fc.flip .in{transform:rotateY(180deg)}
+.fc .f,.fc .bk{position:absolute;inset:0;border-radius:var(--r-xl);display:grid;place-items:center;padding:28px;text-align:center;backface-visibility:hidden;-webkit-backface-visibility:hidden;font-size:22px;font-weight:700;letter-spacing:-.02em;line-height:1.3}
+.fc .f{background:linear-gradient(135deg,var(--u1),var(--u5));color:#fff}
+.fc .bk{background:var(--card);border:1px solid var(--line);transform:rotateY(180deg);font-size:17px;font-weight:500;letter-spacing:-.01em;color:var(--ink)}
+.fcctrl{display:flex;gap:10px;align-items:center}
+.fcctrl span{font-variant-numeric:tabular-nums;color:var(--ink2);font-size:14px;min-width:60px;text-align:center}
+/* practice */
+.prac{border:1px dashed var(--line);border-radius:var(--r-l);padding:16px 18px;margin:12px 0;background:var(--card)}
+.prac .q{font-weight:600}
+.prac .a{display:none;margin-top:10px;color:var(--ink2);font-size:15px;line-height:1.5}
+.prac.show .a{display:block}
+.prac button{margin-top:10px;border:0;background:var(--bg2);border-radius:999px;padding:7px 14px;font-size:13px;font-weight:600}
+.footer{padding:60px 0 40px;color:var(--ink2);font-size:13px;text-align:center}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
+.kv{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;margin:14px 0}
+.kv div{background:var(--card);border-radius:var(--r-m);padding:14px;border:1px solid var(--line)}
+.kv b{display:block;font-size:22px;letter-spacing:-.02em;color:var(--c)}
+.kv span{font-size:13px;color:var(--ink2)}
+.prose p{max-width:66ch}
+canvas.m{width:100%!important;height:auto!important;display:block}
+#heroMol{max-width:420px;margin:0 auto}
+.toast{position:fixed;left:50%;bottom:calc(24px + env(safe-area-inset-bottom,0px));transform:translate(-50%,40px);background:var(--ink);color:var(--bg);padding:10px 18px;border-radius:999px;font-size:14px;font-weight:600;opacity:0;transition:.3s;z-index:120;pointer-events:none}
+.toast.show{opacity:1;transform:translate(-50%,0)}
+</style>
+</head>
+<body>
+<nav class="nav" aria-label="Sections">
+  <div class="wrap">
+    <div class="brand"><i aria-hidden="true"></i>Organic, revised</div>
+    <div class="navlinks" id="navlinks">
+      <a href="#u1">Reagents</a><a href="#u2">Heterocycles</a><a href="#u3">Green</a><a href="#u4">Natural products</a><a href="#u5">Biogenesis</a><a href="#quiz">Quiz</a><a href="#cards">Flashcards</a><a href="#cheat">Cheat sheet</a>
+    </div>
+    <div class="ring" title="Sections marked revised">
+      <svg width="34" height="34" viewBox="0 0 34 34"><circle cx="17" cy="17" r="14" fill="none" stroke="var(--line)" stroke-width="4"/><circle id="ringc" cx="17" cy="17" r="14" fill="none" stroke="var(--u3)" stroke-width="4" stroke-linecap="round" stroke-dasharray="88" stroke-dashoffset="88" style="transition:stroke-dashoffset .5s"/></svg>
+      <span id="ringt">0%</span>
+    </div>
+    <button class="themebtn" id="themebtn" aria-label="Toggle light or dark">◐</button>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="wrap">
+    <h1>Organic chemistry, one night.</h1>
+    <p class="lede">Every reagent, ring and reaction from your CHE 613T notes, drawn out, explained and ready to test yourself on.</p>
+    <div class="cta">
+      <a class="btn primary" href="#map">Start revising</a>
+      <a class="btn ghost" href="#quiz">Test myself</a>
+    </div>
+    <div class="molstage" id="molstage">
+      <canvas id="heroMol" width="420" height="260" aria-label="Molecule drawing"></canvas>
+      <div class="cap">
+        <div><b id="heroName">DDQ</b><small id="heroNote">Tap to see the next molecule</small></div>
+        <div class="dots" id="heroDots"></div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<main>
+<section class="unit" id="map" style="--c:var(--blue)">
+  <div class="wrap">
+    <div class="unit-head">
+      <h2>Your syllabus at a glance.</h2>
+      <p>Five units. Tap one to jump in. The bars fill as you mark topics revised, and your progress is saved on this device.</p>
+    </div>
+    <div class="map" id="maptiles"></div>
+  </div>
+</section>
+
+<!-- UNIT I -->
+<section class="unit" id="u1" style="--c:var(--u1);--s:var(--u1s)">
+  <div class="wrap">
+    <div class="unit-head">
+      <span class="unit-tag">Unit I</span>
+      <h2>Reagents in organic synthesis.</h2>
+      <p>Oxidising agents, reducing agents, carbon-carbon bond formers and palladium coupling. Search or filter, then tap any reagent to open its full page with drawn reactions and a step-by-step mechanism.</p>
+    </div>
+    <div class="tools">
+      <label class="search"><span aria-hidden="true">⌕</span><span class="sr">Search reagents</span><input id="rsearch" type="search" placeholder="Search DDQ, cuprate, Heck, SeO2…"></label>
+      <div class="chips" id="rchips"></div>
+    </div>
+    <div class="rgrid" id="rgrid"></div>
+
+    <h3 class="sub">The palladium catalytic cycle.</h3>
+    <p class="subl">One cycle runs Suzuki, Negishi, Kumada, Stille and Sonogashira. Heck is different: no transmetalation, it inserts an alkene instead. Pick a reaction, then tap each step on the wheel.</p>
+    <div class="panel cyc">
+      <div class="seg" id="cycseg"></div>
+      <div class="two">
+        <div id="cycsvg"></div>
+        <div class="cycinfo">
+          <h4 id="cyct"></h4>
+          <p id="cycd"></p>
+          <div class="stepbox" id="cycstep"></div>
+        </div>
+      </div>
+    </div>
+    <div class="tblw"><table class="tbl" id="coupletbl"></table></div>
+    <div class="callout tip"><b>Why palladium?</b>Pd shuttles easily between Pd(0) and Pd(II), so oxidative addition and reductive elimination are both fast. Its organometallic intermediates are stable enough to form but reactive enough to turn over, it tolerates esters, ketones, nitriles and even water, works at mild temperatures, and its behaviour is tuned by phosphine ligands. Heck, Negishi and Suzuki shared the 2010 Nobel Prize for this chemistry.</div>
+
+    <h3 class="sub">Gilman reagent reactivity order.</h3>
+    <p class="subl">R₂CuLi picks the most reactive electrophile first. Tap to replay the ranking.</p>
+    <div class="panel"><div class="order" id="order"></div><div style="margin-top:14px"><button class="btn ghost" id="orderbtn">Replay</button></div></div>
+
+    <h3 class="sub">Kinetic or thermodynamic enolate?</h3>
+    <p class="subl">Same ketone, two bases, two products. This decides the NET-style LDA and tBuOK questions.</p>
+    <div class="panel" id="enolate"></div>
+
+    <div id="u1rev"></div>
+  </div>
+</section>
+
+<!-- UNIT II -->
+<section class="unit" id="u2" style="--c:var(--u2);--s:var(--u2s)">
+  <div class="wrap">
+    <div class="unit-head">
+      <span class="unit-tag">Unit II</span>
+      <h2>Heterocyclic chemistry.</h2>
+      <p>Rings that contain O, S or N. Learn the ring, where it reacts, and how to build it. Indole, quinoline, isoquinoline, imidazole, oxazole, pyrazole, thiazole, plus pyridine and the Shapiro reaction.</p>
+    </div>
+    <h3 class="sub">Meet the rings.</h3>
+    <p class="subl">Tap a card to flip it for aromaticity, basicity and where it reacts.</p>
+    <div class="rings" id="rings"></div>
+
+    <h3 class="sub">Where does each ring react?</h3>
+    <p class="subl">Blue marks electrophilic attack, pink marks nucleophilic attack or lithiation, orange marks the acidic H. This single picture answers most "predict the product" questions.</p>
+    <div class="panel rmap">
+      <div class="seg" id="rmapseg"></div>
+      <div class="two"><div id="rmapsvg"></div><div id="rmaptxt" class="prose"></div></div>
+      <div class="legend"><span><i style="background:var(--blue)"></i>Electrophile attacks</span><span><i style="background:var(--u5)"></i>Nucleophile or base</span><span><i style="background:var(--u4)"></i>Acidic H</span></div>
+    </div>
+
+    <h3 class="sub">Name reactions, by ring.</h3>
+    <p class="subl">Every synthesis in your notes, with reactants, product and the mechanism broken into steps.</p>
+    <div class="seg" id="nrseg" style="background:var(--bg2)"></div>
+    <div class="nrx" id="nrlist"></div>
+    <div id="u2rev"></div>
+  </div>
+</section>
+
+<!-- UNIT III -->
+<section class="unit" id="u3" style="--c:var(--u3);--s:var(--u3s)">
+  <div class="wrap">
+    <div class="unit-head">
+      <span class="unit-tag">Unit III</span>
+      <h2>Green chemistry.</h2>
+      <p>How to carry out a conventional reaction by a greener route: fewer wasted atoms, safer solvents, less energy, catalysts instead of reagents.</p>
+    </div>
+    <h3 class="sub">The twelve principles.</h3>
+    <p class="subl">Anastas and Warner, 1998. Tap each one to see what it means in practice.</p>
+    <div class="principles" id="principles"></div>
+
+    <h3 class="sub">Atom economy calculator.</h3>
+    <p class="subl">Atom economy = mass of atoms in the desired product ÷ total mass of reactants × 100. Pick one of the worked examples from your notes or type your own numbers.</p>
+    <div class="panel">
+      <div class="two">
+        <div class="calc">
+          <label>Example<select id="aepreset"></select></label>
+          <label>Molar mass of desired product (g/mol)<input id="aep" type="number" inputmode="decimal" step="0.1"></label>
+          <label>Total molar mass of all reactants (g/mol)<input id="aer" type="number" inputmode="decimal" step="0.1"></label>
+          <div id="aeeq" style="font-size:14px;color:var(--ink2)"></div>
+        </div>
+        <div>
+          <div class="gauge"><svg viewBox="0 0 220 220"><circle cx="110" cy="110" r="92" fill="none" stroke="var(--line)" stroke-width="18"/><circle id="aearc" cx="110" cy="110" r="92" fill="none" stroke="var(--u3)" stroke-width="18" stroke-linecap="round" stroke-dasharray="578" stroke-dashoffset="578" transform="rotate(-90 110 110)" style="transition:stroke-dashoffset .7s cubic-bezier(.2,.8,.2,1)"/></svg><div class="v"><div><b id="aev">0%</b><small>atom economy</small></div></div></div>
+        </div>
+      </div>
+      <div id="aefix"></div>
+    </div>
+    <h3 class="sub">Atom economy by reaction type.</h3>
+    <div class="panel"><div class="bars" id="aebars"></div></div>
+    <div class="kv" id="efactor"></div>
+
+    <h3 class="sub">Greener reaction media.</h3>
+    <p class="subl">Your notes flag benzene, toluene and xylene (BTX) as carcinogenic. These are the replacements.</p>
+    <div class="nrx" id="media"></div>
+
+    <h3 class="sub">Greener routes from your notes.</h3>
+    <div id="greenrx"></div>
+    <div id="u3rev"></div>
+  </div>
+</section>
+
+<!-- UNIT IV -->
+<section class="unit" id="u4" style="--c:var(--u4);--s:var(--u4s)">
+  <div class="wrap">
+    <div class="unit-head">
+      <span class="unit-tag">Unit IV</span>
+      <h2>Chemistry of natural products.</h2>
+      <p>Carbohydrates, alkaloids (total synthesis of (±)-ephedrine and quinine) and steroids (total synthesis of cholesterol).</p>
+    </div>
+    <div id="u4body"></div>
+    <div id="u4rev"></div>
+  </div>
+</section>
+
+<!-- UNIT V -->
+<section class="unit" id="u5" style="--c:var(--u5);--s:var(--u5s)">
+  <div class="wrap">
+    <div class="unit-head">
+      <span class="unit-tag">Unit V</span>
+      <h2>Biogenesis.</h2>
+      <p>How living cells build lipids, peptides and proteins, enzymes and nucleic acids from small building blocks.</p>
+    </div>
+    <div id="u5body"></div>
+    <div id="u5rev"></div>
+  </div>
+</section>
+
+<section class="unit" id="quiz" style="--c:var(--blue)">
+  <div class="wrap">
+    <div class="unit-head">
+      <h2>Test yourself.</h2>
+      <p>Exam-style questions across all five units, many from NET, GATE and your class problems. Every answer comes with the reason.</p>
+    </div>
+    <div class="seg" id="qseg" style="background:var(--bg2)"></div>
+    <div class="quiz" id="quizbox"></div>
+  </div>
+</section>
+
+<section class="unit" id="cards" style="--c:var(--u1)">
+  <div class="wrap">
+    <div class="unit-head">
+      <h2>Flashcards.</h2>
+      <p>Tap the card to flip it. Use the arrows or swipe to move. Shuffle before the last round.</p>
+    </div>
+    <div class="fcwrap">
+      <button class="fc" id="fc" aria-live="polite"><div class="in"><div class="f" id="fcf"></div><div class="bk" id="fcb"></div></div></button>
+      <div class="fcctrl"><button class="btn ghost" id="fcp" aria-label="Previous card">‹</button><span id="fcn"></span><button class="btn ghost" id="fcx" aria-label="Next card">›</button><button class="btn ghost" id="fcs">Shuffle</button></div>
+    </div>
+  </div>
+</section>
+
+<section class="unit" id="cheat" style="--c:var(--u4)">
+  <div class="wrap">
+    <div class="unit-head">
+      <h2>Last-minute cheat sheet.</h2>
+      <p>Read this on the way to the exam hall.</p>
+    </div>
+    <div class="tblw"><table class="tbl" id="cheattbl"></table></div>
+  </div>
+</section>
+</main>
+<footer class="footer"><div class="wrap">Built from class notes for CHE 613T, with extra detail from standard references. Where a note looked off, it is flagged in orange so you can double check with your teacher. Good luck tomorrow.</div></footer>
+
+<div class="scrim" id="scrim"></div>
+<div class="sheet" id="sheet" role="dialog" aria-modal="true" aria-labelledby="sheetTitle">
+  <div class="grab"></div>
+  <div class="shead"><div><h4 id="sheetTitle"></h4><small id="sheetSub"></small></div><button class="xbtn" id="sheetX" aria-label="Close">✕</button></div>
+  <div class="sbody" id="sheetBody"></div>
+</div>
+<div class="toast" id="toast"></div>
+<script>
+/* ============ DATA: UNIT I REAGENTS ============ */
+const TAGS={all:'All',ox:'Oxidants',red:'Reductions',cc:'C–C bonds',cp:'Pd coupling',ol:'Olefination',base:'Bases & umpolung'};
+const REAGENTS=[
+{id:'kmno4',name:'Potassium permanganate',sym:'KMnO₄',tags:['ox'],
+sum:'Strong oxidant. Cold, dilute, alkaline KMnO₄ (Baeyer’s reagent) gives syn-dihydroxylation of alkenes. Hot or acidic KMnO₄ cleaves C=C and pushes primary alcohols and alkyl side chains all the way to carboxylic acids.',
+pts:['Cold, dilute, basic KMnO₄: alkene → cis-1,2-diol. Both OH groups add to the same face (syn addition).',
+'It goes through a cyclic manganate(V) ester. Both new C–O bonds form together from one face, which is exactly why the addition is syn.',
+'Oleic acid (a cis alkene) + syn addition gives erythro-9,10-dihydroxystearic acid. Remember: cis + syn → erythro (meso type); trans + syn → threo (racemic).',
+'Primary alcohols: RCH₂OH → RCOOH. Example from your notes: isobutyl alcohol (CH₃)₂CHCH₂OH → isobutyric acid (CH₃)₂CHCOOH. The aldehyde is not isolated.',
+'Hot or acidic KMnO₄ cleaves the double bond: =CH₂ → CO₂, =CHR → RCOOH, =CR₂ → ketone. Alkylbenzenes with a benzylic H become benzoic acid.',
+'Purple colour vanishes and brown MnO₂ appears: this is the Baeyer test for unsaturation.'],
+rx:[{a:'C1=CCCC1',b:'O[C@H]1CCC[C@H]1O',r:'KMnO₄, OH⁻, cold',an:'cyclopentene',bn:'cis-cyclopentane-1,2-diol',l:'<b>Syn dihydroxylation.</b> Both OH on the same face. Your notes show the wedge-wedge diol.'},
+{a:'CC(C)CO',b:'CC(C)C(=O)O',r:'KMnO₄ [O]',an:'isobutyl alcohol',bn:'isobutyric acid',l:'<b>1° alcohol → acid.</b> Over-oxidation past the aldehyde.'},
+{a:'Cc1ccccc1',b:'OC(=O)c1ccccc1',r:'KMnO₄, heat',an:'toluene',bn:'benzoic acid',l:'<b>Side-chain oxidation.</b> Needs at least one benzylic H.'}],
+steps:{t:'Mechanism of syn-dihydroxylation (cyclopentene)',s:[
+['[3+2] cycloaddition','The alkene π electrons attack one Mn=O oxygen while a second oxo oxygen bonds to the other alkene carbon. Both bonds form in one concerted step on the same face.'],
+['Cyclic manganate ester','A five-membered ring containing Mn(V) is formed. The two new C–O bonds are locked cis.'],
+['Hydroxide attacks Mn','OH⁻ adds to manganese and one Mn–O bond breaks, releasing an alkoxide on one carbon.'],
+['Second O–Mn cleavage','Water or OH⁻ breaks the second Mn–O bond. Protonation gives the cis-1,2-diol and HMnO₄²⁻ type by-product, which ends as brown MnO₂.']]},
+tip:'If a question says “cold dilute alkaline KMnO₄” write a cis diol. If it says “hot” or “acidic” write cleavage products.',
+trap:'Do not draw a trans diol. Trans (anti) diols come from epoxidation then acid hydrolysis, not from KMnO₄ or OsO₄.'},
+
+{id:'cr',name:'Chromium(VI) oxidants',sym:'CrO₃',tags:['ox'],
+sum:'CrO₃ dissolves in water to give chromic acid, H₂CrO₄. With H₂SO₄ in acetone it is the Jones reagent. K₂Cr₂O₇/H₂SO₄ behaves the same way. Secondary alcohols give ketones; primary alcohols go to acids in water.',
+pts:['CrO₃ + H₂O ⇌ H₂CrO₄ (chromic acid). This is the actual oxidant.',
+'2° alcohol → ketone. 1° alcohol → aldehyde → hydrate → carboxylic acid when water is present.',
+'3° alcohols are not oxidised: there is no α-H to remove.',
+'Colour change orange Cr(VI) → green Cr(III). This is the old breathalyser test.',
+'Loss of the α-H is the slow step (a primary kinetic isotope effect is seen with C–D).',
+'Collins reagent (CrO₃·2 pyridine in CH₂Cl₂) and PCC work without water, so they stop at the aldehyde.'],
+rx:[{a:'OC1CCCCC1',b:'O=C1CCCCC1',r:'CrO₃, H₂O / H⁺',an:'cyclohexanol',bn:'cyclohexanone',l:'<b>2° alcohol → ketone.</b> The boxed reaction in your notes.'},
+{a:'CC1(C)C2CCC1(C)C(O)C2',b:'CC1(C)C2CCC1(C)C(=O)C2',r:'K₂Cr₂O₇, H⁺',an:'borneol',bn:'camphor',l:'<b>Bicyclic 2° alcohol → ketone.</b> Same idea as the bicyclic example in your notes.'}],
+steps:{t:'Mechanism (chromic acid oxidation)',s:[
+['Protonation','An oxo oxygen of H₂CrO₄ is protonated, making chromium more electrophilic.'],
+['Chromate ester','The alcohol oxygen attacks Cr and water is lost, giving the chromate ester R₂CH–O–CrO₃H.'],
+['E2-like elimination','A base (water) removes the α-H. The C–H electrons form the C=O bond while the O–Cr electrons move onto chromium: Cr(VI) → Cr(IV).'],
+['Clean-up','The ketone is released. Cr(IV) species disproportionate and finish as green Cr(III).']]},
+tip:'Ask yourself two things: is there an α-H, and is water present? That decides ketone, aldehyde, acid or no reaction.'},
+
+{id:'pcc',name:'Pyridinium chlorochromate',sym:'PCC',tags:['ox'],
+sum:'Corey–Suggs reagent, C₅H₅NH⁺ ClCrO₃⁻. Used in dry CH₂Cl₂, it oxidises 1° alcohols only to aldehydes and 2° alcohols to ketones.',
+pts:['No water means no aldehyde hydrate (gem-diol), so the aldehyde cannot be over-oxidised to the acid.',
+'Mildly acidic. For acid-sensitive substrates use PDC (pyridinium dichromate) or buffer with NaOAc.',
+'Oxidises allylic alcohols to enones. Tertiary allylic alcohols give transposed enones (Babler oxidation).',
+'Mechanism is the same chromate ester, then E2-like loss of the α-H, as for chromic acid.'],
+rx:[{a:'CCCCCCO',b:'CCCCCC=O',r:'PCC, CH₂Cl₂',an:'hexan-1-ol',bn:'hexanal',l:'<b>1° alcohol → aldehyde</b>, stops cleanly.'}],
+tip:'PCC or Swern = aldehyde. Jones or KMnO₄ = acid.'},
+
+{id:'swern',name:'Swern oxidation',sym:'DMSO',tags:['ox'],
+sum:'(COCl)₂, DMSO, then Et₃N at −78 °C. Metal-free oxidation of 1° alcohols to aldehydes and 2° alcohols to ketones.',
+pts:['Oxalyl chloride activates DMSO to a chlorodimethylsulfonium ion (CO and CO₂ are released).',
+'Must be kept at about −60 °C or colder. Warmer, you get Pummerer side products (methylthiomethyl ethers).',
+'By-products: dimethyl sulfide (strong smell), CO, CO₂, Et₃NH⁺Cl⁻. No toxic chromium waste, so it is greener than Cr(VI).',
+'Tolerates most functional groups and does not over-oxidise.'],
+rx:[{a:'OCc1ccccc1',b:'O=Cc1ccccc1',r:'(COCl)₂, DMSO, Et₃N, −78 °C',an:'benzyl alcohol',bn:'benzaldehyde',l:'<b>1° alcohol → aldehyde</b> under metal-free conditions.'}],
+steps:{t:'Mechanism',s:[
+['Activate DMSO','DMSO oxygen attacks oxalyl chloride. Loss of CO, CO₂ and Cl⁻ gives the chlorodimethylsulfonium ion Me₂S⁺Cl.'],
+['Alkoxysulfonium ion','The alcohol attacks sulfur and displaces chloride: R₂CH–O–S⁺Me₂.'],
+['Sulfur ylide','Et₃N removes a proton from one S–CH₃ group, giving a sulfur ylide.'],
+['Five-membered transition state','The ylide carbanion pulls off the α-H of the alcohol carbon intramolecularly. C=O forms and Me₂S leaves.']]}},
+
+{id:'moffatt',name:'Pfitzner–Moffatt oxidation',sym:'DMSO/DCC',tags:['ox'],
+sum:'DMSO activated by DCC with a mild acid (pyridinium trifluoroacetate). The same idea as Swern, but at room temperature.',
+pts:['DCC plays the role of oxalyl chloride: it activates DMSO at oxygen.',
+'Alcohol → alkoxysulfonium ion → sulfur ylide → carbonyl + Me₂S. The carbodiimide ends up as DCU.',
+'Advantage: room temperature. Drawbacks: DCU is hard to remove completely, and methylthiomethyl ethers can form.'],
+tip:'Link it in your answer: DCC appears twice in the syllabus, as a coupling agent and in Moffatt oxidation.'},
+
+{id:'mcpba',name:'meta-Chloroperoxybenzoic acid',sym:'mCPBA',tags:['ox'],
+sum:'A peracid. Epoxidises alkenes (Prilezhaev reaction) and converts ketones into esters or lactones (Baeyer–Villiger).',
+pts:['Epoxidation is concerted through a “butterfly” transition state, so it is syn and stereospecific: cis alkene → cis epoxide.',
+'Electron-rich (more substituted) alkenes react faster.',
+'Baeyer–Villiger migratory aptitude: 3° alkyl > 2° alkyl ≈ cyclohexyl ≈ aryl > 1° alkyl > methyl. The group migrates with retention.',
+'Cyclohexanone + mCPBA → ε-caprolactone (ring grows by one O).'],
+rx:[{a:'C1=CCCCC1',b:'C1CCC2OC2C1',r:'mCPBA, CH₂Cl₂',an:'cyclohexene',bn:'cyclohexene oxide',l:'<b>Syn epoxidation.</b>'},
+{a:'O=C1CCCCC1',b:'O=C1CCCCCO1',r:'mCPBA',an:'cyclohexanone',bn:'ε-caprolactone',l:'<b>Baeyer–Villiger.</b> O inserts next to the carbonyl.'}]},
+
+{id:'ddq',name:'DDQ',sym:'DDQ',tags:['ox'],
+sub:'2,3-Dichloro-5,6-dicyano-1,4-benzoquinone',
+sum:'A very strong quinone oxidant. Two Cl and two CN groups pull electron density out of the ring, so DDQ grabs a hydride (H⁻) from benzylic or allylic C–H bonds. The resulting carbocation then loses a proton (dehydrogenation, aromatisation) or is trapped by a nucleophile.',
+pts:['Numbering: C1 and C4 are C=O, C2 and C3 carry Cl, C5 and C6 carry CN.',
+'It is used as a solution in benzene, xylene, chlorobenzene or toluene. Benzene, toluene and xylene (BTX) are highly carcinogenic, which is a green chemistry concern.',
+'DDQ in benzene is red because of a charge-transfer complex between electron-poor DDQ and the electron-rich aromatic.',
+'The reduced hydroquinone (DDQH₂) is insoluble in benzene and separates as a yellow solid, so workup is just filtration.',
+'Reflux is done under a CaCl₂ guard tube to keep moisture out.',
+'The substrate needs a benzylic or allylic H, because that position gives a stabilised carbocation after hydride loss.',
+'Hydroaromatic → aromatic: acenaphthene → acenaphthylene, tetralins → dihydronaphthalenes → naphthalenes.',
+'If a quaternary carbon blocks aromatisation, a 1,2-methyl shift can occur (gem-dimethyl → 1,2-dimethylnaphthalene).',
+'The cation can be trapped: by an internal alkene (cyclisation to indenes), by AcOH (benzylic acetate), by a phenol OH (2H-chromene) or by water (PMB ether cleavage).',
+'PMB (p-methoxybenzyl) ethers are cleaved selectively with DDQ in CH₂Cl₂/H₂O, releasing the alcohol or phenol and anisaldehyde. Plain benzyl ethers survive.'],
+rx:[{a:'O=C1C(Cl)=C(Cl)C(=O)C(C#N)=C1C#N',b:'Oc1c(Cl)c(Cl)c(O)c(C#N)c1C#N',r:'+ 2H (H⁻ + H⁺)',an:'DDQ',bn:'DDQH₂ (yellow solid)',l:'<b>What happens to DDQ itself.</b> It takes a hydride and a proton and becomes the hydroquinone.'},
+{a:'c1cc2cccc3c2c(c1)CC3',b:'C1=Cc2cccc3cccc1c23',r:'DDQ, C₆H₆, reflux',an:'acenaphthene C₁₂H₁₀',bn:'acenaphthylene',l:'<b>Dehydrogenation.</b> Both CH₂ are benzylic.'},
+{a:'CC1(C)CCCc2ccccc21',b:'CC1(C)CC=Cc2ccccc21',r:'DDQ, C₆H₆, reflux',an:'1,1-dimethyltetralin',bn:'1,1-dimethyl-1,2-dihydronaphthalene',l:'<b>Benzylic H⁻ loss then H⁺ loss</b> gives the new C=C (product ② in your notes).'},
+{a:'CC1(C)CC=Cc2ccccc21',b:'Cc1ccc2ccccc2c1C',r:'DDQ, C₆H₆, reflux',an:'dihydronaphthalene ②',bn:'1,2-dimethylnaphthalene',l:'<b>Allylic H⁻ loss, then 1,2-methyl shift</b> so the ring can become aromatic.'},
+{a:'CCc1ccc(OC)cc1',b:'CC(OC(C)=O)c1ccc(OC)cc1',r:'DDQ, AcOH, Ar, 22 °C, 12 h',an:'4-ethylanisole',bn:'1-(4-methoxyphenyl)ethyl acetate',l:'<b>Cation trapped by acetic acid.</b> OMe stabilises the benzylic cation.'},
+{a:'Cc1ccc(O)c(CC=C(C)C)c1',b:'CC1(C)C=Cc2cc(C)ccc2O1',r:'DDQ, ether, 2 h',an:'2-prenyl-4-methylphenol',bn:'2,2,6-trimethyl-2H-chromene',l:'<b>NET problem.</b> Allylic/benzylic cation is trapped by the phenol OH, closing a six-membered ring.'},
+{a:'COc1ccc(COc2ccc3CCCCc3c2)cc1',b:'Oc1ccc2CCCCc2c1',r:'DDQ (1 eq), H₂O',an:'PMB ether',bn:'tetrahydro-2-naphthol (A) + anisaldehyde',l:'<b>NET Dec 2017, step 1.</b> 1 equivalent of DDQ attacks the most activated benzylic C–H: the PMB CH₂.'},
+{a:'Oc1ccc2CCCCc2c1',b:'COC12CCCCC1=CC(=O)C=C2',r:'PhI(OAc)₂, MeOH',an:'phenol (A)',bn:'4a-methoxy dienone (B)',l:'<b>NET Dec 2017, step 2.</b> Oxidative dearomatisation: the phenol attacks I(III), then MeOH adds at the para (ring-fusion) carbon.'}],
+steps:{t:'General DDQ mechanism',s:[
+['Hydride transfer','A benzylic or allylic C–H gives its hydride (H⁻) to a DDQ carbonyl oxygen through the quinone ring. Curly arrow: C–H bond → DDQ.'],
+['Stabilised carbocation','The carbocation is benzylic or allylic, so it is resonance stabilised. DDQ is now the phenolate anion DDQH⁻.'],
+['Proton loss','DDQH⁻ removes a proton next to the cation, forming a new C=C. DDQH₂ precipitates as a yellow solid.'],
+['Repeat or trap','If more benzylic/allylic H remain, the cycle repeats until the ring is aromatic. If a nucleophile (alkene, OH, AcOH, H₂O) is nearby, it traps the cation instead.']]},
+tip:'In mechanism answers always show: 1) the curly arrow from C–H to DDQ oxygen, 2) the carbocation, 3) proton loss or nucleophile trap, 4) DDQH₂ formed.',
+fix:'Your notes call the prenylphenol product a “coumarine derivative”. The new ring has no C=O, so it is a 2,2-dimethyl-2H-chromene (a benzopyran). Coumarin is 2H-chromen-2-one. If your teacher uses “coumarin”, follow them, but know the difference.'},
+
+{id:'seo2',name:'Selenium dioxide',sym:'SeO₂',tags:['ox'],
+sub:'Riley oxidation',
+sum:'Oxidises a reactive CH₂ or CH₃ next to a carbonyl (active methylene) into a new C=O, giving 1,2-dicarbonyl compounds. It also oxidises allylic positions to allylic alcohols or enones.',
+pts:['Key transformation: –CO–CH₂– → –CO–CO–. For example cyclohexanone → cyclohexane-1,2-dione.',
+'Common solvents: dioxane, acetic acid, acetic anhydride, water or ethanol.',
+'In water SeO₂ becomes selenous acid H₂SeO₃; in alcohol it becomes the dialkyl selenite ester (EtO)₂Se=O. These are the true oxidants.',
+'Red selenium metal precipitates as the reaction proceeds. Selenium compounds are toxic.',
+'Allylic oxidation goes by an ene reaction then a [2,3]-sigmatropic shift. Catalytic SeO₂ with t-BuOOH (Sharpless) avoids large amounts of selenium.',
+'Diphenylmethane → benzophenone (activated benzylic CH₂).',
+'Cycloheptatriene → tropone. Tropone has a large dipole because its polar form is an aromatic tropylium oxide (6π electrons in the ring).',
+'Alkynes: diphenylacetylene (Ph–C≡C–Ph) → benzil (Ph–CO–CO–Ph).'],
+rx:[{a:'O=C1CCCCC1',b:'O=C1CCCCC1=O',r:'SeO₂, dioxane, H₂O',an:'cyclohexanone',bn:'cyclohexane-1,2-dione',l:'<b>Active methylene → C=O.</b>'},
+{a:'c1ccc(Cc2ccccc2)cc1',b:'O=C(c1ccccc1)c1ccccc1',r:'SeO₂',an:'diphenylmethane',bn:'benzophenone',l:'<b>Doubly benzylic CH₂ → ketone.</b>'},
+{a:'C1=CC=CCC=C1',b:'O=C1C=CC=CC=C1',r:'SeO₂, H₂O, 5 h',an:'cycloheptatriene',bn:'tropone',l:'<b>Tropone.</b> Large dipole from tropylium oxide resonance.'},
+{a:'C(#Cc1ccccc1)c1ccccc1',b:'O=C(C(=O)c1ccccc1)c1ccccc1',r:'SeO₂, H⁺',an:'diphenylacetylene',bn:'benzil',l:'<b>Alkyne → 1,2-diketone.</b>'},
+{a:'CC1CCCCC1=O',b:'CC1(C)CCCC(C)(O)C1=O',r:'1 tBuOK 2 CH₃I 3 SeO₂ 4 CH₃MgI',an:'2-methylcyclohexanone',bn:'2-hydroxy-2,6,6-trimethylcyclohexanone',l:'<b>NET problem.</b> tBuOK forms the more substituted (thermodynamic) enolate, CH₃I gives 2,2-dimethyl; SeO₂ oxidises the other α-CH₂; CH₃MgI adds to the less hindered C=O.'}],
+steps:{t:'Mechanism (active methylene, as in your notes)',s:[
+['Enolisation','The ketone tautomerises to its enol.'],
+['Attack on selenium','The enol C=C attacks Se of SeO₂ (O=Se=O). The carbonyl reforms and an α-C–Se bond is made.'],
+['Loss of water','A Se–OH group leaves as water, giving an Se-bound intermediate with C=Se character.'],
+['Oxygen transfer','Water (or the Se–O oxygen) attacks the α-carbon and a proton shift gives an α-hydroxy selenium species.'],
+['Elimination','H₂SeO is lost (it breaks down to Se + H₂O). The α-carbon becomes C=O: the 1,2-dicarbonyl product.']]},
+tip:'Spot SeO₂ questions by the words “active methylene” or an allylic methyl group. Product: new C=O right next to the old one.'},
+
+{id:'dcc',name:'DCC',sym:'DCC',tags:['cc'],
+sub:'N,N′-Dicyclohexylcarbodiimide, C₆H₁₁–N=C=N–C₆H₁₁',
+sum:'A mild dehydrating agent. It removes the elements of water under gentle conditions, so it is used to make esters, ethers, anhydrides, amides, lactones and peptides. It becomes dicyclohexylurea (DCU).',
+pts:['Carbodiimide + H₂O (formally) → DCU, which is insoluble and precipitates.',
+'Weakness: DCU is hard to remove completely and yields can be low. EDC (water-soluble urea) and HOBt are more expensive but give higher yields.',
+'HOBt or DMAP intercept the O-acylisourea and stop the side reaction O → N acyl shift, which gives a dead-end N-acylurea. HOBt also suppresses racemisation in peptides.',
+'Esters: RCOOH + R′OH + DCC (+ DMAP) → RCOOR′ (Steglich esterification).',
+'Amides: RCOOH + R′NH₂ + DCC → RCONHR′.',
+'“Formation of alkane” (your notes): R–OH + DCC → O-alkylisourea, then H₂/Pd cleaves the C–O bond → R–H + DCU. This is a deoxygenation.',
+'Heterocyclisation: malonic acid + 2 DCC → 1,3-dicyclohexylbarbituric acid.',
+'DMSO + DCC is the Pfitzner–Moffatt oxidation.'],
+rx:[{a:'C(=NC1CCCCC1)=NC1CCCCC1',b:'O=C(NC1CCCCC1)NC1CCCCC1',r:'takes up H₂O',an:'DCC',bn:'DCU',l:'<b>The by-product.</b> DCU is what makes the reaction go.'},
+{a:'CC(=O)O.OCC',b:'CCOC(C)=O',r:'DCC, DMAP',an:'acid + alcohol',bn:'ester',l:'<b>Esterification</b> at room temperature, no strong acid.'},
+{a:'OC(=O)c1ccccc1.Nc1ccccc1',b:'O=C(Nc1ccccc1)c1ccccc1',r:'DCC',an:'acid + amine',bn:'amide',l:'<b>Amide or peptide bond.</b>'},
+{a:'OC(=O)CC(O)=O',b:'O=C1CC(=O)N(C2CCCCC2)C(=O)N1C1CCCCC1',r:'2 DCC',an:'malonic acid',bn:'1,3-dicyclohexylbarbituric acid',l:'<b>Heterocyclisation of DCC.</b>'}],
+steps:{t:'Mechanism (ester or amide formation)',s:[
+['Proton transfer','The carboxylic acid protonates one carbodiimide nitrogen, making the carboxylate and a very electrophilic central carbon.'],
+['O-acylisourea','The carboxylate oxygen attacks the central C of the carbodiimide. The product R–CO–O–C(=NR)–NHR is an activated ester.'],
+['Nucleophile attacks','The alcohol (or amine) attacks the acyl carbon. A tetrahedral intermediate forms.'],
+['Collapse','The tetrahedral intermediate collapses. DCU is the leaving group, giving the ester (or amide) and DCU.']]},
+trap:'The O-acylisourea can rearrange to an N-acylurea that no longer reacts. Mention HOBt or DMAP as the fix.'},
+
+{id:'gilman',name:'Gilman reagent (organocuprates)',sym:'R₂CuLi',tags:['cc'],
+sum:'Lithium dialkylcuprates. Soft, selective carbon nucleophiles that do 1,4 (conjugate) addition to enones, substitute halides and tosylates, turn acid chlorides into ketones and open epoxides.',
+pts:['Preparation: CH₃Li + CuI → CH₃Cu + LiI, then CH₃Cu + CH₃Li → (CH₃)₂CuLi (lithium dimethylcuprate). Usually in ether or THF at −78 °C.',
+'In ether they exist as dimers, a Cu₂Li₂Me₄ cluster.',
+'R can be alkyl, alkenyl (alkylidene) or aryl. Only one R is transferred, the other is wasted.',
+'Conjugate (1,4) addition to α,β-unsaturated carbonyls happens only with Gilman reagents. Grignard and RLi reagents add 1,2 to the C=O.',
+'Corey–House: R–X + R′₂CuLi → R–R′ (X = I, Br). OTs and OMs are also replaced.',
+'Acid chloride → ketone, and it stops there: hexanoyl chloride + Me₂CuLi → heptan-2-one.',
+'Epoxides open at the less hindered carbon (SN2, inversion). Vinyl epoxides and allylic systems can react SN2′ (attack at the far end of the alkene).',
+'The lithium enolate made by 1,4-addition can be trapped: with CH₃COCl (β-diketone) or with an internal alkyl bromide (ring formation, NET/GATE).',
+'Stereochemistry in cyclohexenones: the cuprate adds axially, anti to an existing ring substituent, so the product is trans (e.g. trans-3,5-dimethylcyclohexanone).',
+'Reactivity order: RCOCl > RCHO > R–OTs > epoxide > R–X.'],
+rx:[{a:'O=C1CCCC=C1',b:'O=C1CCCC(C)C1',r:'(CH₃)₂CuLi, THF, −78 °C; H₃O⁺',an:'cyclohexenone',bn:'3-methylcyclohexanone',l:'<b>1,4-Addition.</b> Methyl goes to the β-carbon.'},
+{a:'CCCCCC(Cl)=O',b:'CCCCCC(C)=O',r:'(CH₃)₂CuLi, THF, −78 °C',an:'hexanoyl chloride',bn:'heptan-2-one',l:'<b>Acid chloride → ketone.</b> No second addition.'},
+{a:'C=CC(C)=O',b:'CCCC(C)=O',r:'LiCuMe₂; H₃O⁺',an:'methyl vinyl ketone',bn:'pentan-2-one',l:'<b>MCQ answer (a).</b> Conjugate addition, not 1,2.'},
+{a:'C=CC(C)=O',b:'CCC(C(C)=O)C(C)=O',r:'1 Me₂CuLi 2 CH₃COCl',an:'methyl vinyl ketone',bn:'3-ethylpentane-2,4-dione',l:'<b>Enolate trapping.</b> Enolate (A) is acylated to give the β-diketone (B), an active methylene compound.'},
+{a:'CCC1CO1',b:'CCC(O)CC',r:'Me₂CuLi, THF, −78 °C',an:'1,2-epoxybutane',bn:'pentan-3-ol',l:'<b>Epoxide opening</b> at the less hindered CH₂.'},
+{a:'CC1CC(=O)C=CC1',b:'C[C@@H]1C[C@@H](C)CC(=O)C1',r:'Me₂CuLi; H₃O⁺',an:'5-methylcyclohex-2-enone',bn:'trans-3,5-dimethylcyclohexanone',l:'<b>NET 2022.</b> Axial attack anti to the existing methyl gives the trans product.'}],
+steps:{t:'Mechanism of 1,4-addition',s:[
+['π-Complex','Cu(I) of the cuprate coordinates to the C=C of the enone (a d-π* complex).'],
+['Oxidative addition','Copper bonds to the β-carbon, giving a Cu(III) species and a lithium enolate.'],
+['Reductive elimination','The R group moves from Cu to the β-carbon, forming the new C–C bond. RCu is released.'],
+['Workup','The lithium enolate is protonated by H₃O⁺ and tautomerises to the ketone, or is trapped by an electrophile first.']]},
+tip:'At −78 °C cuprates are highly selective. Your notes warn that the SN2′ vinyl-cuprate example needs 0 °C; at other temperatures a different product forms.'},
+
+{id:'lda',name:'LDA',sym:'LDA',tags:['base'],
+sub:'Lithium diisopropylamide, (i-Pr)₂N⁻ Li⁺',
+sum:'A strong, bulky, non-nucleophilic base (conjugate acid pKa about 36). It removes the most accessible α-H quickly and irreversibly, giving the kinetic enolate.',
+pts:['LDA, THF, −78 °C: kinetic enolate, at the less substituted α-carbon.',
+'tBuOK or NaOEt at room temperature (reversible): thermodynamic enolate, the more substituted, more stable one.',
+'Too bulky to add to C=O, so it deprotonates instead.',
+'Used with 1,3-dithianes and in the internal test problem: LDA, then ClCO₂Et gives a β-keto ester.'],
+rx:[{a:'CC1CCCCC1=O',b:'CC1CCCC(C)C1=O',r:'1 LDA, −78 °C 2 CH₃I',an:'2-methylcyclohexanone',bn:'2,6-dimethylcyclohexanone',l:'<b>Kinetic control.</b>'},
+{a:'CC1CCCCC1=O',b:'CC1(C)CCCCC1=O',r:'1 tBuOK 2 CH₃I',an:'2-methylcyclohexanone',bn:'2,2-dimethylcyclohexanone',l:'<b>Thermodynamic control.</b>'}]},
+
+{id:'dithiane',name:'1,3-Dithiane (umpolung)',sym:'S⌒S',tags:['base','cc'],
+sub:'Corey–Seebach reaction',
+sum:'Reversal of polarity (umpolung). A carbonyl carbon is normally an electrophile. Once turned into a 1,3-dithiane, its C–H can be removed by a strong base and it becomes a nucleophile: an acyl anion equivalent.',
+pts:['Step 1: aldehyde + HS(CH₂)₃SH (1,3-propanedithiol) with BF₃ or HCl → 1,3-dithiane (a thioacetal). BF₃ activates the carbonyl.',
+'Step 2: n-BuLi (or MeLi in your notes) removes the C2–H (pKa about 31). Sulfur is polarisable and stabilises the carbanion.',
+'The 2-lithio-1,3-dithiane is the synthon R–C⁻=O, an acyl anion equivalent.',
+'Step 3: alkylate with RCH₂Br (C-alkylation), an epoxide, a carbonyl or an acid chloride.',
+'Step 4: Hg²⁺/H₂O (HgCl₂, HgO) hydrolyses the dithiane back to the C=O, giving a ketone.',
+'Formaldehyde can be alkylated twice. With Br(CH₂)₄Br the second alkylation is intramolecular: cyclopentanone.',
+'Raney Ni instead of Hg²⁺ reduces the dithiane carbon all the way to CH₂.'],
+rx:[{a:'CC=O',b:'CC(=O)Cc1ccccc1',r:'1 HS(CH₂)₃SH 2 BuLi 3 PhCH₂Br 4 Hg²⁺/H₂O',an:'acetaldehyde',bn:'phenylacetone',l:'<b>CH₃CHO → CH₃COCH₂Ph.</b>'},
+{a:'C=O',b:'O=C1CCCC1',r:'dithiane; MeLi; Br(CH₂)₄Br; MeLi; Hg²⁺',an:'formaldehyde',bn:'cyclopentanone',l:'<b>Double alkylation</b>, second one intramolecular.'},
+{a:'C=O',b:'CC(C)=CCC=O',r:'dithiane; MeLi; prenyl bromide; Hg²⁺',an:'formaldehyde',bn:'4-methylpent-3-enal',l:'<b>Retrosynthesis question</b> from your notes.'},
+{a:'CC=O',b:'CC(=O)C(C)=O',r:'dithiane; MeLi; CH₃COCl; Hg²⁺',an:'acetaldehyde',bn:'butane-2,3-dione',l:'<b>Acylation</b> of the dithiane anion gives a 1,2-diketone.'},
+{a:'C=O',b:'CC(O)C(C)C(C)O',r:'dithiane/BF₃; BuLi; 2,3-epoxybutane; Hg²⁺; CH₃MgBr',an:'HCHO',bn:'(E) 3-methylpentane-2,4-diol',l:'<b>A → E sequence.</b> Epoxide opening gives C, hydrolysis gives aldehyde D, Grignard gives diol E. KOH then CS₂ converts E into the bis-xanthate F.'}],
+steps:{t:'Corey–Seebach sequence',s:[
+['Thioacetal formation','The dithiol S attacks the (BF₃-activated) carbonyl carbon. Loss of water and ring closure gives the 1,3-dithiane.'],
+['Deprotonation','BuLi or MeLi removes H from C2, between the two sulfur atoms. The carbanion is the acyl anion equivalent.'],
+['C-Alkylation','The carbanion does SN2 on RCH₂Br (or opens an epoxide, or adds to a C=O / COCl).'],
+['Unmasking','Hg²⁺ coordinates to sulfur and water attacks C2. The thioacetal hydrolyses and the ketone is released.']]},
+tip:'Umpolung = “reversal of polarity” = “dipole inversion”. Write the word synthon and acyl anion equivalent in your answer.'},
+
+{id:'pd',name:'Palladium cross-coupling',sym:'Pd(0)',tags:['cp','cc'],
+sub:'Suzuki, Negishi, Kumada, Stille, Sonogashira',
+sum:'R¹–X + R²–M → R¹–R² catalysed by Pd(0). Three steps: oxidative addition, transmetalation, reductive elimination. The metal M decides the name.',
+pts:['M = B (boronic acid or ester): Suzuki (Suzuki–Miyaura). Needs a base to activate boron.',
+'M = Zn: Negishi. M = Mg: Kumada. M = Sn: Stille. Terminal alkyne + CuX co-catalyst: Sonogashira.',
+'A Pd(II) precatalyst such as Pd(OAc)₂ is first reduced to Pd(0) by R²–M or by a phosphine.',
+'Halide reactivity: I > OTf > Br >> Cl. Alkenyl halides couple with retention of alkene geometry.',
+'Suzuki: organoboranes are non-toxic, stable to air and water, and boric acid by-products are easy to remove.',
+'Stille: tolerant of almost everything but organotin compounds are toxic.',
+'Suzuki example (notes): propene + catecholborane (hydroboration) → propylboronate, then PhCl → propylbenzene.',
+'Terminal alkyne C–H is acidic: HC≡CH + NaNH₂ → acetylide.'],
+rx:[{a:'Brc1ccccc1',b:'c1ccc(-c2ccccc2)cc1',r:'PhB(OR)₂, Pd(0), base',an:'bromobenzene',bn:'biphenyl',l:'<b>Suzuki.</b> Your notes write C₆H₆–B; it should be C₆H₅–B (phenyl).'},
+{a:'Ic1ccco1',b:'c1coc(-c2cccs2)c1',r:'2-thienyl-MgBr, Pd(0), Et₂O',an:'2-iodofuran',bn:'2-(2-thienyl)furan',l:'<b>Kumada.</b> Oxidative addition → transmetalation → reductive elimination.'},
+{a:'COc1cc(C)nc(I)c1',b:'COc1cc(C)nc(-c2ccccn2)c1',r:'2-pyridyl-ZnCl, Pd(0)',an:'2-iodo-4-methoxy-6-methylpyridine',bn:'bipyridine product',l:'<b>Negishi.</b> 2-Pyridylzinc chloride comes from 2-lithiopyridine + ZnCl₂.'},
+{a:'CC1CCC(OS(=O)(=O)C(F)(F)F)=CC1',b:'CC1CCC(c2ccccc2)=CC1',r:'PhSnMe₃, Pd(PPh₃)₄',an:'4-methylcyclohexenyl triflate',bn:'1-phenyl-4-methylcyclohexene',l:'<b>Stille.</b> Your notes use OTs; triflate (OTf) is the usual partner.'},
+{a:'O=C1CCCC=C1',b:'C/C=C/C1=CCCCC1=O',r:'1 I₂, pyridine 2 (E)-CH₃CH=CHSnBu₃, Pd(0)',an:'cyclohexenone',bn:'2-propenylcyclohexenone',l:'<b>Stille on an α-iodoenone.</b>'}],
+tip:'Draw the cycle in every coupling answer, label all three steps, and show Pd(0) being regenerated.'},
+
+{id:'heck',name:'Heck reaction',sym:'Heck',tags:['cp','cc'],
+sub:'Mizoroki–Heck',
+sum:'R–X + alkene → substituted alkene + HX, catalysed by Pd. R = aryl, vinyl (or benzyl); X = halide or triflate. There is no organometallic partner and no transmetalation.',
+pts:['Step 1: oxidative addition of R–X to Pd(0) → R–Pd(II)–X.',
+'Step 2: the alkene coordinates and inserts (syn migratory insertion). R goes to the less substituted alkene carbon.',
+'Step 3: syn β-hydride elimination releases the product alkene (mostly E, trans).',
+'Step 4: base removes HX from H–Pd–X (reductive elimination), regenerating Pd(0).',
+'Because insertion and elimination are both syn, the reaction is stereospecific (see trans-2-butene below).',
+'Green Heck (your notes): Ar–X + alkene in water with 1 mol% Pd(L-proline)₂, TBAB (tetrabutylammonium bromide, phase-transfer catalyst), NaOAc, microwave 200–300 W, about 135 °C, 10–50 min.',
+'Ionic liquid Heck: Pd(OAc)₂, K₃PO₄ in [HEmim][BF₄] (1-hydroxyethyl-3-methylimidazolium tetrafluoroborate), 130 °C, 16 h. The ionic liquid can be recycled.'],
+rx:[{a:'Brc1ccccc1.C=CC(=O)OC',b:'COC(=O)/C=C/c1ccccc1',r:'Pd catalyst, base',an:'PhBr + methyl acrylate',bn:'methyl cinnamate',l:'<b>Classic Heck.</b>'},
+{a:'C=Cc1ccccc1.Ic1ccccc1',b:'c1ccc(/C=C/c2ccccc2)cc1',r:'Pd(0), ligand',an:'styrene + PhI',bn:'trans-stilbene',l:'<b>Heck vinylation.</b>'},
+{a:'C=Cc1ccccc1.COc1ccc(I)cc1',b:'COc1ccc(/C=C/c2ccccc2)cc1',r:'Pd(0)',an:'styrene + 4-iodoanisole',bn:'4-methoxystilbene',l:'Example 1 in your notes.'},
+{a:'C=Cc1ccc(Cl)cc1.Ic1ccccc1',b:'Clc1ccc(/C=C/c2ccccc2)cc1',r:'Pd(0)',an:'4-chlorostyrene + PhI',bn:'4-chlorostilbene',l:'<b>C–I reacts, C–Cl stays.</b>'},
+{a:'C=Cc1ccccc1.CC(=O)c1ccc(I)cc1',b:'CC(=O)c1ccc(/C=C/c2ccccc2)cc1',r:'Pd(0)',an:'styrene + 4-iodoacetophenone',bn:'4-acetylstilbene',l:'Example 3 in your notes.'},
+{a:'C/C=C/C.Ic1ccccc1',b:'C/C=C(\\C)c1ccccc1',r:'Pd(0)',an:'trans-2-butene + PhI',bn:'(E)-2-phenylbut-2-ene',l:'<b>Stereospecific.</b> Syn insertion then syn β-H elimination leaves the two methyls cis. Your notes call it cis-2-phenylbut-2-ene (cis methyls); by CIP rules it is (E).'}],
+steps:{t:'Heck catalytic cycle',s:[
+['Oxidative addition','Pd(0)Lₙ inserts into Ar–X: Ar–Pd(II)–X.'],
+['Alkene coordination','The alkene binds to Pd as a π-complex.'],
+['Syn migratory insertion','Ar migrates to one alkene carbon and Pd bonds to the other, on the same face.'],
+['Bond rotation','The C–C bond rotates so that a β-H sits syn to Pd.'],
+['Syn β-hydride elimination','Pd–H forms and the new C=C is released (olefin decomplexation).'],
+['Regeneration','Base removes HX from H–Pd–X: HPdX → Pd(0) + HX. The cycle restarts.']]},
+fix:'Your notes draw 4-chlorostyrene + PhI giving a vinylbiphenyl. In a Heck reaction the aryl iodide adds across the vinyl group; the aryl C–Cl bond is far too unreactive. The expected product is 4-chlorostilbene. Check with your teacher.'},
+
+{id:'wittig',name:'Wittig reaction',sym:'Ph₃P=CR₂',tags:['ol'],
+sum:'A phosphorus ylide + aldehyde or ketone → alkene + triphenylphosphine oxide. The C=O oxygen is swapped for a C=CR₂ at exactly that position.',
+pts:['Ylide preparation: PPh₃ + RCH₂X → phosphonium salt; strong base (BuLi, NaH, NaOMe) removes the α-H.',
+'Driving force: the very strong P=O bond in Ph₃P=O.',
+'Non-stabilised ylides (alkyl) give mainly Z-alkenes; stabilised ylides (with C=O or CO₂R) give E-alkenes.',
+'Ph₃P=CHOMe + ketone → enol ether (A); HCl hydrolysis → aldehyde (B). A one-carbon homologation.',
+'Salicylaldehyde + vinyltriphenylphosphonium (from 1,2-dibromoethane, PPh₃, NaH) → 2H-chromene: phenoxide Michael addition, then intramolecular Wittig.'],
+rx:[{a:'O=C1CCCCC1',b:'C=C1CCCCC1',r:'Ph₃P=CH₂',an:'cyclohexanone',bn:'methylenecyclohexane',l:'<b>Basic Wittig.</b> + Ph₃P=O.'},
+{a:'O=C1CCCCC1',b:'O=CC1CCCCC1',r:'1 Ph₃P=CHOMe 2 HCl, H₂O',an:'cyclohexanone',bn:'cyclohexanecarbaldehyde (B)',l:'<b>Homologation.</b> Enol ether (A) is hydrolysed to the aldehyde.'},
+{a:'O=Cc1ccccc1O',b:'C1=Cc2ccccc2OC1',r:'CH₂=CH–PPh₃⁺ (from BrCH₂CH₂Br, PPh₃, NaH)',an:'salicylaldehyde',bn:'2H-chromene (B)',l:'<b>Intramolecular Wittig</b> after oxa-Michael addition.'}],
+steps:{t:'Mechanism',s:[
+['Nucleophilic attack','The ylide carbanion attacks the carbonyl carbon.'],
+['Betaine / oxaphosphetane','The alkoxide oxygen bonds to P⁺, closing a four-membered oxaphosphetane ring.'],
+['Ring collapse','The ring breaks in a retro [2+2]: C=C forms and Ph₃P=O is released.']]}},
+
+{id:'peterson',name:'Peterson olefination',sym:'R₃Si–CH₂⁻',tags:['ol'],
+sum:'The silicon version of the Wittig reaction. An α-silyl carbanion adds to a carbonyl, and the resulting β-hydroxysilane eliminates to an alkene.',
+pts:['Reagent: Me₃SiCH₂Li or Me₃SiCH₂MgCl. Silicon stabilises the carbanion (Wittig uses phosphorus).',
+'Silicon is oxophilic: the strong Si–O bond promotes loss of oxygen.',
+'The β-hydroxysilane can be isolated. Acid gives anti elimination; base (KH) gives syn elimination. So one diastereomer can give either E or Z alkene.',
+'By-product is a silanol / siloxane, which is volatile and easy to remove, unlike Ph₃P=O.'],
+rx:[{a:'O=C1CCCCC1',b:'C=C1CCCCC1',r:'Me₃SiCH₂Li; then H⁺ or KH',an:'cyclohexanone',bn:'methylenecyclohexane',l:'Same product as Wittig, different by-product.'}],
+fix:'Your notes draw the by-product as R₃Si=O. Silicon does not form a stable Si=O double bond; the real by-product is the silanolate R₃SiO⁻ (giving R₃SiOH or (R₃Si)₂O).'},
+
+{id:'yeast',name:'Baker’s yeast',sym:'BY',tags:['red'],
+sub:'Saccharomyces cerevisiae',
+sum:'A whole-cell biocatalyst for the enantioselective reduction of β-keto esters and β-diketones. Ethyl acetoacetate gives the (S)-alcohol selectively.',
+pts:['Conditions: yeast, sucrose (or glucose), water, about 30 °C. Cheap, safe and green.',
+'The hydride comes from NAD(P)H inside the cell, delivered by dehydrogenase (ketoreductase) enzymes.',
+'Selectivity: if the groups on the carbonyl carbon differ enough in size, the enzyme delivers hydrogen from the less hindered face (Prelog’s rule).',
+'Ethyl acetoacetate (EAA) → ethyl (S)-3-hydroxybutanoate, high ee.'],
+rx:[{a:'CCOC(=O)CC(C)=O',b:'CCOC(=O)C[C@H](C)O',r:'baker’s yeast, sucrose, H₂O',an:'ethyl acetoacetate (EAA)',bn:'ethyl (S)-3-hydroxybutanoate',l:'<b>Selective S-alcohol.</b> Only the ketone is reduced, not the ester.'}]},
+
+{id:'raney',name:'Raney nickel',sym:'Ra-Ni',tags:['red'],
+sum:'Porous nickel full of adsorbed hydrogen, made by dissolving the Al out of a Ni–Al alloy with NaOH. Used for hydrogenation and desulfurisation.',
+pts:['Preparation: Ni–Al alloy + NaOH (aq) → Al dissolves as aluminate, leaving spongy Ni with H₂ on its surface.',
+'Pyrophoric when dry: store under water or ethanol.',
+'Hydrogenates C=C, C≡C, C=O, C≡N and NO₂ groups.',
+'Desulfurisation: thioacetals, thiols and thioethers → C–H (Mozingo reduction). Dithianes → CH₂.',
+'Ring-opens thiophenes and thiazoles by removing sulfur.'],
+rx:[{a:'C1CCC2(CC1)SCCS2',b:'C1CCCCC1',r:'Raney Ni, EtOH, heat',an:'cyclohexanone thioacetal',bn:'cyclohexane',l:'<b>C=O → CH₂</b> in two steps, under neutral conditions.'}]},
+
+{id:'wilk',name:'Wilkinson’s catalyst',sym:'RhCl(PPh₃)₃',tags:['red'],
+sum:'Chloridotris(triphenylphosphine)rhodium(I). A homogeneous hydrogenation catalyst that adds H₂ syn to unhindered C=C bonds.',
+pts:['Reduces the least hindered, non-conjugated C=C selectively. Tetrasubstituted alkenes react very slowly.',
+'Does not touch C=O, NO₂, C≡N or esters.',
+'Cycle: PPh₃ dissociates; oxidative addition of H₂ (Rh(I) → Rh(III)); alkene coordination; migratory insertion; reductive elimination of the alkane.',
+'Also decarbonylates aldehydes: RCHO → RH + CO (Tsuji–Wilkinson).'],
+rx:[{a:'CC1=CCC(CC1)C(C)=C',b:'CC1=CCC(CC1)C(C)C',r:'H₂, RhCl(PPh₃)₃',an:'limonene',bn:'p-menth-1-ene',l:'<b>Selective.</b> Only the less hindered isopropenyl C=C is reduced.'}],
+steps:{t:'Catalytic cycle',s:[
+['Ligand loss','RhCl(PPh₃)₃ loses one PPh₃ to open a site.'],
+['Oxidative addition','H₂ adds to Rh(I), giving cis-dihydride Rh(III).'],
+['Alkene binding and insertion','The alkene coordinates and inserts into one Rh–H bond.'],
+['Reductive elimination','The alkyl and the second H combine: the alkane leaves, Rh(I) is regenerated.']]}},
+
+{id:'acyloin',name:'Acyloin condensation',sym:'2 Na',tags:['red','cc'],
+sum:'Reductive coupling of two esters with sodium metal in hot toluene or xylene gives an α-hydroxy ketone (acyloin). Intramolecular versions make rings of almost any size.',
+pts:['2 RCOOEt + 4 Na → enediolate; acid workup → R–CO–CH(OH)–R.',
+'Mechanism: electron transfer from Na gives ester radical anions (ketyls) that dimerise; EtO⁻ is lost to give a 1,2-diketone, which is reduced again to the enediolate.',
+'Rühlmann modification: add TMSCl to trap the enediolate as a bis(trimethylsilyl) ether. Better yields.',
+'Works well for medium and large rings without high dilution, because the reaction happens on the sodium surface.'],
+rx:[{a:'CCOC(C)=O',b:'CC(=O)C(C)O',r:'1 Na, toluene 2 H₃O⁺',an:'ethyl acetate',bn:'acetoin',l:'<b>Intermolecular.</b>'},
+{a:'CCOC(=O)CCCCC(=O)OCC',b:'O=C1CCCCC1O',r:'1 Na, xylene 2 H₃O⁺',an:'diethyl adipate',bn:'2-hydroxycyclohexanone',l:'<b>Intramolecular ring formation.</b>'}]}
+];
+/* ============ UNIT II ============ */
+const RINGS=[
+{n:'Pyrrole',s:'c1cc[nH]c1',b:'5-membered, one NH. The N lone pair is part of the 6π aromatic sextet, so pyrrole is a very weak base (conjugate acid pKa about −3.8). Electron-rich: electrophiles attack C2. The N–H is weakly acidic (pKa about 17.5).'},
+{n:'Furan',s:'c1ccoc1',b:'O contributes one lone pair to the 6π system. Least aromatic of pyrrole, furan and thiophene, so it can act as a diene in Diels–Alder. Electrophiles attack C2.'},
+{n:'Thiophene',s:'c1ccsc1',b:'The most aromatic of the three 5-membered rings (aromaticity: thiophene > pyrrole > furan). Electrophiles attack C2. Raney Ni removes the S.'},
+{n:'Pyridine',s:'c1ccncc1',b:'N lone pair sits in an sp² orbital outside the ring, so it is basic (pKa of pyridinium 5.2). Electron-poor ring: electrophiles attack C3 with difficulty; nucleophiles attack C2 and C4 (Chichibabin).'},
+{n:'Indole',s:'c1ccc2[nH]ccc2c1',b:'Benzene fused to pyrrole. Electrophiles attack C3, because the intermediate keeps the benzene ring intact (Mannich, Vilsmeier, Reimer–Tiemann all at C3).'},
+{n:'Quinoline',s:'c1ccc2ncccc2c1',b:'Benzene fused to pyridine (N at 1). pKa 4.9. Electrophiles go into the benzene ring (C5 and C8); nucleophiles go to C2 and C4.'},
+{n:'Isoquinoline',s:'c1ccc2cnccc2c1',b:'N at position 2. pKa 5.4. Electrophiles attack C5 and C8; nucleophiles attack C1. Made by Pictet–Spengler and Bischler–Napieralski.'},
+{n:'Benzimidazole',s:'c1ccc2[nH]cnc2c1',b:'Benzene fused to imidazole. Your syllabus diagram labels this ring “imidazole”. Found in vitamin B12 and many drugs.'},
+{n:'Imidazole',s:'c1c[nH]cn1',b:'1,3-Diazole. N1 is pyrrole-type (lone pair in the ring), N3 is pyridine-type (basic). Amphoteric. More basic than pyridine (pKa about 7.0) because the imidazolium cation is symmetrical and well stabilised. Strong H-bonding gives a high bp (256 °C). Part of histidine.'},
+{n:'Oxazole',s:'c1cocn1',b:'1,3-Oxazole. Weak base (pKa about 0.8). The least aromatic azole, so it behaves as a diene in Diels–Alder (route to pyridines and vitamin B6). C2–H is the most acidic; nucleophiles attack C2.'},
+{n:'Pyrazole',s:'c1cn[nH]c1',b:'1,2-Diazole (two N side by side). pKa about 2.5. Very stable to oxidation. Electrophiles attack C4. Tautomers make positions 3 and 5 equivalent in unsubstituted pyrazoles.'},
+{n:'Thiazole',s:'c1cscn1',b:'1,3-Thiazole. pKa about 2.5. Electrophiles attack C5; the C2–H is acidic (thiamine, vitamin B1, reacts through a C2 ylide). Nucleophiles and BuLi react at C2.'}
+];
+const RMAP={
+Imidazole:{n:5,at:['N1–H','C2','N3','C4','C5'],e:[3,4],nu:[1],h:[0],t:'<p><b>Electrophiles:</b> C4 and C5 (diazo coupling at pH 7–11, nitration, bromination). The pyridine-type N3 is attacked by alkylating agents: CH₃I gives an imidazolium salt, and N-alkyl imidazolium salts are easily quaternised.</p><p><b>Base/nucleophile:</b> N-protected imidazole is lithiated at C2 by n-BuLi; the 2-lithio species reacts with R–X or CO₂.</p><p><b>Acidic H:</b> N1–H (pKa about 14.5). NaOH (50%) then BuBr gives 1-butylimidazole.</p>'},
+Oxazole:{n:5,at:['O1','C2','N3','C4','C5'],e:[4],nu:[1],h:[1],t:'<p><b>Electrophiles:</b> only when an activating group is present, at C5 (then C4). The ring is electron-poor.</p><p><b>Nucleophiles:</b> attack C2, often opening the ring. NH₃ converts oxazoles into imidazoles; OH⁻ opens the ring to an acyclic formamide.</p><p><b>Acidic H:</b> C2–H is removed by BuLi.</p><p><b>Diene:</b> [4+2] with singlet O₂ (photo-oxygenation) and with alkenes.</p>'},
+Thiazole:{n:5,at:['S1','C2','N3','C4','C5'],e:[4],nu:[1],h:[1],t:'<p><b>Electrophiles:</b> C5. Nitration (conc. HNO₃/H₂SO₄) and sulfonation (oleum) give 5-substituted thiazoles. Gas-phase bromination is unusual and goes to C2.</p><p><b>Nucleophiles:</b> C2. NaNH₂ gives 2-aminothiazole (Chichibabin type).</p><p><b>Acidic H:</b> C2–H (BuLi gives 2-lithiothiazole). A 2-CH₃ group is also acidic and condenses with benzaldehyde.</p>'},
+Pyrazole:{n:5,at:['N1–H','N2','C3','C4','C5'],e:[3],nu:[],h:[0],t:'<p><b>Electrophiles:</b> C4, the only electron-rich carbon. Vilsmeier (DMF/POCl₃) on 1-phenylpyrazole gives 1-phenylpyrazole-4-carbaldehyde.</p><p><b>N-Acylation:</b> Ac₂O or PhCOCl acylate N1.</p><p><b>Acidic H:</b> N1–H. The ring resists oxidation, so KMnO₄ oxidises a C-methyl group to COOH instead.</p>'},
+Pyridine:{n:6,at:['N1','C2','C3','C4','C5','C6'],e:[2,4],nu:[1,3,5],h:[],t:'<p><b>Electrophiles:</b> C3 and C5, and only under harsh conditions (the ring N withdraws electrons and is protonated in acid).</p><p><b>Nucleophiles:</b> C2 and C4 (and C6). Chichibabin: KNH₂ or NaNH₂ gives 2-aminopyridine; if both ortho positions are blocked, attack is at C4.</p><p><b>Side chains:</b> 2-picoline’s CH₃ is acidic: PhLi then CO₂ gives 2-pyridylacetic acid.</p>'}
+};
+const NRGROUPS=['Indole','Quinoline','Isoquinoline','Imidazole','Oxazole','Pyrazole','Thiazole','Pyridine & more'];
+const NR=[
+/* INDOLE */
+{g:'Indole',t:'Fischer indole synthesis',d:'Arylhydrazine + ketone or aldehyde with an α-CH₂, acid catalyst → indole.',
+rx:[{a:'NNc1ccccc1',b:'Cc1c(C)[nH]c2ccccc12',r:'CH₃COCH₂CH₃, H⁺',an:'phenylhydrazine',bn:'2,3-dimethylindole',l:'General: R₁CH₂COR₂ gives the 2-R₂, 3-R₁ indole.'},
+{a:'CC(C)=NNc1ccccc1',b:'Cc1cc2ccccc2[nH]1',r:'BF₃, heat',an:'acetone phenylhydrazone',bn:'2-methylindole',l:'Lewis acid version from your notes; NH₃ leaves as NH₃·BF₃.'},
+{a:'NNc1ccccc1.CC(=O)C(=O)O',b:'OC(=O)c1cc2ccccc2[nH]1',r:'H⁺',an:'phenylhydrazine + pyruvic acid',bn:'indole-2-carboxylic acid',l:'Then NaOH/CaO (soda lime), heat, −CO₂ → indole itself.'}],
+s:[['Hydrazone','The terminal NH₂ attacks the C=O; loss of water gives the phenylhydrazone.'],['Ene-hydrazine','Acid-catalysed tautomerism moves the C=N to C=C–NH (ene-hydrazine).'],['[3,3]-Sigmatropic shift','The key step. The N–N bond breaks while a new C–C bond forms between the ring ortho carbon and the alkene carbon (like a Claisen/Cope).'],['Rearomatise','The ring loses a proton to become aromatic again, giving an aniline NH₂ and an imine.'],['Cyclise','The aniline NH₂ attacks the imine carbon, forming the 5-membered aminal ring.'],['Lose NH₃','Protonation and loss of ammonia, then loss of H⁺, gives the aromatic indole.']]},
+{g:'Indole',t:'Madelung synthesis',d:'Intramolecular condensation of an o-acylamino toluene with a very strong base at high temperature.',
+rx:[{a:'CC(=O)Nc1ccccc1C',b:'Cc1cc2ccccc2[nH]1',r:'NaNH₂ or tBuOK, heat',an:'o-acetamidotoluene (from o-toluidine)',bn:'2-methylindole',l:'The CH₃ group next to the ring becomes C3.'}],
+s:[['Deprotonate benzylic CH₃','The strong base (NH₂⁻) removes a proton from the ortho CH₃ group.'],['Attack the amide','The benzylic carbanion attacks the amide C=O intramolecularly, closing the 5-membered ring.'],['Protonate','The alkoxide is protonated to a hemiaminal-type alcohol.'],['Dehydrate','Loss of water gives the aromatic 2-methylindole.']]},
+{g:'Indole',t:'Reissert synthesis',d:'o-Nitrotoluene + diethyl oxalate (NaOEt), then reductive cyclisation with Zn/AcOH.',
+rx:[{a:'Cc1ccccc1[N+](=O)[O-]',b:'CCOC(=O)c1cc2ccccc2[nH]1',r:'1 (CO₂Et)₂, NaOEt 2 Zn, AcOH',an:'o-nitrotoluene',bn:'ethyl indole-2-carboxylate',l:'Hydrolysis and heating then remove the ester group to give indole.'}],
+s:[['Acidic CH₃','The ortho NO₂ makes the CH₃ acidic; EtO⁻ removes a proton.'],['Claisen condensation','The carbanion attacks diethyl oxalate; EtO⁻ leaves, giving ethyl o-nitrophenylpyruvate.'],['Reduction','Zn/AcOH reduces NO₂ to NH₂.'],['Cyclise','NH₂ attacks the ketone C=O; the ring closes.'],['Dehydrate','Loss of water gives ethyl indole-2-carboxylate.']]},
+{g:'Indole',t:'Indole → indole-3-acetic acid (Mannich route)',d:'Mannich reaction with HCHO and R₂NH gives gramine at C3; cyanide displacement and hydrolysis give the plant hormone IAA.',
+rx:[{a:'c1ccc2[nH]ccc2c1',b:'CN(C)Cc1c[nH]c2ccccc12',r:'HCHO, Me₂NH',an:'indole',bn:'gramine (A)',l:'C3 attacks the iminium ion CH₂=N⁺R₂.'},
+{a:'CN(C)Cc1c[nH]c2ccccc12',b:'N#CCc1c[nH]c2ccccc12',r:'KCN (or CH₃I then KCN)',an:'gramine',bn:'indole-3-acetonitrile',l:'Alternative way: quaternise with CH₃I first to make a better leaving group.'},
+{a:'N#CCc1c[nH]c2ccccc12',b:'OC(=O)Cc1c[nH]c2ccccc12',r:'H₃O⁺ or OH⁻, heat',an:'indole-3-acetonitrile',bn:'indole-3-acetic acid',l:'Nitrile hydrolysis.'}],
+s:[['Iminium ion','R₂NH adds to HCHO; the carbinolamine loses water to give CH₂=N⁺R₂.'],['C3 attack','Indole C3 attacks the iminium carbon (the N lone pair pushes).'],['Rearomatise','Loss of H⁺ from C3 gives gramine.'],['Elimination–addition','Protonated (or quaternised) NR₂ leaves, giving a 3-methyleneindolenine; CN⁻ adds to the CH₂.'],['Hydrolysis','–CH₂CN → –CH₂COOH.']]},
+{g:'Indole',t:'Reimer–Tiemann reaction of indole',d:'CHCl₃ + KOH makes dichlorocarbene. Indole gives two products.',
+rx:[{a:'c1ccc2[nH]ccc2c1',b:'O=Cc1c[nH]c2ccccc12',r:'CHCl₃, KOH',an:'indole',bn:'indole-3-carboxaldehyde',l:'Normal Reimer–Tiemann formylation at C3.'},
+{a:'c1ccc2[nH]ccc2c1',b:'Clc1cnc2ccccc2c1',r:'CHCl₃, KOH',an:'indole',bn:'3-chloroquinoline',l:'Ring expansion (Ciamician–Dennstedt): :CCl₂ adds across C2=C3, the cyclopropane opens and Cl⁻ is lost.'}],
+s:[['Carbene','OH⁻ removes H from CHCl₃; ⁻CCl₃ loses Cl⁻ to give :CCl₂ (dichlorocarbene).'],['Attack','Indole C3 (or the C2=C3 bond) attacks the carbene.'],['Path 1: formylation','The CHCl₂ group at C3 is hydrolysed by OH⁻ to CHO.'],['Path 2: ring expansion','Cyclopropanation across C2=C3, then ring opening with loss of Cl⁻ gives the 6-membered 3-chloroquinoline.']]},
+/* QUINOLINE */
+{g:'Quinoline',t:'Skraup synthesis',d:'Aniline + glycerol + conc. H₂SO₄ + FeSO₄ + nitrobenzene (oxidant) → quinoline.',
+rx:[{a:'Nc1ccccc1.OCC(O)CO',b:'c1ccc2ncccc2c1',r:'conc. H₂SO₄, FeSO₄, PhNO₂',an:'aniline + glycerol',bn:'quinoline',l:'Glycerol → acrolein in situ.'},
+{a:'OCC(O)CO',b:'C=CC=O',r:'conc. H₂SO₄, −2 H₂O',an:'glycerol',bn:'acrolein',l:'Acrolein is not added directly because it polymerises under the conditions.'},
+{a:'COc1ccc(N)c([N+](=O)[O-])c1',b:'COc1cc([N+](=O)[O-])c2ncccc2c1',r:'glycerol, H₂SO₄, FeSO₄, PhNO₂',an:'4-methoxy-2-nitroaniline',bn:'6-methoxy-8-nitroquinoline',l:'Substituted example from your notes (a quinine/primaquine building block).'}],
+s:[['Acrolein','Conc. H₂SO₄ dehydrates glycerol twice to acrolein CH₂=CH–CHO.'],['Michael addition','Aniline N adds 1,4 to acrolein (conjugate addition).'],['Cyclisation','The protonated aldehyde is attacked by the ring ortho carbon (electrophilic substitution).'],['Dehydration','Loss of water gives 1,2-dihydroquinoline.'],['Oxidation','PhNO₂ removes 2H to give aromatic quinoline.']],
+tip:'Role of each reagent: H₂SO₄ dehydrates glycerol; PhNO₂ is the oxidising agent; FeSO₄ moderates the otherwise violent reaction.'},
+{g:'Quinoline',t:'Friedländer synthesis',d:'2-Aminobenzaldehyde + a carbonyl with an α-CH₂, base (NaOH).',
+rx:[{a:'Nc1ccccc1C=O.CC=O',b:'c1ccc2ncccc2c1',r:'NaOH',an:'2-aminobenzaldehyde + acetaldehyde',bn:'quinoline',l:'Imine formation then intramolecular aldol and dehydration.'}],
+s:[['Imine','The aryl NH₂ attacks the acetaldehyde C=O; loss of water gives Ar–N=CH–CH₃.'],['Enolate','OH⁻ removes an α-H from the CH₃ group.'],['Intramolecular aldol','The carbanion attacks the ring CHO.'],['Dehydrate','Loss of water gives aromatic quinoline.']]},
+{g:'Quinoline',t:'Knorr quinoline synthesis',d:'Aniline + a β-keto ester (ethyl acetoacetate), acid → 2-hydroxyquinoline (2-quinolone).',
+rx:[{a:'Nc1ccccc1.CCOC(=O)CC(C)=O',b:'Cc1cc(O)nc2ccccc12',r:'H⁺ (conc. H₂SO₄)',an:'aniline + ethyl acetoacetate',bn:'2-hydroxy-4-methylquinoline',l:'Exists mainly as the 2-quinolone tautomer.'}],
+s:[['Anilide','Aniline attacks the ester C=O; EtOH leaves, giving the β-keto anilide.'],['Cyclise','The ketone C=O (protonated) is attacked by the ring ortho carbon.'],['Dehydrate','Loss of water forms the C3=C4 double bond.'],['Tautomerise','The amide C=O tautomerises to the 2-OH aromatic form.']],
+tip:'Aniline attacks the ester (Knorr → 2-OH). If aniline first attacks the ketone (Conrad–Limpach, lower temperature) you get 4-hydroxy-2-methylquinoline.'},
+{g:'Quinoline',t:'Doebner–Miller synthesis',d:'Like Skraup, but the 3-carbon unit is made in situ by acid-catalysed aldol of 2 CH₃CHO, and no oxidant is added.',
+rx:[{a:'CC=O',b:'C/C=C/C=O',r:'H⁺, aldol, −H₂O',an:'2 × acetaldehyde',bn:'crotonaldehyde',l:'Step 1.'},
+{a:'Nc1ccccc1',b:'Cc1ccc2ccccc2n1',r:'crotonaldehyde, H⁺',an:'aniline',bn:'2-methylquinoline (quinaldine)',l:'Step 2.'}],
+s:[['Aldol','Two acetaldehydes condense to crotonaldehyde.'],['Michael addition','Aniline adds 1,4 to crotonaldehyde.'],['Cyclise and dehydrate','Ring ortho C attacks the aldehyde; water is lost, giving a dihydroquinoline.'],['Hydride transfer','The dihydroquinoline transfers a hydride to an imine (PhN=CHCH₃, from aniline + acetaldehyde), which becomes PhNHEt. This is the oxidation step.']]},
+/* ISOQUINOLINE */
+{g:'Isoquinoline',t:'Pictet–Spengler synthesis',d:'β-Arylethylamine + aldehyde in excess HCl at 100 °C → 1,2,3,4-tetrahydroisoquinoline. Se or Pd/heat aromatises it.',
+rx:[{a:'NCCc1ccccc1',b:'CC1NCCc2ccccc21',r:'CH₃CHO, HCl (excess), 100 °C',an:'2-phenylethylamine',bn:'1-methyl-1,2,3,4-tetrahydroisoquinoline',l:'Iminium ion + intramolecular SEAr.'},
+{a:'CC1NCCc2ccccc21',b:'Cc1nccc2ccccc12',r:'Se or Pd, heat',an:'tetrahydroisoquinoline',bn:'1-methylisoquinoline',l:'Dehydrogenation.'}],
+s:[['Carbinolamine','The NH₂ attacks the aldehyde C=O.'],['Iminium ion','Loss of water, then protonation by HCl, gives R–CH=N⁺H–.'],['Ring closure','The benzene ring attacks the iminium carbon (6-endo), forming a σ-complex.'],['Rearomatise','Loss of H⁺ gives the 1-alkyl-1,2,3,4-tetrahydroisoquinoline.']]},
+{g:'Isoquinoline',t:'Bischler–Napieralski reaction',d:'N-Acyl-β-phenylethylamine + POCl₃ → 3,4-dihydroisoquinoline; Se/Pd → isoquinoline. Your notes build the amine first by a Henry reaction.',
+rx:[{a:'O=Cc1ccccc1',b:'[O-][N+](=O)/C=C/c1ccccc1',r:'CH₃NO₂, base (Henry)',an:'benzaldehyde',bn:'β-nitrostyrene',l:'Henry (nitro-aldol) condensation then dehydration.'},
+{a:'[O-][N+](=O)/C=C/c1ccccc1',b:'NCCc1ccccc1',r:'LiAlH₄',an:'β-nitrostyrene',bn:'2-phenylethylamine',l:'Reduces both C=C and NO₂.'},
+{a:'CC(=O)NCCc1ccccc1',b:'CC1=NCCc2ccccc12',r:'POCl₃, heat',an:'N-acetyl-2-phenylethylamine',bn:'1-methyl-3,4-dihydroisoquinoline',l:'After RCOCl acylation of the amine.'},
+{a:'CC1=NCCc2ccccc12',b:'Cc1nccc2ccccc12',r:'Se or Pd, heat',an:'dihydroisoquinoline',bn:'1-methylisoquinoline',l:'Aromatisation.'}],
+s:[['Amide activation','The amide oxygen attacks POCl₃, giving an imidoyl phosphate (O–POCl₂).'],['Nitrilium / iminium','Loss of the phosphate gives a strongly electrophilic C=N⁺ species.'],['Cyclisation','The aromatic ring attacks this carbon (intramolecular SEAr).'],['Rearomatise','Loss of H⁺ gives 1-R-3,4-dihydroisoquinoline.']],
+tip:'Henry reaction = aldol with a nitroalkane (CH₂=N⁺O₂⁻ carbanion). An aldol needs an α-H: nitromethane has three.'},
+/* IMIDAZOLE */
+{g:'Imidazole',t:'α-Hydroxy ketone + amidine',d:'Condensation of an acyloin with an amidine gives a 2,4,5-trisubstituted imidazole.',
+rx:[{a:'CC(=O)C(C)O.CC(N)=N',b:'Cc1nc(C)c(C)[nH]1',r:'heat, −2 H₂O',an:'acetoin + acetamidine',bn:'2,4,5-trimethylimidazole',l:'General: R–CO–CH(OH)–R + R–C(=NH)NH₂.'}],
+s:[['Addition','The amidine NH₂ attacks the ketone C=O.'],['Dehydrate','Loss of water; the OH-bearing carbon becomes part of an enol / C=C.'],['Tautomerise','The enol tautomerises to a ketone.'],['Ring closure','The second amidine nitrogen attacks this new C=O.'],['Aromatise','Loss of the second water gives the substituted imidazole.']]},
+{g:'Imidazole',t:'α-Halo ketone + formamide (Bredereck)',d:'Heating an α-haloketone with excess HCONH₂ gives an imidazole (N-formyl imidazole intermediate).',
+rx:[{a:'CC(=O)C(C)Cl.NC=O',b:'Cc1nc[nH]c1C',r:'HCONH₂, heat',an:'3-chlorobutan-2-one + formamide',bn:'4,5-dimethylimidazole',l:'Two formamide molecules supply N1, C2 and N3.'}],
+s:[['Attack at C=O','Formamide N attacks the ketone.'],['SN2 at C–Cl','A second formamide displaces chloride.'],['Cyclise','One N attacks the formyl carbon of the other amide.'],['−2 H₂O','Dehydration gives N-formyl imidazole; loss of the formyl group gives the free imidazole.']]},
+{g:'Imidazole',t:'Other named routes to imidazole',d:'Know the names and starting materials.',
+list:['<b>Wallach synthesis:</b> N,N′-dialkyloxamide + PCl₅ → chloroimidazole, then reduction.',
+'<b>Debus–Radziszewski:</b> 1,2-dicarbonyl + aldehyde + NH₃ (or a primary amine) → imidazole. Glyoxal + HCHO + NH₃ gives imidazole itself.',
+'<b>Bredereck:</b> α-diketone (or α-haloketone / α-hydroxyketone) + formamide or an amide, with NH₃.',
+'<b>Akabori / Marckwald route (notes item iii):</b> α-amino ester → α-amino aldehyde with Na(Hg), then KSCN → 2-mercaptoimidazole, then oxidative desulfurisation.',
+'<b>Heating at 180 °C (notes item iv):</b> 1,2-dicarbonyl + aldehyde + amine.']},
+{g:'Imidazole',t:'Reactions of imidazole',d:'All from your notes.',
+rx:[{a:'c1c[nH]cn1',b:'CCCCn1ccnc1',r:'1 50% NaOH 2 BuBr',an:'imidazole',bn:'1-butylimidazole',l:'The imidazolide anion is alkylated at N. It tends to quaternise to [Bu₂Im]⁺Br⁻, which hydrolyses easily.'},
+{a:'Cc1[nH]cnc1C',b:'Cc1[nH]c[n+](C)c1C',r:'CH₃I',an:'4,5-dimethylimidazole',bn:'N-methylimidazolium',l:'The pyridine-type N3 is the nucleophile.'},
+{a:'c1c[nH]cn1',b:'OCn1ccnc1',r:'HCHO',an:'imidazole',bn:'1-(hydroxymethyl)imidazole',l:'Reaction with aldehydes happens at N.'},
+{a:'Cn1ccnc1',b:'Cn1ccnc1C(=O)O',r:'1 n-BuLi 2 CO₂ 3 H⁺',an:'1-methylimidazole',bn:'1-methylimidazole-2-carboxylic acid',l:'Metallation at C2.'},
+{a:'c1c[nH]cn1',b:'NC(=O)C(N)=O',r:'H₂O₂',an:'imidazole',bn:'oxamide',l:'Oxidation (with perbenzoic acid: urea + NH₃).'}],
+list:['<b>Diazo coupling:</b> Ar–N₂⁺ at pH 7–11 gives the 2-arylazo imidazole.','<b>Formylation:</b> gives imidazole-2-carboxaldehyde in your notes.']},
+/* OXAZOLE */
+{g:'Oxazole',t:'Robinson–Gabriel synthesis',d:'Cyclodehydration of an α-acylamino ketone with acid (H₂SO₄, POCl₃ or P₂O₅).',
+rx:[{a:'CC(=O)NC(C)C(C)=O',b:'Cc1nc(C)c(C)o1',r:'H⁺ (conc. H₂SO₄), −H₂O',an:'3-acetamidobutan-2-one',bn:'2,4,5-trimethyloxazole',l:'The acylamino ketone comes from RCH(NH₂)COR + RCOCl/pyridine (N-acylation).'}],
+s:[['N-Acylation','The α-amino ketone is acylated with RCOCl or (RCO)₂O in pyridine.'],['Enol attack','The ketone oxygen (enol form) attacks the protonated amide carbonyl.'],['Cyclic hemiaminal','A 5-membered ring with an OH forms.'],['Dehydrate','Loss of water gives the aromatic oxazole.']]},
+{g:'Oxazole',t:'α-Halo ketone + primary amide (Blümlein–Lewy)',d:'R–CO–CH(X)–R + R–CONH₂ → 2,4,5-trisubstituted oxazole.',
+rx:[{a:'CC(=O)C(C)Cl.CC(N)=O',b:'Cc1nc(C)c(C)o1',r:'heat',an:'α-chloroketone + acetamide',bn:'2,4,5-trimethyloxazole',l:'Two mechanisms in your notes: N attacks C=O first, or N displaces X first.'}],
+s:[['N attacks','The amide N attacks the ketone C=O (or displaces X in the “another way”).'],['O closes the ring','The amide oxygen displaces the halide (or attacks the carbonyl).'],['Dehydrate','Loss of water and H⁺ aromatises the ring.']]},
+{g:'Oxazole',t:'Oxazole from diethyl α-hydroxyketosuccinate',d:'Heating with HCONH₂ gives diethyl oxazole-4,5-dicarboxylate; hydrolysis with Ba(OH)₂ and decarboxylation gives oxazole.',
+rx:[{a:'CCOC(=O)C(=O)C(O)C(=O)OCC',b:'CCOC(=O)c1ncoc1C(=O)OCC',r:'HCONH₂, heat',an:'ethyl α-hydroxy ketosuccinate',bn:'diethyl oxazole-4,5-dicarboxylate',l:''},
+{a:'CCOC(=O)c1ncoc1C(=O)OCC',b:'c1cocn1',r:'1 Ba(OH)₂/H₂O 2 Cu, quinoline, heat',an:'diester',bn:'oxazole',l:''}],
+fix:'Your notes write “Quinidine, Cu”. The standard decarboxylation conditions are copper powder in quinoline (a high-boiling base). Quinidine is an alkaloid and is not used here.'},
+{g:'Oxazole',t:'Reactions of oxazole',d:'Ring expansions, cycloadditions and ring openings.',
+list:['<b>From aziridine:</b> heating an N-tert-butyl-2-acylaziridine opens the ring to an azomethine ylide; the carbonyl oxygen closes a 5-membered ring, and loss of the tert-butyl group (as isobutene) gives the 2-phenyloxazole.',
+'<b>Photo-oxygenation:</b> singlet O₂ adds [4+2] across C2 and C5, giving an ozonide-like endoperoxide that fragments to an acyl imide / anhydride-type product plus a nitrile fragment.',
+'<b>NH₃ (nucleophile):</b> attack at C2 opens the ring; the new NH₂ recloses onto the carbonyl, giving an imidazole. Oxazole → imidazole conversion.',
+'<b>OH⁻:</b> attack at C2 of 4-formyloxazole opens the ring to an acyclic N-formyl amino dicarbonyl.']},
+/* PYRAZOLE */
+{g:'Pyrazole',t:'β-Diketone + hydrazine (Knorr pyrazole synthesis)',d:'The most important route. Both carbonyls condense with the two hydrazine nitrogens.',
+rx:[{a:'CC(=O)CC(C)=O.NN',b:'Cc1cc(C)[nH]n1',r:'−2 H₂O',an:'acetylacetone + hydrazine',bn:'3,5-dimethylpyrazole',l:''},
+{a:'CC(=O)CC(=O)c1ccccc1.NNc1ccccc1',b:'Cc1cc(-c2ccccc2)n(-c2ccccc2)n1',r:'−2 H₂O',an:'benzoylacetone + phenylhydrazine',bn:'3-methyl-1,5-diphenylpyrazole',l:'The more nucleophilic NH₂ attacks the more reactive (methyl) ketone first.'},
+{a:'CCOC(=O)CC(C)=O.NNc1ccccc1',b:'CC1=NN(c2ccccc2)C(=O)C1',r:'−H₂O, −EtOH',an:'ethyl acetoacetate + phenylhydrazine',bn:'1-phenyl-3-methyl-5-pyrazolone',l:'The ester gives a C=O in the ring (pyrazolone), not an aromatic C–R. This is the drug edaravone.'}],
+s:[['Attack','NH₂ of hydrazine attacks one C=O.'],['Hydrazone','Loss of water gives a hydrazone.'],['Ring closure','The second N attacks the other C=O (or the ester).'],['Aromatise','Loss of the second H₂O (or EtOH) gives the pyrazole (or pyrazolone).']]},
+{g:'Pyrazole',t:'Other routes to pyrazole',d:'From your notes.',
+rx:[{a:'CCOC(CC(OCC)OCC)OCC.NN',b:'c1cn[nH]c1',r:'−4 EtOH',an:'malondialdehyde tetraethyl acetal + hydrazine',bn:'pyrazole',l:'The acetal is a masked 1,3-dialdehyde.'},
+{a:'C=CC=O.NN',b:'C1CC=NN1',r:'−H₂O',an:'acrolein + hydrazine',bn:'2-pyrazoline',l:'Hydrazone formation then intramolecular Michael addition.'},
+{a:'C1CC=NN1',b:'c1cn[nH]c1',r:'Br₂ [O]',an:'2-pyrazoline',bn:'pyrazole',l:'Oxidation (dehydrogenation).'},
+{a:'OC(=O)c1n[nH]c(C(=O)O)c1C(=O)O',b:'c1cn[nH]c1',r:'200–300 °C, −3 CO₂',an:'pyrazole-3,4,5-tricarboxylic acid',bn:'pyrazole',l:'Decarboxylation.'}]},
+{g:'Pyrazole',t:'Reactions of pyrazole',d:'N-acylation, oxidation of side chains, formylation at C4, and loss of N₂.',
+rx:[{a:'c1cn[nH]c1',b:'CC(=O)n1cccn1',r:'(CH₃CO)₂O',an:'pyrazole',bn:'1-acetylpyrazole',l:'Benzoylation with C₆H₅COCl works the same way.'},
+{a:'Cc1cc(C)[nH]n1',b:'Cc1cc(C(=O)O)[nH]n1',r:'KMnO₄',an:'3,5-dimethylpyrazole',bn:'5-methylpyrazole-3-carboxylic acid',l:'The ring resists oxidation; a methyl is oxidised.'},
+{a:'c1cnn(-c2ccccc2)c1',b:'O=Cc1cnn(-c2ccccc2)c1',r:'DMF, POCl₃',an:'1-phenylpyrazole',bn:'1-phenylpyrazole-4-carbaldehyde',l:'Vilsmeier–Haack at C4.'}],
+list:['<b>Effect of heating:</b> a 3H-pyrazole with an ester group, heated with Cu powder, loses N₂ and gives a cyclopropane carboxylate.']},
+/* THIAZOLE */
+{g:'Thiazole',t:'Gabriel synthesis (acylamino carbonyl + P₂S₅)',d:'P₂S₅ turns the ketone C=O into C=S, which then cyclises onto the amide.',
+rx:[{a:'CC(=O)NC(C)C(C)=O',b:'Cc1nc(C)c(C)s1',r:'P₂S₅, heat',an:'α-acylamino ketone',bn:'2,4,5-trimethylthiazole',l:''}],
+s:[['Thionation','P₂S₅ converts the ketone into a thioketone.'],['S attacks','Sulfur attacks the amide carbonyl carbon.'],['Hemiaminal','A 5-membered ring with an OH forms.'],['Dehydrate','Loss of water gives the thiazole.']]},
+{g:'Thiazole',t:'Hantzsch thiazole synthesis',d:'α-Halo carbonyl + thioamide → thiazole. Your notes title it “from α-hydroxy carbonyl” but draw an α-chloro ketone, which is the Hantzsch reaction.',
+rx:[{a:'CC(=O)CCl.CC(N)=S',b:'Cc1csc(C)n1',r:'heat',an:'chloroacetone + thioacetamide',bn:'2,4-dimethylthiazole',l:''}],
+s:[['S-alkylation','Thioamide sulfur displaces the halide (SN2).'],['N attacks C=O','The NH closes the ring onto the ketone.'],['Dehydrate','Loss of water gives the aromatic thiazole.']]},
+{g:'Thiazole',t:'From thiocyanate',d:'α-Halo ketone + SCN⁻ gives an α-thiocyanato ketone, which cyclises in aqueous acid to a 2-hydroxythiazole (thiazol-2-one).',
+rx:[{a:'CC(=O)CCl',b:'CC1=CSC(=O)N1',r:'KSCN; aq. H⁺',an:'chloroacetone',bn:'4-methylthiazol-2(3H)-one',l:''}]},
+{g:'Thiazole',t:'Reactions of thiazole',d:'Electrophiles at C5, nucleophiles and bases at C2.',
+rx:[{a:'c1cscn1',b:'[O-][N+](=O)c1cncs1',r:'conc. HNO₃, conc. H₂SO₄',an:'thiazole',bn:'5-nitrothiazole',l:'Sulfonation (oleum/H₂SO₄) also goes to C5.'},
+{a:'O=c1[nH]ccs1',b:'Clc1nccs1',r:'PCl₅',an:'thiazol-2-one',bn:'2-chlorothiazole',l:''},
+{a:'Oc1nccs1',b:'Oc1ncc(Br)s1',r:'Br₂, CHCl₃',an:'2-hydroxythiazole',bn:'5-bromo-2-hydroxythiazole',l:''},
+{a:'c1cscn1',b:'Brc1nccs1',r:'Br₂, gas phase',an:'thiazole',bn:'2-bromothiazole',l:''},
+{a:'c1cscn1',b:'Nc1nccs1',r:'NaNH₂',an:'thiazole',bn:'2-aminothiazole',l:'Then HCl, HONO gives the 2-diazonium salt.'},
+{a:'Cc1nccs1.O=Cc1ccccc1',b:'C(=C/c1ccccc1)\\c1nccs1',r:'OH⁻',an:'2-methylthiazole + PhCHO',bn:'2-styrylthiazole',l:'The 2-CH₃ is acidic: aldol-type condensation then dehydration.'},
+{a:'c1ccc(-c2cscn2)cc1',b:'CC(N)c1ccccc1',r:'H₂, Raney Ni, CH₃OH',an:'4-phenylthiazole',bn:'1-phenylethylamine',l:'Ring opening by desulfurisation.'}],
+list:['<b>n-BuLi:</b> lithiates C2 (2-thiazolyllithium).','<b>Na/EtOH:</b> reductive ring opening with loss of H₂S (notes example).']},
+/* PYRIDINE & MORE */
+{g:'Pyridine & more',t:'Chichibabin reaction',d:'Pyridine + KNH₂ (or NaNH₂) → 2-aminopyridine. A nucleophilic aromatic substitution in which hydride (H⁻) is the leaving group.',
+rx:[{a:'c1ccncc1',b:'Nc1ccccn1',r:'KNH₂ (or NaNH₂), heat',an:'pyridine',bn:'2-aminopyridine',l:'If both ortho positions are blocked, attack is at C4 (para).'}],
+s:[['Addition','NH₂⁻ adds to C2, giving an anionic σ-complex (Meisenheimer-type) with the charge on N.'],['Hydride loss','The ring re-aromatises by expelling H⁻, which reacts with the amine to give H₂.'],['Workup','The sodium salt of 2-aminopyridine is protonated on workup.']]},
+{g:'Pyridine & more',t:'Shapiro reaction',d:'Tosylhydrazone of an aldehyde or ketone + 2 equivalents of a strong base (RLi) → less substituted alkene. Formally an elimination with a hydride shift.',
+rx:[{a:'CCCC=O',b:'CCC=C',r:'1 TsNHNH₂ 2 2 RLi 3 H₂O',an:'butanal (RCH₂CHO, R = Et)',bn:'but-1-ene (R–CH=CH₂)',l:''},
+{a:'CC(=O)CCC',b:'C=CCCC',r:'1 TsNHNH₂ 2 2 BuLi 3 H₂O',an:'pentan-2-one',bn:'pent-1-ene',l:'Deprotonation at the less hindered CH₃ side, so the new C=C is terminal.'}],
+s:[['Tosylhydrazone','TsNHNH₂ condenses with the C=O: R–CH=N–NHTs.'],['First deprotonation','RLi removes the N–H.'],['Second deprotonation','RLi removes an α-C–H from the less hindered side, giving a dianion.'],['Loss of Ts⁻','Ts⁻ (sulfinate) is expelled, giving a vinyl diazenide.'],['Loss of N₂','N₂ is lost, leaving a vinyllithium; H₂O protonates it to the less substituted alkene.']],
+tip:'Shapiro (RLi) → less substituted alkene. Bamford–Stevens (NaOMe, protic) → more substituted alkene.'},
+{g:'Pyridine & more',t:'Side-chain and aryne reactions',d:'Two “reactions of heterocycles” problems from your notes.',
+rx:[{a:'Cc1ccccn1',b:'OC(=O)Cc1ccccn1',r:'1 PhLi 2 CO₂ 3 H⁺',an:'2-picoline',bn:'2-pyridylacetic acid',l:'The CH₃ next to ring N is acidic.'},
+{a:'CNCCCc1ccccc1Cl',b:'CN1CCCc2ccccc21',r:'PhLi',an:'N-methyl-3-(2-chlorophenyl)propylamine',bn:'1-methyl-1,2,3,4-tetrahydroquinoline',l:'PhLi removes the H next to Cl; LiCl leaves to form a benzyne; the amine N adds intramolecularly.'}]}
+];
+const PRACTICE=[
+{q:'Homework: 1,4-dimethylisoquinoline + ArCHO, base → ?',a:'The C1–CH₃ is the acidic one (it is next to ring N, like 2-picoline). It condenses with ArCHO (aldol then dehydration) to give 1-styryl-4-methylisoquinoline, Ar–CH=CH– at C1.'},
+{q:'Homework: 2-hydroxypyridine → 2-methoxypyridine. Reagents?',a:'2-Hydroxypyridine exists mostly as 2-pyridone, and plain CH₃I methylates N. To get O-methylation use Ag₂CO₃ + CH₃I (silver salt favours O) or CH₂N₂. An alternative: POCl₃ to make 2-chloropyridine, then NaOMe (SNAr).'},
+{q:'Homework: o-toluidine + HCOOH, then tBuOK → ?',a:'HCOOH formylates the NH₂ to N-formyl-o-toluidine. tBuOK at high temperature does a Madelung cyclisation: the benzylic CH₃ attacks the formyl C=O. Product: indole (unsubstituted at C2 because the acyl group was formyl).'},
+{q:'Internal test Q3: indole (2 eq) + PhCHO, TsOH → ?',a:'Indole C3 attacks the protonated aldehyde; the alcohol loses water to a very stabilised (indol-3-yl)benzyl cation, which a second indole attacks at C3. Product: bis(indol-3-yl)phenylmethane (3,3′-(phenylmethylene)bisindole).'}
+];
+/* ============ UNIT III ============ */
+const PRINCIPLES=[
+['Prevention','It is better to prevent waste than to treat or clean it up after it is formed.'],
+['Atom economy','Design syntheses so that as many reactant atoms as possible end up in the final product.'],
+['Less hazardous syntheses','Use and generate substances with little or no toxicity to people or the environment.'],
+['Safer chemicals','Design products that do their job while being as non-toxic as possible.'],
+['Safer solvents and auxiliaries','Avoid solvents and separation agents where possible; if needed, use innocuous ones (water, ethanol, scCO₂, ionic liquids) instead of BTX or chlorinated solvents.'],
+['Energy efficiency','Run reactions at ambient temperature and pressure when possible. Microwave and ultrasound can cut energy use and time.'],
+['Renewable feedstocks','Use raw materials from biomass rather than depleting fossil sources.'],
+['Reduce derivatives','Avoid unnecessary protecting groups and temporary modifications; they need extra reagents and create waste.'],
+['Catalysis','Catalytic reagents (as selective as possible) are better than stoichiometric reagents. Pd coupling, enzymes and baker’s yeast are examples.'],
+['Design for degradation','Products should break down into harmless substances after use and not persist in the environment.'],
+['Real-time analysis','Monitor reactions in real time to stop hazardous by-products forming.'],
+['Accident prevention','Choose substances and forms that minimise the risk of explosions, fires and releases (e.g. avoid storing large amounts of HCN or phosgene).']
+];
+const AEPRESET=[
+{n:'Benzene → phenol (sulfonation route)',p:94,r:256,eq:'C₆H₆ + H₂SO₄ + 2 NaOH → C₆H₅OH + Na₂SO₃ + 2 H₂O. Reactants: 78 + 98 + 2(40) = 256. Phenol = 94.',fix:'Your notes use 88 for phenol and only 78 for the reactants. Phenol C₆H₅OH is 6(12) + 6(1) + 16 = 94, and atom economy counts every reactant (benzene, H₂SO₄ and 2 NaOH), giving 94/256 = 36.7%.'},
+{n:'Benzene → maleic anhydride (oxidation)',p:98,r:222,eq:'C₆H₆ + 4½ O₂ → C₄H₂O₃ + 2 CO₂ + 2 H₂O. Reactants: 78 + 144 = 222. Maleic anhydride = 98.',fix:'Your notes use 96 for maleic anhydride and get 43%. C₄H₂O₃ = 48 + 2 + 48 = 98, so the atom economy is 98/222 = 44.1%. Write the working exactly; examiners check the molar mass.'},
+{n:'Methylamine + phosgene → methyl isocyanate',p:57,r:130,eq:'CH₃NH₂ + COCl₂ → CH₃N=C=O + 2 HCl. Reactants: 31 + 99 = 130. MIC = 57.',fix:'This matches your notes: 57/130 = 43.8%. (This is the Bhopal chemical; phosgene is extremely toxic, which also breaks principle 3.)'},
+{n:'Diels–Alder: butadiene + ethene → cyclohexene',p:82,r:82,eq:'C₄H₆ + C₂H₄ → C₆H₁₀. Every atom ends up in the product.',fix:''},
+{n:'Wittig: cyclohexanone + Ph₃P=CH₂',p:96,r:374,eq:'C₆H₁₀O (98) + Ph₃P=CH₂ (276) → C₇H₁₂ (96) + Ph₃P=O (278).',fix:''},
+{n:'Custom',p:'',r:'',eq:'Enter your own molar masses.',fix:''}
+];
+const AEBARS=[['Addition (Diels–Alder, hydrogenation)',100],['Rearrangement',100],['Substitution (typical)',60],['Benzene → maleic anhydride',44.1],['CH₃NH₂ + COCl₂ → MIC',43.8],['Benzene → phenol',36.7],['Wittig reaction',25.7],['Elimination (typical)',35]];
+const EFACTOR=[['< 0.1','Oil refining'],['1 to 5','Bulk chemicals'],['5 to 50','Fine chemicals'],['25 to 100+','Pharmaceuticals']];
+const MEDIA=[
+{t:'Water',d:'Cheapest, safest solvent. Hydrophobic effect speeds up Diels–Alder and Claisen reactions “on water”. Heck couplings run in water with Pd(L-proline)₂, TBAB and microwave heating. Acetone cyanohydrin in water is a safer HCN source for making cyanohydrins (Ph–CO–CH₃ → Ph–C(OH)(CN)–CH₃) than handling KCN/HCN.'},
+{t:'Ionic liquids',d:'Salts that are liquid below 100 °C, e.g. [bmim][BF₄] or [HEmim][BF₄]. Negligible vapour pressure (no fumes), non-flammable, dissolve metal catalysts, and can be recycled. Heck: Pd(OAc)₂, K₃PO₄, [HEmim][BF₄], 130 °C.'},
+{t:'Supercritical CO₂',d:'Above 31 °C and 73 atm CO₂ becomes a supercritical fluid. Non-toxic and leaves no residue. Used to decaffeinate coffee and for dry cleaning.'},
+{t:'Solvent-free and grinding',d:'Reactions done neat, by grinding solids together (mechanochemistry) or on solid supports such as clay or alumina. No solvent waste at all.'},
+{t:'Microwave and ultrasound',d:'Microwaves heat the reaction mixture directly and rapidly; reaction times drop from hours to minutes (the green Heck takes 10 to 50 min). Ultrasound (sonochemistry) creates cavitation bubbles that speed up reactions.'},
+{t:'Phase-transfer catalysts and surfactants',d:'TBAB (tetrabutylammonium bromide) carries anions from water into the organic phase, so reactions can use water instead of polar aprotic solvents. CTAB is a surfactant that forms micelles, a “nano-reactor” in water.'},
+{t:'Biocatalysis',d:'Enzymes and whole cells work in water at room temperature with high selectivity: baker’s yeast reduction of ethyl acetoacetate, ketoreductases for statins.'}
+];
+const GREENRX=[
+{t:'Benzoin condensation',d:'Conventional: PhCHO with KCN (toxic cyanide). Greener: thiamine (vitamin B1) hydrochloride as the catalyst in aqueous ethanol. Same product, benzoin Ph–CO–CH(OH)–Ph.',rx:{a:'O=Cc1ccccc1',b:'O=C(c1ccccc1)C(O)c1ccccc1',r:'thiamine·HCl, NaOH, EtOH/H₂O',an:'2 × benzaldehyde',bn:'benzoin',l:'Thiamine’s thiazolium C2 ylide replaces cyanide (links to Unit II thiazole C2 acidity).'}},
+{t:'Cyanohydrins with acetone cyanohydrin',d:'Acetone cyanohydrin (CH₃)₂C(OH)CN, in the presence of water and a base, transfers HCN to another carbonyl. It avoids storing HCN gas or large amounts of KCN.',rx:{a:'CC(=O)c1ccccc1',b:'CC(O)(C#N)c1ccccc1',r:'(CH₃)₂C(OH)CN, H₂O, base',an:'acetophenone',bn:'acetophenone cyanohydrin',l:'Conventional route: KCN/HCN.'}},
+{t:'Statins by biocatalysis',d:'Statins (atorvastatin, simvastatin) block HMG-CoA reductase in cholesterol biosynthesis (see Unit V). Their chiral side chains used to need cryogenic, metal-heavy steps. Engineered enzymes (ketoreductase, halohydrin dehalogenase, nitrilase) now make them in water at room temperature; simvastatin is made from lovastatin by the acyltransferase LovD. Both routes won US Presidential Green Chemistry awards.'}
+];
+/* ============ UNIT IV ============ */
+const U4={
+carbs:[
+['Classification','Monosaccharides (glucose, fructose), disaccharides (sucrose, maltose, lactose), polysaccharides (starch, cellulose, glycogen). General formula Cₙ(H₂O)ₙ.'],
+['Glucose','An aldohexose, C₆H₁₂O₆. In water it exists mainly as the six-membered pyranose ring. C1 becomes a new stereocentre (anomeric carbon): α (OH axial, down in Haworth) and β (OH equatorial, up).'],
+['Mutarotation','Pure α-D-glucose ([α] +112°) or β-D-glucose (+18.7°) in water both change to an equilibrium +52.7° (about 36% α : 64% β) via the open chain.'],
+['Reducing sugars','Free anomeric OH (hemiacetal): reduce Tollens’ and Fehling’s, form osazones with PhNHNH₂. Sucrose (glucose C1 linked to fructose C2) has no free anomeric OH and is non-reducing.'],
+['Polysaccharides','Amylose: α-1,4 linked glucose. Amylopectin and glycogen: α-1,4 plus α-1,6 branches. Cellulose: β-1,4 linked glucose (straight chains, strong H-bonded fibres).'],
+['Chain length changes','Kiliani–Fischer synthesis adds one carbon (HCN, hydrolysis, lactone reduction). Ruff degradation removes one carbon (Br₂/H₂O then H₂O₂/Fe³⁺).']],
+eph:[
+['Target','Ephedrine: (1R,2S)-2-(methylamino)-1-phenylpropan-1-ol, from Ephedra. A sympathomimetic amine used as a bronchodilator and decongestant. Two stereocentres: ephedrine is erythro, pseudoephedrine is threo.'],
+['Route A, step 1','1-Phenylpropane-1,2-dione + CH₃NH₂. The non-conjugated C2 ketone is more reactive, so methylamine condenses there to give the imine (Schiff base).'],
+['Route A, step 2','Catalytic hydrogenation (H₂/Pt) reduces both C=N and the C1 ketone, giving (±)-ephedrine (Manske and Johnson, 1929).'],
+['Route B, step 1','Benzaldehyde + nitroethane, base (Henry reaction) → 2-nitro-1-phenylpropan-1-ol.'],
+['Route B, step 2','Reduce NO₂ → NH₂ (H₂/Ni or LiAlH₄) → (±)-norephedrine (phenylpropanolamine).'],
+['Route B, step 3','N-Methylation (for example N-formylation then LiAlH₄, or reductive methylation) → (±)-ephedrine plus some pseudoephedrine, separated by crystallisation.'],
+['Resolution','The racemate is resolved with an optically active acid (mandelic or tartaric acid) to obtain natural (−)-ephedrine.']],
+quinine:[
+['1820','Pelletier and Caventou isolate quinine from Cinchona bark.'],
+['1856','W. H. Perkin tries to make quinine by oxidising allyltoluidine and instead discovers mauveine, the first synthetic dye.'],
+['1907','Rabe proposes the correct structure: a 6-methoxyquinoline joined through a CH(OH) bridge (C9) to a quinuclidine bearing a vinyl group.'],
+['1918','Rabe and Kindler convert quinotoxine back into quinine: N-bromination with NaOBr, base-induced cyclisation to quininone, then reduction of C9 C=O with Al powder.'],
+['1944','Woodward and Doering: formal total synthesis. 7-Hydroxyisoquinoline → C8-methyl group by Mannich reaction → hydrogenation and ring cleavage → homomeroquinene (with the vinyl group) → Claisen condensation with ethyl quininate → quinotoxine. Rabe’s steps then complete quinine.'],
+['2001','Stork: first fully stereoselective total synthesis.'],
+['2007','Williams repeats Rabe’s 1918 steps and confirms the Woodward–Doering route was valid.']],
+qfacts:['Formula C₂₀H₂₄N₂O₂. Antimalarial; also gives tonic water its bitter taste and blue fluorescence under UV.','Stereocentres at N1, C3, C4, C8 and C9. Quinidine is its C8/C9 diastereomer.','Two nitrogens: the quinuclidine N is basic (sp³); the quinoline N is weakly basic (sp²).'],
+chol:[
+['Structure','C₂₇H₄₆O. Four fused rings A, B, C (six-membered) and D (five-membered): the cyclopentanoperhydrophenanthrene skeleton. 3β-OH, a Δ⁵ double bond, angular methyls C18 and C19, and an 8-carbon side chain at C17.'],
+['Stereochemistry','8 stereocentres, so 2⁸ = 256 stereoisomers. Only one is natural cholesterol, which is why its synthesis was a landmark.'],
+['Woodward, 1951','Began with a Diels–Alder reaction of 2-methoxy-5-methyl-1,4-benzoquinone with butadiene to set up the C/D ring junction with the angular methyl. Rings were then built by annulation and aldol/Michael steps to a tetracyclic intermediate with the correct trans ring fusions.'],
+['Completing the side chain','The tetracyclic ketone was converted into a known steroid relay compound (the same compound was also prepared from natural steroids). The C17 side chain was then attached (Grignard/organometallic addition and hydrogenation) and the 3-ketone reduced to the 3β-alcohol, giving cholesterol.'],
+['Robinson, 1951','Robinson’s group completed an independent total synthesis in the same year, relying on the Robinson annulation to build the six-membered rings.'],
+['Biosynthesis link','In nature cholesterol comes from acetyl-CoA via mevalonate and squalene (see Unit V).']],
+cholNote:'Your notes list only the topic titles for Unit IV. The synthesis outlines here follow standard textbooks; if your teacher dictated a specific route, write that one in the exam.'
+};
+/* ============ UNIT V ============ */
+const FAS=[
+['Condensation','Acetyl-ACP + malonyl-ACP → acetoacetyl-ACP + CO₂. Loss of CO₂ drives this Claisen-type step (β-ketoacyl synthase).'],
+['Reduction','The β-keto group is reduced by NADPH to a β-hydroxy group (β-ketoacyl reductase).'],
+['Dehydration','Water is lost to give a trans-Δ²-enoyl-ACP (dehydratase).'],
+['Reduction','NADPH reduces the C=C, giving a saturated acyl-ACP two carbons longer (enoyl reductase).']
+];
+const MEVA=[
+['3 Acetyl-CoA','C₂ units from glucose or fatty acid breakdown.'],
+['HMG-CoA','Acetoacetyl-CoA + acetyl-CoA (C₆).'],
+['Mevalonate','HMG-CoA reductase, 2 NADPH. Rate-limiting step, blocked by statins.'],
+['IPP ⇌ DMAPP','Phosphorylation and decarboxylation give the C₅ isoprene units.'],
+['GPP (C₁₀)','Head-to-tail: monoterpenes.'],
+['FPP (C₁₅)','Sesquiterpenes.'],
+['Squalene (C₃₀)','Two FPP joined tail-to-tail.'],
+['2,3-Oxidosqualene','Squalene epoxidase, O₂.'],
+['Lanosterol','Cyclase folds and closes all four rings in one cascade.'],
+['Cholesterol','About 19 more steps: loss of three methyls, double-bond shifts.']
+];
+const U5={
+lipids:['Fats are built by the acetate–malonate pathway. The two-carbon unit is acetyl-CoA.',
+'Acetyl-CoA carboxylase (biotin, ATP, HCO₃⁻) makes malonyl-CoA. This is the committed step.',
+'Fatty acid synthase (FAS) holds the growing chain on an acyl carrier protein (ACP) and adds two carbons per turn.',
+'Seven turns give palmitoyl-ACP (C₁₆); thioesterase releases palmitate. Overall: 8 acetyl-CoA + 7 ATP + 14 NADPH → palmitate.',
+'Why natural fatty acids have even numbers of carbons: they are built two at a time from acetate.',
+'Unsaturation is added later by desaturases (O₂, NADH); elongation happens in the ER.',
+'Triglycerides: glycerol-3-phosphate + 3 acyl-CoA. Phospholipids come from phosphatidic acid.',
+'Terpenes and steroids come from the mevalonate pathway, also starting from acetyl-CoA.'],
+prot:[
+['Amino acids','Built from central metabolites: pyruvate → Ala; oxaloacetate → Asp, Asn, Lys, Thr, Met; α-ketoglutarate → Glu, Gln, Pro, Arg; 3-phosphoglycerate → Ser, Gly, Cys; aromatic Phe, Tyr, Trp from the shikimate pathway (PEP + erythrose-4-phosphate → shikimate → chorismate).'],
+['Transcription','The DNA gene is copied into mRNA by RNA polymerase in the 5′ → 3′ direction.'],
+['Activation','Aminoacyl-tRNA synthetase uses ATP to form aminoacyl-AMP, then transfers the amino acid to its tRNA (charged tRNA). This is where the genetic code is actually read.'],
+['Initiation','The ribosome assembles on mRNA at the AUG start codon with Met-tRNA (fMet in bacteria).'],
+['Elongation','Codon–anticodon pairing brings each new aminoacyl-tRNA. Peptidyl transferase (an rRNA ribozyme) forms the amide (peptide) bond. The chain grows from N-terminus to C-terminus.'],
+['Termination','Stop codons UAA, UAG or UGA are read by release factors; the polypeptide is released.'],
+['Folding and modification','The chain folds (primary → secondary α-helix/β-sheet → tertiary → quaternary), often helped by chaperones. Post-translational modification: disulfide bonds, glycosylation, phosphorylation, cleavage.'],
+['Non-ribosomal peptides','Some antibiotics (gramicidin, the ACV tripeptide that becomes penicillin) are assembled by non-ribosomal peptide synthetases, which can use D- and unusual amino acids.']],
+enz:['Enzymes are proteins, so they are biosynthesised exactly like other proteins: gene → mRNA → polypeptide → folded active site.',
+'Many are made as inactive precursors (zymogens) and switched on by cleavage: trypsinogen → trypsin, pepsinogen → pepsin.',
+'Many need cofactors: metal ions (Zn²⁺, Mg²⁺) or coenzymes derived from vitamins (NAD⁺ from niacin, FAD from riboflavin, TPP from thiamine, biotin, CoA from pantothenic acid).',
+'They lower the activation energy by stabilising the transition state. They are highly specific (lock-and-key, and Koshland’s induced fit).',
+'Kinetics: Michaelis–Menten, v = Vmax[S] / (Km + [S]).',
+'EC classes: oxidoreductases, transferases, hydrolases, lyases, isomerases, ligases (and translocases).'],
+nuc:[
+['Building blocks','Nucleotide = nitrogen base + pentose sugar + phosphate. Purines: adenine, guanine. Pyrimidines: cytosine, thymine (DNA), uracil (RNA).'],
+['PRPP','Ribose-5-phosphate (from the pentose phosphate pathway) + ATP → PRPP, the activated sugar for both pathways.'],
+['Purines','Built on the sugar, atom by atom: PRPP + glutamine → 5-phosphoribosylamine, then glycine, N¹⁰-formyl-THF, glutamine, CO₂ and aspartate complete the rings → IMP → AMP and GMP.'],
+['Pyrimidines','Ring built first, then attached: carbamoyl phosphate + aspartate → carbamoyl aspartate → dihydroorotate → orotate; + PRPP → OMP → UMP → UTP → CTP.'],
+['Deoxy and thymine','Ribonucleotide reductase turns NDPs into dNDPs. Thymidylate synthase methylates dUMP → dTMP (using methylene-THF).'],
+['Polymerisation','DNA polymerase joins dNTPs 5′ → 3′ on a template, releasing PPi and forming phosphodiester bonds. Base pairing: A=T (2 H-bonds), G≡C (3 H-bonds). RNA polymerase does the same with NTPs.']]
+};
+/* ============ QUIZ ============ */
+const QUIZ=[
+{u:'I',q:'Cold, dilute alkaline KMnO₄ converts cyclopentene into:',o:['trans-cyclopentane-1,2-diol','cis-cyclopentane-1,2-diol','cyclopentanone','glutaric acid'],a:1,e:'Syn addition through a cyclic manganate ester, so both OH groups are cis. Hot/acidic KMnO₄ would cleave the ring to glutaric acid.'},
+{u:'I',q:'Why is DDQ in benzene red?',o:['Cr(VI) impurity','A charge-transfer complex','Oxidation of benzene','Formation of DDQH₂'],a:1,e:'Electron-poor DDQ and the electron-rich aromatic form a charge-transfer complex. DDQH₂ is the yellow solid that precipitates.'},
+{u:'I',q:'DDQ removes which species from the substrate in the first step?',o:['H⁺','H•','H⁻ (hydride)','H₂'],a:2,e:'DDQ abstracts a hydride from a benzylic or allylic C–H, leaving a stabilised carbocation. A proton is removed afterwards.'},
+{u:'I',q:'NET Dec 2017: PMB ether of 5,6,7,8-tetrahydro-2-naphthol + DDQ (1 eq) gives (A). (A) is:',o:['The aromatised naphthalene PMB ether','5,6,7,8-Tetrahydro-2-naphthol + anisaldehyde','A benzylic acetate','A chromene'],a:1,e:'The PMB CH₂ is the most activated benzylic position (OMe para and O-aryl). Hydride loss, water attack and hemiacetal collapse release the phenol and anisaldehyde.'},
+{u:'I',q:'Methyl vinyl ketone + LiCuMe₂ (then H₃O⁺) gives:',o:['Butan-2-one','2-Methylbut-3-en-2-ol','3-Methylbutan-2-ol','Cyclopropyl methyl ketone'],a:0,e:'Wait: the Me adds to the β-carbon (1,4-addition): CH₂=CH–CO–CH₃ → CH₃–CH₂–CH₂–CO–CH₃? No. Me adds to CH₂, giving CH₃CH₂CH₂COCH₃, pentan-2-one. Your notes’ answer (a) is drawn as Me–CH₂–CH₂–CO–Me, which is pentan-2-one.'},
+{u:'I',q:'Which is the correct reactivity order towards R₂CuLi?',o:['R–X > epoxide > R–OTs > RCHO > RCOCl','RCOCl > RCHO > R–OTs > epoxide > R–X','RCHO > RCOCl > R–X > R–OTs','Epoxide > RCOCl > R–X > RCHO'],a:1,e:'Acid chlorides react fastest; alkyl halides slowest of this list.'},
+{u:'I',q:'Hexanoyl chloride + (CH₃)₂CuLi, THF, −78 °C gives:',o:['Heptan-2-ol','Heptan-2-one','2-Methylheptan-2-ol','Hexanal'],a:1,e:'Cuprates convert acid chlorides into ketones and stop there. A Grignard would add twice to give a 3° alcohol.'},
+{u:'I',q:'The 1,3-dithiane anion is an example of:',o:['An enolate','Umpolung (acyl anion equivalent)','A Wittig ylide','A carbene'],a:1,e:'The normally electrophilic carbonyl carbon becomes nucleophilic: reversal of polarity.'},
+{u:'I',q:'Which reagent hydrolyses a 2,2-disubstituted 1,3-dithiane back to a ketone?',o:['Raney Ni','Hg²⁺ / H₂O','LDA','PCC'],a:1,e:'HgCl₂/HgO in aqueous solvent. Raney Ni would reduce it to CH₂ instead.'},
+{u:'I',q:'SeO₂ converts cycloheptatriene into:',o:['Benzaldehyde','Tropone','Tropylium bromide','Cycloheptanone'],a:1,e:'Tropone. It has a large dipole because its polar form is an aromatic tropylium oxide.'},
+{u:'I',q:'The by-product of DCC coupling is:',o:['Dicyclohexylamine','DCU (dicyclohexylurea)','Cyclohexyl isocyanate','CO₂'],a:1,e:'DCC takes up the elements of water and becomes DCU, which precipitates.'},
+{u:'I',q:'Which coupling uses an organozinc reagent?',o:['Suzuki','Stille','Negishi','Kumada'],a:2,e:'Zn = Negishi, B = Suzuki, Sn = Stille, Mg = Kumada, Cu/alkyne = Sonogashira.'},
+{u:'I',q:'Which step is absent from the Heck reaction?',o:['Oxidative addition','Transmetalation','Migratory insertion','β-Hydride elimination'],a:1,e:'Heck has no organometallic partner, so there is no transmetalation. It inserts an alkene instead.'},
+{u:'I',q:'Baker’s yeast reduction of ethyl acetoacetate gives:',o:['Racemic ethyl 3-hydroxybutanoate','Ethyl (S)-3-hydroxybutanoate','Butane-1,3-diol','Ethyl (R)-3-hydroxybutanoate only by chance'],a:1,e:'Enzymatic delivery of hydride from the less hindered face gives the (S)-alcohol selectively.'},
+{u:'I',q:'In the Peterson olefination the carbanion is stabilised by:',o:['Phosphorus','Sulfur','Silicon','Boron'],a:2,e:'An α-silyl carbanion. The Wittig uses phosphorus.'},
+{u:'I',q:'2-Methylcyclohexanone + LDA (−78 °C) then CH₃I gives mainly:',o:['2,2-Dimethylcyclohexanone','2,6-Dimethylcyclohexanone','3-Methylcyclohexanone','O-methyl enol ether'],a:1,e:'LDA forms the kinetic (less substituted) enolate at C6.'},
+{u:'II',q:'Electrophilic substitution of indole occurs mainly at:',o:['C2','C3','N1','C5'],a:1,e:'Attack at C3 keeps the benzene ring aromatic in the intermediate.'},
+{u:'II',q:'The key step of the Fischer indole synthesis is:',o:['Diels–Alder','[3,3]-Sigmatropic rearrangement','Wittig','Beckmann rearrangement'],a:1,e:'The ene-hydrazine undergoes a [3,3] shift, breaking N–N and forming C–C.'},
+{u:'II',q:'In the Skraup synthesis, nitrobenzene acts as:',o:['A solvent','An oxidising agent','A catalyst for dehydration','A moderator'],a:1,e:'It oxidises 1,2-dihydroquinoline to quinoline. FeSO₄ moderates; H₂SO₄ dehydrates glycerol.'},
+{u:'II',q:'Glycerol is used in the Skraup synthesis instead of acrolein because:',o:['Acrolein is too expensive','Acrolein polymerises under the conditions','Glycerol is the oxidant','Acrolein does not react with aniline'],a:1,e:'Acrolein is generated slowly in situ so it does not polymerise.'},
+{u:'II',q:'Aniline + ethyl acetoacetate with acid (Knorr) gives:',o:['4-Hydroxy-2-methylquinoline','2-Hydroxy-4-methylquinoline','2-Methylindole','Quinaldine'],a:1,e:'Aniline attacks the ester first (anilide), then the ketone cyclises: 2-hydroxy-4-methylquinoline.'},
+{u:'II',q:'Bischler–Napieralski cyclisation uses:',o:['NaNH₂','POCl₃','Pd/C, H₂','HCl, 100 °C with an aldehyde'],a:1,e:'POCl₃ activates the amide. HCl + aldehyde is Pictet–Spengler.'},
+{u:'II',q:'Imidazole is more basic than pyridine because:',o:['It has more nitrogen atoms','Its conjugate acid is symmetrically stabilised by resonance','It is not aromatic','The NH is acidic'],a:1,e:'The imidazolium cation spreads positive charge equally over both N atoms (amidinium resonance). pKa ≈ 7.0 vs 5.2.'},
+{u:'II',q:'Electrophilic substitution of pyrazole occurs at:',o:['C3','C4','C5','N2 only'],a:1,e:'C4 is the only electron-rich carbon.'},
+{u:'II',q:'Nitration of thiazole gives mainly:',o:['2-Nitrothiazole','4-Nitrothiazole','5-Nitrothiazole','N-Nitrothiazolium'],a:2,e:'Electrophiles attack C5. Nucleophiles and bases react at C2.'},
+{u:'II',q:'α-Halo ketone + thioamide gives a thiazole. This is the:',o:['Gabriel synthesis','Hantzsch synthesis','Robinson–Gabriel synthesis','Paal–Knorr synthesis'],a:1,e:'Hantzsch. Gabriel uses an acylamino ketone + P₂S₅.'},
+{u:'II',q:'Ethyl acetoacetate + phenylhydrazine gives:',o:['3-Methyl-1-phenylpyrazole','1-Phenyl-3-methyl-5-pyrazolone','5-Methyl-1-phenylindole','A pyrazoline'],a:1,e:'The ester carbon becomes the ring C=O: a pyrazolone.'},
+{u:'II',q:'In the Chichibabin reaction the leaving group is:',o:['Cl⁻','NH₂⁻','H⁻','N₂'],a:2,e:'Hydride is expelled on re-aromatisation and ends up as H₂.'},
+{u:'II',q:'The Shapiro reaction gives:',o:['The more substituted alkene','The less substituted alkene','An alkyne','A ketone'],a:1,e:'Kinetic deprotonation by RLi at the less hindered α-carbon. Bamford–Stevens gives the more substituted alkene.'},
+{u:'III',q:'Atom economy of CH₃NH₂ + COCl₂ → CH₃NCO + 2 HCl is about:',o:['100%','72%','43.8%','20%'],a:2,e:'57 / (31 + 99) × 100 = 43.8%.'},
+{u:'III',q:'Which reaction type has 100% atom economy?',o:['Substitution','Elimination','Diels–Alder addition','Wittig'],a:2,e:'In an addition every reactant atom ends up in the product.'},
+{u:'III',q:'TBAB in the green Heck reaction acts as:',o:['A base','A phase-transfer catalyst','A ligand for Pd','An oxidant'],a:1,e:'Tetrabutylammonium bromide shuttles ions between phases so water can be the solvent.'},
+{u:'III',q:'Which solvent family do your notes call highly carcinogenic?',o:['Alcohols','BTX (benzene, toluene, xylene)','Ionic liquids','Water'],a:1,e:'BTX solvents are used for DDQ oxidations, a reason to look for greener media.'},
+{u:'IV',q:'How many stereocentres does cholesterol have?',o:['4','6','8','10'],a:2,e:'8 stereocentres, so 256 possible stereoisomers.'},
+{u:'IV',q:'Woodward and Doering’s 1944 quinine work made which relay compound?',o:['Quininone','Quinotoxine','Homomeroquinene only','Quinidine'],a:1,e:'They made quinotoxine; Rabe’s 1918 steps convert quinotoxine to quinine.'},
+{u:'IV',q:'1-Phenylpropane-1,2-dione + CH₃NH₂ then H₂/Pt gives:',o:['Amphetamine','(±)-Ephedrine','Norephedrine','Phenylacetone'],a:1,e:'Imine at the more reactive C2 ketone, then reduction of both C=N and C=O (Manske–Johnson).'},
+{u:'IV',q:'Sucrose is a non-reducing sugar because:',o:['It is a polysaccharide','Both anomeric carbons are tied up in the glycosidic bond','It contains fructose','It has no OH groups'],a:1,e:'Glucose C1 is linked to fructose C2, so no free hemiacetal remains.'},
+{u:'V',q:'The committed step of fatty acid biosynthesis is catalysed by:',o:['Fatty acid synthase','Acetyl-CoA carboxylase','HMG-CoA reductase','Thioesterase'],a:1,e:'Acetyl-CoA → malonyl-CoA (biotin, ATP).'},
+{u:'V',q:'Statins lower cholesterol by inhibiting:',o:['Squalene synthase','HMG-CoA reductase','Lanosterol cyclase','Acetyl-CoA carboxylase'],a:1,e:'HMG-CoA → mevalonate is the rate-limiting step of the mevalonate pathway.'},
+{u:'V',q:'Natural fatty acids usually have an even number of carbons because:',o:['They are made from C₂ acetate units','Odd chains are unstable','Enzymes remove one carbon','Glycerol has 3 carbons'],a:0,e:'Each FAS cycle adds two carbons from malonyl-CoA (losing CO₂).'},
+{u:'V',q:'Which is built on the ribose sugar step by step?',o:['Pyrimidine ring','Purine ring','Both','Neither'],a:1,e:'Purines are assembled on PRPP; the pyrimidine ring (orotate) is made first and then attached.'},
+{u:'V',q:'The peptide bond in the ribosome is formed by:',o:['Aminoacyl-tRNA synthetase','Peptidyl transferase (an rRNA ribozyme)','DNA polymerase','Release factor'],a:1,e:'The catalytic centre of the ribosome is RNA.'}
+];
+/* fix Q5 explanation cleanly */
+QUIZ[4].o=['Pentan-2-one','2-Methylbut-3-en-2-ol','3-Methylbutan-2-ol','Cyclopropyl methyl ketone'];
+QUIZ[4].e='Me adds to the β-carbon (1,4-addition): CH₂=CH–CO–CH₃ → CH₃–CH₂–CH₂–CO–CH₃, pentan-2-one. This is option (a) in your notes. Option (b) is the 1,2-addition product a Grignard would give.';
+const CARDS=[
+['DDQ full name','2,3-Dichloro-5,6-dicyano-1,4-benzoquinone'],['DDQ removes…','A hydride (H⁻) from a benzylic or allylic position, then a proton'],['DDQ solution colour and why','Red: charge-transfer complex'],['DDQH₂ appearance','Yellow solid that separates from benzene'],['PMB ether + DDQ','Free alcohol/phenol + anisaldehyde; benzyl ethers survive'],
+['Cold dilute KMnO₄ + alkene','cis-1,2-diol via cyclic manganate ester'],['Chromic acid','CrO₃ + H₂O ⇌ H₂CrO₄; 2° alcohol → ketone'],['PCC stops at the aldehyde because','No water, so no hydrate to over-oxidise'],['Swern reagents','(COCl)₂, DMSO, Et₃N, −78 °C'],['mCPBA does','Epoxidation (syn) and Baeyer–Villiger'],
+['SeO₂ oxidises','Active CH₂ next to C=O → 1,2-dicarbonyl; allylic positions'],['SeO₂ + cycloheptatriene','Tropone'],['DCC by-product','DCU (dicyclohexylurea)'],['EDC / HOBt','Costlier than DCC but higher yield; HOBt stops racemisation'],['Gilman reagent','R₂CuLi; 1,4-addition, R–X substitution, RCOCl → ketone'],
+['Cuprate reactivity order','RCOCl > RCHO > R–OTs > epoxide > R–X'],['Epoxide + R₂CuLi','Opens at the less hindered carbon, inversion'],['Umpolung','Reversal of polarity; 1,3-dithiane anion = acyl anion equivalent'],['Dithiane hydrolysis','Hg²⁺ / H₂O'],['LDA gives','Kinetic (less substituted) enolate at −78 °C'],
+['B / Zn / Mg / Sn / Cu','Suzuki / Negishi / Kumada / Stille / Sonogashira'],['Three steps of cross-coupling','Oxidative addition, transmetalation, reductive elimination'],['Heck key steps','Oxidative addition, syn insertion, syn β-H elimination, base regenerates Pd(0)'],['Wittig driving force','Strong P=O bond in Ph₃P=O'],['Peterson uses','α-Silyl carbanion (Si instead of P)'],
+['Baker’s yeast + EAA','Ethyl (S)-3-hydroxybutanoate'],['Fischer indole key step','[3,3]-Sigmatropic shift of ene-hydrazine'],['Madelung','o-Acylamino toluene + strong base → 2-substituted indole'],['Reissert','o-Nitrotoluene + diethyl oxalate, then Zn/AcOH'],['Skraup reagents','Aniline, glycerol, conc. H₂SO₄, FeSO₄, PhNO₂'],
+['Friedländer','2-Aminobenzaldehyde + CH₃CHO / NaOH → quinoline'],['Knorr quinoline','Aniline + EAA → 2-hydroxy-4-methylquinoline'],['Doebner–Miller','Crotonaldehyde made in situ; hydride transfer oxidises'],['Pictet–Spengler','Arylethylamine + aldehyde, HCl → tetrahydroisoquinoline'],['Bischler–Napieralski','N-Acyl phenethylamine + POCl₃ → 3,4-dihydroisoquinoline'],
+['Imidazole: E⁺ site / basic N','C4–C5 / N3 (pKa 7.0)'],['Oxazole: most acidic H','C2–H'],['Pyrazole: E⁺ site','C4'],['Thiazole: E⁺ / Nu sites','C5 / C2'],['Hantzsch thiazole','α-Halo ketone + thioamide'],
+['Atom economy formula','Mass of desired product ÷ mass of all reactants × 100'],['Supercritical CO₂','Above 31 °C, 73 atm'],['Cholesterol stereocentres','8 (256 isomers)'],['Rate-limiting step of cholesterol synthesis','HMG-CoA reductase (statin target)'],['FAS adds per cycle','2 carbons from malonyl-CoA, 2 NADPH used']
+];
+const CHEAT=[
+['KMnO₄ (cold, OH⁻)','Alkene → cis diol','Syn, cyclic manganate ester'],['CrO₃ / Jones','2° OH → ketone, 1° → acid','Chromate ester, α-H needed'],['PCC / Swern','1° OH → aldehyde','No over-oxidation'],['mCPBA','Epoxide, Baeyer–Villiger','Syn, stereospecific'],['DDQ','Dehydrogenation, PMB removal','Hydride abstraction, red CT complex'],
+['SeO₂','CH₂ next to C=O → C=O','Riley; allylic oxidation'],['DCC','Esters, amides, peptides','DCU by-product'],['R₂CuLi','1,4-addition, R–X, RCOCl → ketone','Soft; axial attack'],['LDA','Kinetic enolate','Bulky, −78 °C'],['1,3-Dithiane','Acyl anion equivalent','Umpolung; Hg²⁺ to unmask'],
+['Suzuki / Negishi / Kumada / Stille','R–M + R′–X','B / Zn / Mg / Sn'],['Heck','ArX + alkene','Syn insertion, syn β-H'],['Wittig / Peterson','C=O → C=C','P / Si'],['Baker’s yeast','β-Keto ester → (S)-alcohol','Green, enantioselective'],['Raney Ni','Hydrogenation, C–S → C–H','Pyrophoric'],
+['Wilkinson’s','Selective hydrogenation','RhCl(PPh₃)₃, syn'],['Acyloin','2 esters + Na → α-hydroxy ketone','Ketyl dimerisation']
+];
+const INTERNAL=[
+{q:'Internal Q1: 4-iodo-1,2-dimethoxybenzene + 2,3-dihydrofuran, Pd(OAc)₂, Bu₄NCl, KOAc, PPh₃ → (A); (A) + 1-iodonaphthalene → (B)',a:'Think Heck (Jeffery conditions: Bu₄NCl phase transfer). The aryl adds to C2 of the enol ether next to O and β-H elimination leaves a new C=C in the ring (2-aryl-dihydrofuran, the double bond can migrate). A second Heck with 1-iodonaphthalene arylates that remaining ring C=C. Check the exact regiochemistry with your teacher; this is a known Larock-type question.'},
+{q:'Internal Q2: 1,5-cyclooctadiene + B₂H₆ (1 eq), 25 °C → (A); (A) + 4-vinylcyclohexene, then methyl (Z)-3-iodoacrylate, Pd(dppf)Cl₂, AsPh₃, Cs₂CO₃, DMF/H₂O → (B)',a:'(A) is 9-BBN (double intramolecular hydroboration of COD). 9-BBN hydroborates only the terminal vinyl group (anti-Markovnikov). B-alkyl Suzuki coupling with the (Z)-iodoacrylate keeps the Z geometry: (B) = methyl (Z)-5-(cyclohex-3-en-1-yl)pent-2-enoate. Pd(dppf)Cl₂ = [1,1′-bis(diphenylphosphino)ferrocene]palladium(II) dichloride.'},
+{q:'Internal Q3: indole (2 eq) + PhCHO, TsOH → ?',a:'Bis(indol-3-yl)phenylmethane, from two C3 attacks on the (protonated) aldehyde carbon.'},
+{q:'Internal Q4: (R)-pulegone: 1 PhMgBr, CuBr 2 KOH, EtOH 3 Na, i-PrOH, toluene reflux → ?',a:'CuBr makes the Grignard add 1,4: Ph goes onto the isopropylidene carbon (–CMe₂Ph). KOH/EtOH equilibrates the ring methyl/side chain to the more stable trans isomer. Dissolving-metal reduction (Na, i-PrOH) gives the thermodynamic equatorial alcohol. Product: (−)-8-phenylmenthol, Corey’s chiral auxiliary.'},
+{q:'Internal Q5: β-tetralone: 1 LDA 2 ClCO₂Et 3 methyl vinyl ketone, Et₃N, heat → ?',a:'LDA and ClCO₂Et give the β-keto ester (acylation at the α-carbon, usually C1, the benzylic position). The very acidic β-keto ester then does a Michael addition to MVK with Et₃N, and heating drives the intramolecular aldol and dehydration: a Robinson annulation, giving a tricyclic enone with a quaternary ester-bearing carbon.'}
+];
+/* ============ CORE UTILITIES ============ */
+const $=s=>document.querySelector(s);
+const $$=s=>[...document.querySelectorAll(s)];
+const store={get(k,d){try{const v=localStorage.getItem(k);return v?JSON.parse(v):d}catch(e){return d}},set(k,v){try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}}};
+function toast(t){const e=$('#toast');e.textContent=t;e.classList.add('show');clearTimeout(e._t);e._t=setTimeout(()=>e.classList.remove('show'),1600)}
+const ARROW='<svg viewBox="0 0 56 14" aria-hidden="true"><path d="M2 7h48" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round"/><path d="M44 2l8 5-8 5" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+
+/* theme */
+let theme=store.get('oc-theme',null);
+function isDark(){if(theme)return theme==='dark';return matchMedia('(prefers-color-scheme: dark)').matches}
+function applyTheme(){if(theme)document.documentElement.setAttribute('data-theme',theme);else document.documentElement.removeAttribute('data-theme');redrawAll()}
+$('#themebtn').addEventListener('click',()=>{theme=isDark()?'light':'dark';store.set('oc-theme',theme);applyTheme()});
+try{matchMedia('(prefers-color-scheme: dark)').addEventListener('change',()=>{if(!theme)redrawAll()})}catch(e){}
+
+/* ============ MOLECULE DRAWING ============ */
+const TH={
+ light:{C:'#1d1d1f',O:'#e0245e',N:'#0071e3',F:'#1aa05a',CL:'#12936b',BR:'#b5561d',I:'#7b3fb3',P:'#c77700',S:'#b38b00',B:'#d8661a',SI:'#8a6d3b',H:'#1d1d1f',BACKGROUND:'#ffffff'},
+ dark:{C:'#f5f5f7',O:'#ff6b8b',N:'#64b5ff',F:'#4cd07d',CL:'#3fd1a4',BR:'#ff9b5e',I:'#c792ff',P:'#ffb340',S:'#ffd426',B:'#ff9f5a',SI:'#d9b77a',H:'#f5f5f7',BACKGROUND:'#1c1c1e'}};
+const drawers={};
+function getDrawer(w,h,bg){const k=w+'x'+h+bg;if(!drawers[k]){const th=JSON.parse(JSON.stringify(TH));th.light.BACKGROUND=bg==='bg2'?'#f5f5f7':'#ffffff';th.dark.BACKGROUND=bg==='bg2'?'#101012':'#1c1c1e';
+ drawers[k]=new SmilesDrawer.Drawer({width:w,height:h,bondThickness:1.1,fontSizeLarge:6,fontSizeSmall:4,padding:12,themes:th})}return drawers[k]}
+function drawMol(c){
+ const smi=c.dataset.smi;if(!smi)return;
+ if(!window.SmilesDrawer){if(!c.nextElementSibling||!c.nextElementSibling.classList.contains('fallback')){const f=document.createElement('div');f.className='fallback';f.textContent=smi;c.after(f);c.style.display='none'}return}
+ const w=+c.dataset.w||300,h=+c.dataset.h||200;
+ try{SmilesDrawer.parse(smi,tree=>{try{getDrawer(w,h,c.dataset.bg||'card').draw(tree,c,isDark()?'dark':'light',false);c.dataset.drawn='1'}catch(e){console.warn(smi,e)}},err=>console.warn('parse',smi,err))}catch(e){console.warn(e)}
+}
+const io='IntersectionObserver' in window?new IntersectionObserver(es=>es.forEach(en=>{if(en.isIntersecting){drawMol(en.target);io.unobserve(en.target)}}),{rootMargin:'300px'}):null;
+function observeMols(root){(root||document).querySelectorAll('canvas.m:not([data-obs])').forEach(c=>{c.dataset.obs='1';if(io)io.observe(c);else drawMol(c)})}
+function drawNow(root){root.querySelectorAll('canvas.m').forEach(drawMol)}
+function redrawAll(){$$('canvas.m[data-drawn]').forEach(drawMol);drawHero()}
+function mol(smi,w,h,bg){return `<canvas class="m" data-smi="${smi.replace(/"/g,'&quot;')}" data-w="${w||300}" data-h="${h||200}" data-bg="${bg||'card'}" width="${w||300}" height="${h||200}" role="img" aria-label="structure"></canvas>`}
+function rxnHTML(r){
+ return `<div class="rxn"><div class="row">
+  <div><div class="mol">${mol(r.a)}</div><div class="mname">${r.an||''}</div></div>
+  <div class="arrow"><span>${r.r}</span>${ARROW}</div>
+  <div><div class="mol">${mol(r.b)}</div><div class="mname">${r.bn||''}</div></div>
+ </div>${r.l?`<div class="lab">${r.l}</div>`:''}</div>`}
+
+/* ============ STEPPER ============ */
+let stepId=0;const STEPS={};
+function stepperHTML(title,steps){const id='st'+(stepId++);STEPS[id]={s:steps,i:0};
+ return `<div class="stepper" id="${id}"><div class="top"><b>${title}</b><span class="count"></span></div><div class="track"><i></i></div><div class="txt" aria-live="polite"></div><div class="ctrl"><button class="pv">Back</button><button class="nx">Next step</button></div></div>`}
+function paintStep(id){const el=document.getElementById(id);if(!el)return;const o=STEPS[id],s=o.s[o.i];
+ el.querySelector('.count').textContent=`Step ${o.i+1} of ${o.s.length}`;
+ el.querySelector('.track i').style.width=((o.i+1)/o.s.length*100)+'%';
+ el.querySelector('.txt').innerHTML=`<span class="k">${s[0]}</span>${s[1]}`;
+ el.querySelector('.pv').disabled=o.i===0;const nx=el.querySelector('.nx');nx.textContent=o.i===o.s.length-1?'Start again':'Next step'}
+function initSteppers(root){(root||document).querySelectorAll('.stepper').forEach(el=>{if(!el.dataset.init){el.dataset.init=1;paintStep(el.id)}})}
+document.addEventListener('click',e=>{const b=e.target.closest('.stepper button');if(!b)return;const el=b.closest('.stepper'),o=STEPS[el.id];
+ if(b.classList.contains('nx'))o.i=o.i===o.s.length-1?0:o.i+1;else o.i=Math.max(0,o.i-1);paintStep(el.id)});
+
+/* ============ PROGRESS ============ */
+const REV=[];let done=store.get('oc-rev',{});
+function revBtn(k,u,label){if(!REV.find(x=>x.k===k))REV.push({k,u});return `<button class="revised${done[k]?' on':''}" data-rev="${k}"><span class="box">✓</span>${label||'Mark as revised'}</button>`}
+document.addEventListener('click',e=>{const b=e.target.closest('[data-rev]');if(!b)return;const k=b.dataset.rev;done[k]=!done[k];store.set('oc-rev',done);
+ $$(`[data-rev="${k}"]`).forEach(x=>x.classList.toggle('on',!!done[k]));toast(done[k]?'Marked revised':'Unmarked');updateProgress();renderGrid()});
+function updateProgress(){const tot=REV.length,n=REV.filter(x=>done[x.k]).length,p=tot?Math.round(n/tot*100):0;
+ $('#ringc').style.strokeDashoffset=88-88*p/100;$('#ringt').textContent=p+'%';
+ ['I','II','III','IV','V'].forEach((u,i)=>{const L=REV.filter(x=>x.u===u),m=L.filter(x=>done[x.k]).length;const bar=document.querySelector(`#tile${i+1} .bar i`);if(bar)bar.style.width=(L.length?m/L.length*100:0)+'%';const c=document.querySelector(`#tile${i+1} .cnt`);if(c)c.textContent=`${m} of ${L.length} revised`})}
+/* ============ HERO ============ */
+const HERO=[
+['O=C1C(Cl)=C(Cl)C(=O)C(C#N)=C1C#N','DDQ','The hydride thief of Unit I'],
+['COc1ccc2nccc([C@@H](O)[C@@H]3C[C@@H]4CCN3C[C@@H]4C=C)c2c1','Quinine','Unit IV alkaloid, Woodward–Doering 1944'],
+['C[C@H](CCCC(C)C)[C@H]1CC[C@@H]2[C@@]1(CC[C@H]3[C@H]2CC=C4[C@@]3(CC[C@@H](C4)O)C)C','Cholesterol','8 stereocentres, 256 isomers'],
+['c1ccc2[nH]ccc2c1','Indole','Fischer, Madelung, Reissert'],
+['O=C1C=CC=CC=C1','Tropone','SeO₂ on cycloheptatriene'],
+['C(=NC1CCCCC1)=NC1CCCCC1','DCC','Mild dehydrating agent'],
+['c1cscn1','Thiazole','Electrophiles at C5, bases at C2']];
+let hi=0,hTimer;
+function drawHero(){const c=$('#heroMol');if(!c)return;c.dataset.smi=HERO[hi][0];c.dataset.w=420;c.dataset.h=260;c.dataset.bg='bg2';c.classList.add('m');drawMol(c);
+ $('#heroName').textContent=HERO[hi][1];$('#heroNote').textContent=HERO[hi][2];
+ $$('#heroDots button').forEach((b,i)=>b.classList.toggle('on',i===hi))}
+$('#heroDots').innerHTML=HERO.map((h,i)=>`<button aria-label="${h[1]}"></button>`).join('');
+$$('#heroDots button').forEach((b,i)=>b.addEventListener('click',e=>{e.stopPropagation();hi=i;drawHero();clearInterval(hTimer)}));
+$('#molstage').addEventListener('click',()=>{hi=(hi+1)%HERO.length;drawHero();clearInterval(hTimer)});
+if(!matchMedia('(prefers-reduced-motion: reduce)').matches)hTimer=setInterval(()=>{hi=(hi+1)%HERO.length;drawHero()},4500);
+
+/* ============ MAP ============ */
+const UNITS=[['I','Reagents in organic synthesis','Oxidants, reductants, cuprates, dithianes, Pd coupling, Wittig','u1'],['II','Heterocyclic chemistry','Indole, quinoline, isoquinoline, imidazole, oxazole, pyrazole, thiazole','u2'],['III','Green chemistry','12 principles, atom economy, greener media','u3'],['IV','Natural products','Carbohydrates, ephedrine, quinine, cholesterol','u4'],['V','Biogenesis','Lipids, proteins, enzymes, nucleic acids','u5']];
+$('#maptiles').innerHTML=UNITS.map((u,i)=>`<a class="tile" id="tile${i+1}" href="#${u[3]}" style="--c:var(--${u[3]});--s:var(--${u[3]}s)"><span class="n">${u[0]}</span><b>${u[1]}</b><small>${u[2]}</small><small class="cnt"></small><span class="bar"><i></i></span></a>`).join('');
+
+/* ============ UNIT I: REAGENT GRID ============ */
+let rfilter='all',rq='';
+$('#rchips').innerHTML=Object.entries(TAGS).map(([k,v])=>`<button class="chip${k==='all'?' on':''}" data-t="${k}">${v}</button>`).join('');
+$('#rchips').addEventListener('click',e=>{const b=e.target.closest('.chip');if(!b)return;rfilter=b.dataset.t;$$('#rchips .chip').forEach(x=>x.classList.toggle('on',x===b));renderGrid()});
+$('#rsearch').addEventListener('input',e=>{rq=e.target.value.toLowerCase();renderGrid()});
+REAGENTS.forEach(r=>revBtn('r-'+r.id,'I'));
+function renderGrid(){const g=$('#rgrid');const list=REAGENTS.filter(r=>(rfilter==='all'||r.tags.includes(rfilter))&&(!rq||(r.name+r.sym+(r.sub||'')+r.sum+r.pts.join(' ')).toLowerCase().includes(rq)));
+ g.innerHTML=list.length?list.map(r=>`<button class="rcard" data-r="${r.id}"><span class="sym">${r.sym}</span><b>${r.name}</b><p>${r.sum.split('. ')[0]}.</p><span class="tags">${r.tags.map(t=>`<span class="tag">${TAGS[t]}</span>`).join('')}${done['r-'+r.id]?'<span class="done">✓ Revised</span>':''}</span></button>`).join(''):`<p class="subl">No reagent matches “${rq}”. Try a formula such as SeO2, or clear the filter.</p>`}
+renderGrid();
+$('#rgrid').addEventListener('click',e=>{const b=e.target.closest('.rcard');if(b)openReagent(b.dataset.r)});
+
+/* sheet */
+let lastFocus;
+function openSheet(title,sub,html,color){lastFocus=document.activeElement;$('#sheetTitle').textContent=title;$('#sheetSub').textContent=sub||'';const body=$('#sheetBody');body.innerHTML=html;body.scrollTop=0;
+ $('#sheet').style.setProperty('--c',color||'var(--u1)');$('#scrim').classList.add('open');$('#sheet').classList.add('open');document.body.style.overflow='hidden';
+ initSteppers(body);requestAnimationFrame(()=>drawNow(body));setTimeout(()=>$('#sheetX').focus(),300)}
+function closeSheet(){$('#scrim').classList.remove('open');$('#sheet').classList.remove('open');document.body.style.overflow='';if(lastFocus)lastFocus.focus()}
+$('#sheetX').addEventListener('click',closeSheet);$('#scrim').addEventListener('click',closeSheet);
+document.addEventListener('keydown',e=>{if(e.key==='Escape')closeSheet()});
+function openReagent(id){const r=REAGENTS.find(x=>x.id===id);
+ let h=`<p style="font-size:17px;line-height:1.5">${r.sum}</p>${revBtn('r-'+r.id,'I')}`;
+ h+=`<h5>Key points</h5><ul class="pts">${r.pts.map(p=>`<li>${p}</li>`).join('')}</ul>`;
+ if(r.rx)h+=`<h5>Reactions</h5>${r.rx.map(rxnHTML).join('')}`;
+ if(r.steps)h+=`<h5>Mechanism, step by step</h5>${stepperHTML(r.steps.t,r.steps.s)}`;
+ if(r.tip)h+=`<div class="callout tip"><b>Exam tip</b>${r.tip}</div>`;
+ if(r.trap)h+=`<div class="callout trap"><b>Common mistake</b>${r.trap}</div>`;
+ if(r.fix)h+=`<div class="callout fix"><b>Check your notes</b>${r.fix}</div>`;
+ openSheet(r.name,r.sub||r.sym,h,'var(--u1)')}
+
+/* ============ CATALYTIC CYCLE ============ */
+const CYC={
+Suzuki:{d:'R¹–X + R²–B(OR)₂, Pd(0), base. Boron partners are non-toxic and air-stable.',m:'R²–B(OR)₂',s:[['Oxidative addition','Pd(0)Lₙ inserts into R¹–X, giving R¹–Pd(II)–X. Pd goes from 0 to +2.'],['Transmetalation','The base (OH⁻, CO₃²⁻) activates boron as a borate. R² moves from B to Pd, X moves to B: R¹–Pd–R².'],['Reductive elimination','R¹ and R² couple and leave as R¹–R². Pd returns to Pd(0) and the cycle restarts.']]},
+Negishi:{d:'R¹–X + R²–ZnX, Pd(0). Organozincs are reactive but tolerate esters and ketones.',m:'R²–ZnCl',s:[['Oxidative addition','Pd(0) + R¹–X → R¹–Pd–X. In your notes: 2-iodo-4-methoxy-6-methylpyridine → pyridyl–PdI.'],['Transmetalation','2-Pyridyl–ZnCl (from 2-lithiopyridine + ZnCl₂) transfers its pyridyl group to Pd.'],['Reductive elimination','The bipyridine is released and Pd(0) regenerated.']]},
+Kumada:{d:'R¹–X + R²–MgX, Pd(0) or Ni. The first catalytic cross-coupling (1972).',m:'R²–MgBr',s:[['Oxidative addition','2-Iodofuran + Pd(0) → furyl–PdI.'],['Transmetalation','2-Thienyl–MgBr gives its thienyl group to Pd; MgBrI leaves.'],['Reductive elimination','2-(2-Thienyl)furan is released, Pd(0) regenerated.']]},
+Stille:{d:'R¹–X (or OTf) + R²–SnR₃, Pd(PPh₃)₄. Very tolerant, but tin is toxic.',m:'R²–SnBu₃',s:[['Oxidative addition','Vinyl triflate or halide + Pd(0) → vinyl–Pd–X, geometry retained.'],['Transmetalation','R² moves from tin to palladium; Bu₃Sn–X is formed.'],['Reductive elimination','R¹–R² forms with retention of alkene geometry.']]},
+Sonogashira:{d:'R¹–X + terminal alkyne H–C≡C–R², Pd(0), CuI, amine base.',m:'Cu–C≡C–R²',s:[['Oxidative addition','Pd(0) + R¹–X → R¹–Pd–X.'],['Transmetalation','CuI and the amine turn the acidic alkyne C–H into a copper acetylide, which passes the alkynyl group to Pd.'],['Reductive elimination','R¹–C≡C–R² is released.']]},
+Heck:{d:'R–X + alkene, Pd, base. No organometallic partner: an alkene inserts instead.',m:'alkene',s:[['Oxidative addition','Pd(0) + RX → R–Pd–X.'],['Syn migratory insertion','The alkene coordinates; R and Pd add across it on the same face. R goes to the less substituted carbon.'],['Syn β-hydride elimination','After rotation a β-H is syn to Pd; H–Pd–X is eliminated and the alkene product (mostly E) is released.'],['Base regenerates Pd(0)','Base removes HX from H–Pd–X: HPdX → Pd(0) + HX.']]}};
+let cyk='Suzuki',cyi=0;
+$('#cycseg').innerHTML=Object.keys(CYC).map(k=>`<button data-k="${k}"${k===cyk?' class="on"':''}>${k}</button>`).join('');
+$('#cycseg').addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return;cyk=b.dataset.k;cyi=0;$$('#cycseg button').forEach(x=>x.classList.toggle('on',x===b));drawCycle()});
+function drawCycle(){const c=CYC[cyk],n=c.s.length,R=110,cx=160,cy=160;
+ let s=`<svg viewBox="0 0 320 320" role="img" aria-label="${cyk} catalytic cycle"><defs><marker id="ah" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="var(--u1)"/></marker></defs>`;
+ for(let i=0;i<n;i++){const a1=-Math.PI/2+i*2*Math.PI/n+0.32,a2=-Math.PI/2+(i+1)*2*Math.PI/n-0.32;
+  s+=`<path d="M${cx+R*Math.cos(a1)} ${cy+R*Math.sin(a1)} A${R} ${R} 0 0 1 ${cx+R*Math.cos(a2)} ${cy+R*Math.sin(a2)}" fill="none" stroke="var(--u1)" stroke-width="3" marker-end="url(#ah)" opacity=".55"/>`}
+ s+=`<text x="${cx}" y="${cy-6}" text-anchor="middle" font-size="20" font-weight="800" fill="var(--ink)">Pd(0)Lₙ</text><text x="${cx}" y="${cy+16}" text-anchor="middle" font-size="12" fill="var(--ink2)">+ ${c.m}</text>`;
+ c.s.forEach((st,i)=>{const a=-Math.PI/2+i*2*Math.PI/n,x=cx+R*Math.cos(a),y=cy+R*Math.sin(a);
+  s+=`<g class="node${i===cyi?' on':''}" data-i="${i}" tabindex="0" role="button" aria-label="${st[0]}"><circle cx="${x}" cy="${y}" r="24" fill="var(--card)" stroke="var(--u1)" stroke-width="2"/><text x="${x}" y="${y+6}" text-anchor="middle" font-size="17" font-weight="800" fill="var(--u1)">${i+1}</text></g>`});
+ s+='</svg>';$('#cycsvg').innerHTML=s;
+ $('#cyct').textContent=cyk+(cyk==='Heck'?' reaction':' coupling');$('#cycd').textContent=c.d;
+ const st=c.s[cyi];$('#cycstep').innerHTML=`<b>Step ${cyi+1}: ${st[0]}</b>${st[1]}<div style="margin-top:10px"><button class="chip" id="cycnext">Next step</button></div>`;
+ $('#cycnext').onclick=()=>{cyi=(cyi+1)%n;drawCycle()};
+ $$('#cycsvg .node').forEach(g=>{const f=()=>{cyi=+g.dataset.i;drawCycle()};g.addEventListener('click',f);g.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();f()}})})}
+drawCycle();
+$('#coupletbl').innerHTML='<tr><th>Metal in R²–M</th><th>Name</th><th>Partner</th><th>Remember</th></tr>'+[
+['B','Suzuki (–Miyaura)','Boronic acid or ester','Needs base; non-toxic by-products'],['Zn','Negishi','Organozinc halide','Made from RLi + ZnCl₂'],['Mg','Kumada','Grignard reagent','Pd or Ni; limited functional group tolerance'],['Sn','Stille','Organostannane','Very tolerant; toxic tin'],['Cu (co-cat.)','Sonogashira','Terminal alkyne','Pd + CuI + amine'],['none','Heck','Alkene','Insertion + β-H elimination']].map(r=>`<tr><td><b style="color:var(--u1)">${r[0]}</b></td><td>${r[1]}</td><td>${r[2]}</td><td>${r[3]}</td></tr>`).join('');
+revBtn('cycle','I');$('#u1rev').innerHTML=`<div style="margin-top:28px;display:flex;gap:10px;flex-wrap:wrap">${revBtn('cycle','I','Catalytic cycle revised')}</div>`;
+
+/* order */
+const ORD=[['R–COCl',100,'var(--u5)'],['R–CHO',80,'var(--u4)'],['R–OTs',62,'var(--u3)'],['Epoxide',44,'var(--u2)'],['R–X',26,'var(--u1)']];
+$('#order').innerHTML=ORD.map((o,i)=>`<div class="it"><span>${o[0]}</span><span class="b"><i style="background:${o[2]}"></i></span><small>${i+1}</small></div>`).join('');
+function playOrder(){$$('#order i').forEach(i=>i.style.width=0);setTimeout(()=>$$('#order i').forEach((i,k)=>setTimeout(()=>i.style.width=ORD[k][1]+'%',k*140)),60)}
+$('#orderbtn').addEventListener('click',playOrder);
+if(io){new IntersectionObserver((es,ob)=>{if(es[0].isIntersecting){playOrder();ob.disconnect()}}).observe($('#order'))}else playOrder();
+
+/* enolate */
+const L=REAGENTS.find(r=>r.id==='lda');
+$('#enolate').innerHTML=`<div class="two"><div>${rxnHTML(L.rx[0])}<p class="subl" style="margin:6px 0 0"><b style="color:var(--ink)">LDA, −78 °C:</b> fast, irreversible removal of the most accessible H (the CH₂ side). Kinetic enolate.</p></div><div>${rxnHTML(L.rx[1])}<p class="subl" style="margin:6px 0 0"><b style="color:var(--ink)">tBuOK, room temperature:</b> reversible, so the more substituted (more stable) enolate wins. Thermodynamic enolate. Used in the SeO₂ NET problem.</p></div></div>`;
+/* ============ UNIT II ============ */
+$('#rings').innerHTML=RINGS.map(r=>`<button class="ringc" aria-label="${r.n}, tap to flip"><div class="in"><div class="f">${mol(r.s,220,170)}<b>${r.n}</b></div><div class="bk"><b>${r.n}</b>${r.b}</div></div></button>`).join('');
+$('#rings').addEventListener('click',e=>{const b=e.target.closest('.ringc');if(b)b.classList.toggle('flip')});
+let rmk='Imidazole';
+$('#rmapseg').innerHTML=Object.keys(RMAP).map(k=>`<button data-k="${k}"${k===rmk?' class="on"':''}>${k}</button>`).join('');
+$('#rmapseg').addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return;rmk=b.dataset.k;$$('#rmapseg button').forEach(x=>x.classList.toggle('on',x===b));drawRmap()});
+function drawRmap(){const m=RMAP[rmk],n=m.n,cx=160,cy=150,R=n===5?92:96;const pts=m.at.map((a,i)=>{const ang=(90-(360/n)*i)*Math.PI/180;return[cx+R*Math.cos(ang),cy+R*Math.sin(ang)]});
+ let s=`<svg viewBox="0 0 320 300" role="img" aria-label="${rmk} reactivity map"><polygon points="${pts.map(p=>p.join(',')).join(' ')}" fill="var(--u2s)" stroke="var(--ink)" stroke-width="2.5" stroke-linejoin="round"/><circle cx="${cx}" cy="${cy}" r="${R*.5}" fill="none" stroke="var(--ink2)" stroke-width="1.5" stroke-dasharray="4 5"/>`;
+ m.at.forEach((a,i)=>{const[x,y]=pts[i];const col=m.e.includes(i)?'var(--blue)':m.nu.includes(i)?'var(--u5)':m.h.includes(i)?'var(--u4)':'var(--card)';const txt=col==='var(--card)'?'var(--ink)':'#fff';
+  s+=`<circle cx="${x}" cy="${y}" r="26" fill="${col}" stroke="var(--ink)" stroke-width="1.5"/><text x="${x}" y="${y+5}" text-anchor="middle" font-size="${a.length>3?12:15}" font-weight="700" fill="${txt}">${a}</text>`;
+  if(m.h.includes(i)&&col!=='var(--u4)')s+=`<circle cx="${x+20}" cy="${y-20}" r="8" fill="var(--u4)" stroke="var(--bg)" stroke-width="2"/>`});
+ s+='</svg>';$('#rmapsvg').innerHTML=s;$('#rmaptxt').innerHTML=`<h4 style="font-size:24px;margin:0 0 8px">${rmk}</h4>${m.t}`}
+drawRmap();
+let nrg='Indole';
+$('#nrseg').innerHTML=NRGROUPS.map(g=>`<button data-g="${g}"${g===nrg?' class="on"':''}>${g}</button>`).join('');
+$('#nrseg').addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return;nrg=b.dataset.g;$$('#nrseg button').forEach(x=>x.classList.toggle('on',x===b));renderNR()});
+NR.forEach((r,i)=>revBtn('nr'+i,'II'));
+function renderNR(){$('#nrlist').innerHTML=NR.map((r,i)=>r.g!==nrg?'':`<div class="nr" data-i="${i}"><button aria-expanded="false"><span><b>${r.t}</b><small>${r.d}</small></span><span class="pl">+</span></button><div class="nb"></div></div>`).join('')+(nrg==='Pyridine & more'||nrg==='Indole'?'':'')}
+function nrBody(i){const r=NR[i];let h='';
+ if(r.rx)h+=r.rx.map(rxnHTML).join('');
+ if(r.list)h+=`<ul class="pts" style="--c:var(--u2);margin:12px 0">${r.list.map(x=>`<li>${x}</li>`).join('')}</ul>`;
+ if(r.s)h+=stepperHTML('Mechanism',r.s);
+ if(r.tip)h+=`<div class="callout tip"><b>Exam tip</b>${r.tip}</div>`;
+ if(r.fix)h+=`<div class="callout fix"><b>Check your notes</b>${r.fix}</div>`;
+ return h+revBtn('nr'+i,'II')}
+$('#nrlist').addEventListener('click',e=>{const b=e.target.closest('.nr > button');if(!b)return;const nr=b.parentElement,body=nr.querySelector('.nb');const open=!nr.classList.contains('open');
+ if(open&&!body.innerHTML){body.innerHTML=nrBody(+nr.dataset.i);initSteppers(body)}nr.classList.toggle('open',open);b.setAttribute('aria-expanded',open);if(open)drawNow(body)});
+renderNR();
+const pr=PRACTICE.map(p=>`<div class="prac"><div class="q">${p.q}</div><button>Show answer</button><div class="a">${p.a}</div></div>`).join('');
+$('#u2rev').innerHTML=`<h3 class="sub">Practice from your notes.</h3><p class="subl">Try each one before you reveal the answer.</p>${pr}<div style="margin-top:20px;display:flex;gap:10px;flex-wrap:wrap">${revBtn('rings','II','Rings revised')}${revBtn('rmap','II','Reactivity map revised')}</div>`;
+document.addEventListener('click',e=>{const b=e.target.closest('.prac > button');if(!b)return;const p=b.parentElement;p.classList.toggle('show');b.textContent=p.classList.contains('show')?'Hide answer':'Show answer'});
+
+/* ============ UNIT III ============ */
+$('#principles').innerHTML=PRINCIPLES.map((p,i)=>`<button class="pr"><span class="no">${i+1}</span><b>${p[0]}</b><p>${p[1]}</p></button>`).join('');
+$('#principles').addEventListener('click',e=>{const b=e.target.closest('.pr');if(b)b.classList.toggle('on')});
+$('#aepreset').innerHTML=AEPRESET.map((p,i)=>`<option value="${i}">${p.n}</option>`).join('');
+function aeCalc(){const p=parseFloat($('#aep').value),r=parseFloat($('#aer').value);const v=(p>0&&r>0)?Math.min(100,p/r*100):0;
+ $('#aev').textContent=v?v.toFixed(1)+'%':'–';$('#aearc').style.strokeDashoffset=578-578*v/100;$('#aearc').style.stroke=v>=75?'var(--u3)':v>=40?'var(--u4)':'var(--u5)'}
+function aeSet(){const p=AEPRESET[+$('#aepreset').value];$('#aep').value=p.p;$('#aer').value=p.r;$('#aeeq').innerHTML=p.eq;$('#aefix').innerHTML=p.fix?`<div class="callout fix"><b>Check your notes</b>${p.fix}</div>`:'';aeCalc()}
+$('#aepreset').addEventListener('change',aeSet);$('#aep').addEventListener('input',aeCalc);$('#aer').addEventListener('input',aeCalc);aeSet();
+$('#aebars').innerHTML=AEBARS.map(b=>`<div class="br"><span>${b[0]}</span><span class="t"><i style="width:${b[1]}%;background:${b[1]>=75?'var(--u3)':b[1]>=40?'var(--u4)':'var(--u5)'}"></i></span><b>${b[1]}%</b></div>`).join('');
+$('#efactor').innerHTML=`<div style="grid-column:1/-1;background:transparent;border:0;padding:0"><b style="color:var(--ink);font-size:19px">E-factor = kg of waste ÷ kg of product</b><span>Lower is greener. Typical values by industry:</span></div>`+EFACTOR.map(e=>`<div><b>${e[0]}</b><span>${e[1]}</span></div>`).join('');
+$('#media').innerHTML=MEDIA.map(m=>`<div class="nr"><button><span><b>${m.t}</b></span><span class="pl">+</span></button><div class="nb"><p style="margin:0;line-height:1.55">${m.d}</p></div></div>`).join('');
+$('#media').addEventListener('click',e=>{const b=e.target.closest('.nr > button');if(b)b.parentElement.classList.toggle('open')});
+$('#greenrx').innerHTML=GREENRX.map(g=>`<div class="panel"><h4 style="margin:0 0 6px;font-size:21px">${g.t}</h4><p style="margin:0;color:var(--ink2)">${g.d}</p>${g.rx?rxnHTML(g.rx):''}</div>`).join('');
+$('#u3rev').innerHTML=`<div style="margin-top:20px;display:flex;gap:10px;flex-wrap:wrap">${revBtn('g1','III','Principles revised')}${revBtn('g2','III','Atom economy revised')}${revBtn('g3','III','Green media revised')}</div>`;
+
+/* ============ UNIT IV ============ */
+const EPH='CN[C@@H](C)[C@H](O)c1ccccc1', QUI='COc1ccc2nccc([C@@H](O)[C@@H]3C[C@@H]4CCN3C[C@@H]4C=C)c2c1', CHOL=HERO[2][0];
+$('#u4body').innerHTML=`
+<h3 class="sub">Carbohydrates.</h3>
+<div class="two"><div class="panel" style="margin:0"><div class="mol" style="background:transparent">${mol('OC[C@H]1O[C@H](O)[C@H](O)[C@@H](O)[C@@H]1O',320,220,'bg2')}</div><div class="mname">α-D-glucopyranose</div></div>
+<div>${stepperHTML('Carbohydrate essentials',U4.carbs)}</div></div>
+<h3 class="sub">Alkaloids: total synthesis of (±)-ephedrine.</h3>
+<div class="two"><div class="panel" style="margin:0">${mol(EPH,320,200,'bg2')}<div class="mname">(−)-Ephedrine, (1R,2S)</div></div><div>${stepperHTML('Ephedrine, two routes',U4.eph)}</div></div>
+${rxnHTML({a:'CC(=O)C(=O)c1ccccc1.CN',b:'CNC(C)C(O)c1ccccc1',r:'1 −H₂O 2 H₂, Pt',an:'1-phenylpropane-1,2-dione + CH₃NH₂',bn:'(±)-ephedrine',l:'<b>Route A (Manske–Johnson).</b> Imine at the aliphatic ketone, then catalytic hydrogenation.'})}
+${rxnHTML({a:'O=Cc1ccccc1.CC[N+](=O)[O-]',b:'CC(C(O)c1ccccc1)[N+](=O)[O-]',r:'base (Henry)',an:'benzaldehyde + nitroethane',bn:'2-nitro-1-phenylpropan-1-ol',l:'<b>Route B, step 1.</b>'})}
+${rxnHTML({a:'CC(C(O)c1ccccc1)[N+](=O)[O-]',b:'CNC(C)C(O)c1ccccc1',r:'1 H₂/Ni 2 N-methylation',an:'nitro alcohol',bn:'(±)-ephedrine',l:'<b>Route B, steps 2 and 3</b> via norephedrine.'})}
+<h3 class="sub">Alkaloids: quinine.</h3>
+<div class="two"><div class="panel" style="margin:0">${mol(QUI,340,230,'bg2')}<div class="mname">Quinine: 6-methoxyquinoline + quinuclidine, joined at C9</div><ul class="pts" style="--c:var(--u4);margin-top:12px;font-size:15px">${U4.qfacts.map(f=>`<li>${f}</li>`).join('')}</ul></div>
+<div class="tl" style="--c:var(--u4)">${U4.quinine.map(e=>`<div class="ev"><b>${e[0]}</b><span>${e[1]}</span></div>`).join('')}</div></div>
+${rxnHTML({a:'COc1ccc2nccc(C(=O)CCC3CCNCC3C=C)c2c1',b:'COc1ccc2nccc(C(O)C3CC4CCN3CC4C=C)c2c1',r:'1 NaOBr 2 NaOEt 3 Al, EtOH',an:'quinotoxine',bn:'quinine (+ quinidine)',l:'<b>Rabe’s relay (1918),</b> the last stage of the Woodward–Doering synthesis. Quinotoxine is drawn with its C3 vinyl piperidine.'})}
+<h3 class="sub">Steroids: total synthesis of cholesterol.</h3>
+<div class="two"><div class="panel" style="margin:0">${mol(CHOL,360,240,'bg2')}<div class="mname">Cholesterol, rings A, B, C, D</div></div><div>${stepperHTML('Cholesterol, the key ideas',U4.chol)}</div></div>
+<div class="callout fix"><b>Check your notes</b>${U4.cholNote}</div>`;
+$('#u4rev').innerHTML=`<div style="margin-top:20px;display:flex;gap:10px;flex-wrap:wrap">${revBtn('n1','IV','Carbohydrates')}${revBtn('n2','IV','Ephedrine')}${revBtn('n3','IV','Quinine')}${revBtn('n4','IV','Cholesterol')}</div>`;
+
+/* ============ UNIT V ============ */
+$('#u5body').innerHTML=`
+<h3 class="sub">a) Lipids.</h3>
+<ul class="pts" style="--c:var(--u5)">${U5.lipids.map(x=>`<li>${x}</li>`).join('')}</ul>
+<div class="panel"><div class="wheel"><div id="fasw"></div><div><h4 style="margin:0 0 6px;font-size:22px">The fatty acid synthase cycle</h4><p class="subl" style="margin-bottom:12px">Tap a quarter of the wheel for the step, or run a full cycle and watch the chain grow by two carbons.</p><div class="flowinfo" id="fasinfo"></div><div style="display:flex;gap:10px;align-items:center;margin-top:12px;flex-wrap:wrap"><button class="btn primary" id="fasrun" style="background:var(--u5)">Run one cycle</button><button class="btn ghost" id="fasreset">Reset</button><b id="faslen"></b></div><div class="bars"><div class="br"><span>Chain length</span><span class="t"><i id="fasbar" style="background:var(--u5);width:12.5%;transition:width .5s"></i></span><b id="fasc">C₂</b></div></div></div></div></div>
+<h4 style="font-size:20px;margin:28px 0 8px">Mevalonate pathway to terpenes and steroids</h4>
+<div class="flow" id="meva" style="--c:var(--u5)">${MEVA.map((m,i)=>`${i?'<span class="ar">›</span>':''}<button class="fs${i===0?' on':''}" data-i="${i}"><b>${m[0]}</b>${m[1]}</button>`).join('')}</div>
+<h3 class="sub">b) Peptides and proteins.</h3>
+<div class="two"><div>${stepperHTML('From gene to protein',U5.prot)}</div><div>${rxnHTML({a:'NCC(=O)O.C[C@H](N)C(=O)O',b:'C[C@H](NC(=O)CN)C(=O)O',r:'ribosome, −H₂O',an:'glycine + L-alanine',bn:'Gly-Ala dipeptide',l:'<b>The peptide (amide) bond.</b> Written N → C.'})}</div></div>
+<h3 class="sub">c) Enzymes.</h3>
+<ul class="pts" style="--c:var(--u5)">${U5.enz.map(x=>`<li>${x}</li>`).join('')}</ul>
+<h3 class="sub">d) Nucleic acids.</h3>
+<div class="two"><div>${stepperHTML('Building DNA and RNA',U5.nuc)}</div>
+<div class="rings" style="grid-template-columns:1fr 1fr">${[['Nc1ncnc2[nH]cnc12','Adenine (purine)'],['Cc1c[nH]c(=O)[nH]c1=O','Thymine (pyrimidine)'],['Nc1nc2[nH]cnc2c(=O)[nH]1','Guanine (purine)'],['Nc1cc[nH]c(=O)n1','Cytosine (pyrimidine)']].map(b=>`<div class="panel" style="margin:0;padding:10px">${mol(b[0],220,160,'bg2')}<div class="mname">${b[1]}</div></div>`).join('')}</div></div>`;
+$('#u5rev').innerHTML=`<div style="margin-top:20px;display:flex;gap:10px;flex-wrap:wrap">${revBtn('b1','V','Lipids')}${revBtn('b2','V','Proteins')}${revBtn('b3','V','Enzymes')}${revBtn('b4','V','Nucleic acids')}</div>`;
+let fasC=2,fasI=0;const FC=['var(--u5)','var(--u4)','var(--u1)','var(--u2)'];
+function drawFas(){let s='<svg viewBox="0 0 260 260" role="img" aria-label="Fatty acid synthase cycle">';const cx=130,cy=130,R=110,r=58;
+ FAS.forEach((f,i)=>{const a1=(i*90-90)*Math.PI/180,a2=((i+1)*90-90)*Math.PI/180;const p=[[cx+R*Math.cos(a1),cy+R*Math.sin(a1)],[cx+R*Math.cos(a2),cy+R*Math.sin(a2)],[cx+r*Math.cos(a2),cy+r*Math.sin(a2)],[cx+r*Math.cos(a1),cy+r*Math.sin(a1)]];
+  const m=(a1+a2)/2,tx=cx+84*Math.cos(m),ty=cy+84*Math.sin(m);
+  s+=`<g class="seg4" data-i="${i}" tabindex="0" role="button" aria-label="${f[0]}"><path d="M${p[0]} A${R} ${R} 0 0 1 ${p[1]} L${p[2]} A${r} ${r} 0 0 0 ${p[3]}Z" fill="${FC[i]}" opacity="${i===fasI?1:.45}" stroke="var(--bg)" stroke-width="3"/><text x="${tx}" y="${ty+5}" text-anchor="middle" font-size="13" font-weight="700" fill="#fff">${i+1}</text></g>`});
+ s+=`<text x="${cx}" y="${cy-4}" text-anchor="middle" font-size="26" font-weight="800" fill="var(--ink)">C${fasC}</text><text x="${cx}" y="${cy+16}" text-anchor="middle" font-size="11" fill="var(--ink2)">acyl-ACP</text></svg>`;
+ $('#fasw').innerHTML=s;$('#fasinfo').innerHTML=`<b style="color:${FC[fasI]}">Step ${fasI+1}: ${FAS[fasI][0]}</b><br>${FAS[fasI][1]}`;
+ $('#fasc').textContent='C'+fasC;$('#fasbar').style.width=(fasC/16*100)+'%';$('#faslen').textContent=fasC>=16?'Palmitate (C₁₆) released by thioesterase':`${(fasC-2)/2} of 7 cycles`;
+ $$('#fasw .seg4').forEach(g=>{const f=()=>{fasI=+g.dataset.i;drawFas()};g.addEventListener('click',f);g.addEventListener('keydown',e=>{if(e.key==='Enter')f()})})}
+drawFas();
+$('#fasrun').addEventListener('click',()=>{if(fasC>=16)return;let k=0;const t=setInterval(()=>{fasI=k;drawFas();k++;if(k===4){clearInterval(t);setTimeout(()=>{fasC+=2;drawFas()},350)}},350)});
+$('#fasreset').addEventListener('click',()=>{fasC=2;fasI=0;drawFas()});
+$('#meva').addEventListener('click',e=>{const b=e.target.closest('.fs');if(b)$$('#meva .fs').forEach(x=>x.classList.toggle('on',x===b))});
+/* ============ QUIZ ============ */
+let qu='All',qs=[],qi=0,score=0,answered=false;
+$('#qseg').innerHTML=['All','I','II','III','IV','V'].map(u=>`<button data-u="${u}"${u==='All'?' class="on"':''}>${u==='All'?'All units':'Unit '+u}</button>`).join('');
+$('#qseg').addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return;qu=b.dataset.u;$$('#qseg button').forEach(x=>x.classList.toggle('on',x===b));startQuiz()});
+function shuffle(a){a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a}
+function startQuiz(){qs=shuffle(QUIZ.filter(q=>qu==='All'||q.u===qu));qi=0;score=0;paintQ()}
+function paintQ(){const box=$('#quizbox');
+ if(qi>=qs.length){const p=Math.round(score/qs.length*100);box.innerHTML=`<div style="text-align:center;padding:20px 0"><div style="font-size:64px;font-weight:800;letter-spacing:-.04em;color:${p>=70?'var(--u3)':p>=40?'var(--u4)':'var(--u5)'}">${score}/${qs.length}</div><p class="qq">${p>=80?'Exam ready. Skim the cheat sheet and sleep.':p>=50?'Good base. Reopen the reagents you missed.':'Go back through the units once more, then retry.'}</p><button class="btn primary" id="qre">Try again</button></div>`;$('#qre').onclick=startQuiz;return}
+ const q=qs[qi];answered=false;
+ box.innerHTML=`<div class="qhead"><span class="tag">Unit ${q.u}</span><span class="sc">Question ${qi+1} of ${qs.length} · Score ${score}</span></div><div class="stepper" style="border:0;padding:0;margin:0"><div class="track"><i style="width:${qi/qs.length*100}%;background:var(--blue)"></i></div></div><div class="qq">${q.q}</div><div class="opts">${q.o.map((o,i)=>`<button class="opt" data-i="${i}">${String.fromCharCode(97+i)}) ${o}</button>`).join('')}</div><div class="expl" id="qex"></div><div class="qnav"><span></span><button class="btn primary" id="qnext" disabled style="opacity:.4">Next question</button></div>`;
+ box.querySelectorAll('.opt').forEach(b=>b.addEventListener('click',()=>{if(answered)return;answered=true;const i=+b.dataset.i;
+  box.querySelectorAll('.opt').forEach((x,k)=>{if(k===q.a)x.classList.add('ok');else if(k===i)x.classList.add('no')});
+  if(i===q.a)score++;const ex=$('#qex');ex.innerHTML=`<b style="color:${i===q.a?'var(--u3)':'var(--u5)'}">${i===q.a?'Correct.':'Not quite.'}</b> ${q.e}`;ex.classList.add('show');
+  const n=$('#qnext');n.disabled=false;n.style.opacity=1;n.textContent=qi===qs.length-1?'See my score':'Next question'}));
+ $('#qnext').addEventListener('click',()=>{qi++;paintQ()})}
+startQuiz();
+const iq=document.createElement('div');
+iq.innerHTML=`<h3 class="sub">Internal test I, CHE 613T.</h3><p class="subl">The five questions from your internal test, with the reasoning. Try them first.</p>${INTERNAL.map(p=>`<div class="prac"><div class="q">${p.q}</div><button>Show answer</button><div class="a">${p.a}</div></div>`).join('')}`;
+$('#quiz .wrap').appendChild(iq);
+
+/* ============ FLASHCARDS ============ */
+let cards=CARDS.slice(),ci=0;
+function paintCard(){$('#fc').classList.remove('flip');setTimeout(()=>{$('#fcf').textContent=cards[ci][0];$('#fcb').textContent=cards[ci][1]},150);$('#fcn').textContent=`${ci+1} / ${cards.length}`}
+$('#fc').addEventListener('click',()=>$('#fc').classList.toggle('flip'));
+$('#fcx').addEventListener('click',()=>{ci=(ci+1)%cards.length;paintCard()});
+$('#fcp').addEventListener('click',()=>{ci=(ci-1+cards.length)%cards.length;paintCard()});
+$('#fcs').addEventListener('click',()=>{cards=shuffle(cards);ci=0;paintCard();toast('Shuffled')});
+let tx=null;$('#fc').addEventListener('touchstart',e=>{tx=e.touches[0].clientX},{passive:true});
+$('#fc').addEventListener('touchend',e=>{if(tx===null)return;const d=e.changedTouches[0].clientX-tx;if(Math.abs(d)>50){e.preventDefault();ci=(ci+(d<0?1:-1)+cards.length)%cards.length;paintCard()}tx=null});
+paintCard();
+
+/* ============ CHEAT SHEET ============ */
+$('#cheattbl').innerHTML='<tr><th>Reagent</th><th>Does</th><th>Remember</th></tr>'+CHEAT.map(c=>`<tr><td><b style="color:var(--u1)">${c[0]}</b></td><td>${c[1]}</td><td>${c[2]}</td></tr>`).join('')+
+'<tr><th colspan="3">Heterocycles</th></tr>'+[['Indole','E⁺ at C3','Fischer [3,3]'],['Quinoline','E⁺ C5/C8, Nu C2/C4','Skraup, Friedländer, Knorr, Doebner–Miller'],['Isoquinoline','Nu at C1','Pictet–Spengler, Bischler–Napieralski'],['Imidazole','E⁺ C4/C5, N3 basic, C2 lithiation','pKa 7.0'],['Oxazole','Nu at C2, diene','Robinson–Gabriel'],['Pyrazole','E⁺ at C4','β-Diketone + N₂H₄'],['Thiazole','E⁺ C5, Nu/base C2','Hantzsch, Gabriel'],['Pyridine','Nu at C2/C4','Chichibabin, H⁻ leaves']].map(c=>`<tr><td><b style="color:var(--u2)">${c[0]}</b></td><td>${c[1]}</td><td>${c[2]}</td></tr>`).join('');
+
+/* ============ NAV + INIT ============ */
+if(io){const links=$$('#navlinks a');const secs=links.map(a=>document.querySelector(a.getAttribute('href')));
+ const nio=new IntersectionObserver(es=>es.forEach(en=>{if(en.isIntersecting){links.forEach(a=>a.classList.toggle('on',a.getAttribute('href')==='#'+en.target.id));const on=links.find(a=>a.classList.contains('on'));if(on){const nl=$('#navlinks');nl.scrollTo({left:on.offsetLeft-nl.clientWidth/2+on.clientWidth/2,behavior:'smooth'})}}}),{rootMargin:'-45% 0px -50% 0px'});
+ secs.forEach(s=>s&&nio.observe(s))}
+function boot(){if(theme)document.documentElement.setAttribute('data-theme',theme);initSteppers();observeMols();updateProgress();drawHero()}
+if(document.readyState!=='loading')boot();else document.addEventListener('DOMContentLoaded',boot);
+window.addEventListener('load',()=>{if(window.SmilesDrawer){$$('canvas.m[data-obs]').forEach(c=>{if(!c.dataset.drawn&&c.getBoundingClientRect().top<innerHeight+300)drawMol(c)})}});
+</script>
+</body>
+</html>
